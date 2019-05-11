@@ -620,3 +620,44 @@ pre tt:after {
     font-size: 100%;
   }
 }
+
+/* Temporary styles and colors */
+.weights-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.weight {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+}
+
+.red {
+  background:red
+}
+.blue {
+  background:blue;
+  color: white;
+}
+.yellow {
+  background:yellow
+}
+.green {
+  background:green
+}
+.white {
+  background:white
+}
+.black {
+  background:black;
+  color: white;
+}
+.silver {
+  background:silver
+}
