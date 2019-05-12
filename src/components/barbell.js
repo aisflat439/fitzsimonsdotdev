@@ -1,7 +1,10 @@
 import React from "react"
 
-const Barbell = ({ incrementTotal, weight, name }) => (
-  <div onClick={() => incrementTotal(weight)} className={`barbell`}>
+const Barbell = ({ updateBarbell, weight, name,}) => (
+  <div
+    onClick={() => updateBarbell(name, weight)}
+    className={`click-target barbell`}
+  >
     {name}
   </div>
 )

@@ -622,7 +622,26 @@ pre tt:after {
 }
 
 /* Temporary styles and colors */
-.weights-container {
+.click-target {
+  text-align: center;
+  background-color: darkgrey;
+  border: black 1px solid;
+  padding: 10px;
+  margin: 10px;
+  min-width: 100px;
+}
+
+.barbell {
+  margin: 10px;
+  margin-bottom: 5px;
+  text-align: center;
+  background-color: darkgrey;
+  border: black 1px solid;
+  padding: 5px;
+  max-width: 100px;
+}
+
+.container {
   display: flex;
   flex-wrap: wrap;
 }
