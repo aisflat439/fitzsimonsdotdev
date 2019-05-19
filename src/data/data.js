@@ -1,50 +1,62 @@
 export const weights = [
-  {
-    color: "red",
-    kg: 25,
-  },
-  {
-    color: "blue",
-    kg: 20,
-  },
-  {
-    color: "yellow",
-    kg: 15,
-  },
-  {
-    color: "green",
-    kg: 10,
-  },
-  {
-    color: "white",
-    kg: 5,
-  },
-  {
-    color: "black",
-    kg: 2.5,
-  },
-  {
-    kg: 1.25,
-  },
-  {
-    kg: 0.5,
-  },
-  {
-    kg: 0.25,
-  },
-]
+         {
+           color: "red",
+           kg: 25,
+           lbs: 55,
+         },
+         {
+           color: "blue",
+           kg: 20,
+           lbs: 45,
+         },
+         {
+           color: "yellow",
+           kg: 15,
+           lbs: 35,
+         },
+         {
+           color: "green",
+           kg: 10,
+           lbs: 25,
+         },
+         {
+           color: "white",
+           kg: 5,
+           lbs: 15,
+         },
+         {
+           color: "black",
+           kg: 2.5,
+           lbs: 10,
+         },
+         {
+           kg: 1.25,
+           lbs: 5,
+         },
+         {
+           kg: 0.5,
+           lbs: 2.5,
+         },
+         {
+           kg: 0.25,
+           lbs: 1.25,
+         },
+       ]
 
 export const barbells = [
   {
-    name: "squat",
-    weight: 25
+    name: "Mens Bar",
+    kg: 20,
+    lbs: 45,
   },
   {
-    name: "deadlift",
-    weight: 25
+    name: "Womens Bar",
+    kg: 15,
+    lbs: 35,
   },
   {
-      name: "trap",
-      weight: 30
+    name: "Trap Bar",
+    kg: 25,
+    lbs: 55,
   },
 ]

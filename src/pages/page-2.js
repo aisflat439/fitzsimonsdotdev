@@ -24,9 +24,9 @@ class SecondPage extends React.Component {
   }
 
   updateTotalByWeights = value => {
-    this.setState(
-      { total: this.state.total + value * 2 }
-    )
+    this.setState({ 
+        total: this.state.total + value * 2,
+      })
   }
 
   updateBarbell = (barbellName, newBarbellWeight) => {
@@ -39,9 +39,13 @@ class SecondPage extends React.Component {
   }
 
   toggleMetric = () => {
-    this.setState(
-      { metric: !this.state.metric }
-    )
+    this.setState({
+      barbell: "",
+      barbellWeight: 0,
+      total: 0,
+      clicks: 0,
+      metric: !this.state.metric,
+    })
   }
 
   resetTotal = () => {
@@ -49,6 +53,7 @@ class SecondPage extends React.Component {
       barbell: "",
       barbellWeight: 0,
       total: 0,
+      clicks: 0,
     })
   }
 
@@ -62,11 +67,11 @@ class SecondPage extends React.Component {
           {this.state.metric ? "Metric" : "Imperial"}!
         </h1>
         <div className="container">
-          {barbells.map((b, index) => (
+          {barbells.map(b => (
             <Barbell
               key={b.name}
               name={b.name}
-              weight={b.weight}
+              weight={this.state.metric ? b.kg : b.lbs}
               updateBarbell={this.updateBarbell}
             />
           ))}
@@ -77,20 +82,20 @@ class SecondPage extends React.Component {
               metric={this.state.metric}
               key={w.kg}
               incrementTotal={this.updateTotalByWeights}
-              weight={w.kg}
+              weight={this.state.metric ? w.kg : w.lbs}
               color={w.color}
             />
           ))}
         </div>
         <div className="container">
-          <div className="click-target" onClick={this.resetTotal}>
+          <button className="click-target" onClick={this.resetTotal}>
             reset
-          </div>
-          {/* <div className="click-target" onClick={this.toggleMetric}>
+          </button>
+          <button className="click-target" onClick={this.toggleMetric}>
             Switch weightset to {!this.state.metric ? "Metric" : "Imperial"}
-          </div> */}
+          </button>
         </div>
-        <WeightOutput total={this.state.total} units={this.state.metric}/>
+        <WeightOutput total={this.state.total} units={this.state.metric} />
         <Link to="/">Go back to the homepage</Link>
       </Layout>
     )

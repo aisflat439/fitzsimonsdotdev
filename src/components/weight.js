@@ -1,11 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 
 const Weight = ({ incrementTotal, weight, color = "silver", metric }) => {
+
     return (
-        <div 
-            onClick={() => incrementTotal(weight, 2)}
+        <div
+            onClick={() => { incrementTotal(weight) }}
             className={`weight ${color}`}>
-                {metric ? weight : (weight * 2.2).toFixed()}
+                {/* {count > 0 && <span>{count}</span>} */}
+                {weight}
                 {metric ? "kg" : "lbs"}
         </div>
     )
