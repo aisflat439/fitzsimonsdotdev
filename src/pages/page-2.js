@@ -16,6 +16,7 @@ class SecondPage extends React.Component {
       barbellWeight: 0,
       total: 0,
       metric: true,
+      reset: 0,
     }
     this.updateTotalByWeights = this.updateTotalByWeights.bind(this)
     this.updateBarbell = this.updateBarbell.bind(this)
@@ -44,6 +45,7 @@ class SecondPage extends React.Component {
       barbellWeight: 0,
       total: 0,
       clicks: 0,
+      reset: 0,
       metric: !this.state.metric,
     })
   }
@@ -54,6 +56,7 @@ class SecondPage extends React.Component {
       barbellWeight: 0,
       total: 0,
       clicks: 0,
+      reset: 0,
     })
   }
 
@@ -79,6 +82,7 @@ class SecondPage extends React.Component {
         <div className="container">
           {weights.map(w => (
             <Weight
+              reset={this.state.reset}
               metric={this.state.metric}
               key={w.kg}
               incrementTotal={this.updateTotalByWeights}
@@ -97,6 +101,7 @@ class SecondPage extends React.Component {
         </div>
         <WeightOutput total={this.state.total} units={this.state.metric} />
         <Link to="/">Go back to the homepage</Link>
+        <Link to="/kesha">Kesha Ipsum</Link>
       </Layout>
     )
   }
