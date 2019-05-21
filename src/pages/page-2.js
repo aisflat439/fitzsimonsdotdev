@@ -45,7 +45,7 @@ class SecondPage extends React.Component {
       barbellWeight: 0,
       total: 0,
       clicks: 0,
-      reset: 0,
+      reset: !this.state.reset,
       metric: !this.state.metric,
     })
   }
@@ -56,7 +56,7 @@ class SecondPage extends React.Component {
       barbellWeight: 0,
       total: 0,
       clicks: 0,
-      reset: 0,
+      reset: !this.state.reset,
     })
   }
 

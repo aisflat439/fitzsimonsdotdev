@@ -12,7 +12,7 @@ const Weight = props => {
       <div
         onClick={() => {
           props.incrementTotal(props.weight)
-          setCount(count + 1)
+          setCount(count + 2)
         }}
         className={`weight ${props.color}`}
       >
