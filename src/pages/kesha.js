@@ -5,31 +5,26 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { lyrics } from "../data/kesha"
 
-const buildLorem = (numLines, ipsumArray) => {
+const buildLorem = (numLines, numParagraphs, ipsumArray) => {
+  let ipsumText = '';
 
-    let ipsumText = ""
+  for (let j = 0; j < numParagraphs; j++) {
     for (let i = 0; i < numLines; i++) {
-      ipsumText +=
-        "" + ipsumArray[Math.floor(Math.random() * ipsumArray.length)]
+      `${ipsumText} ${ipsumArray[Math.floor(Math.random() * ipsumArray.length)]}`;
+      
+      ipsumText += ipsumText.split('').pop().match(/^[a-z0-9]+$/i) ? ". " : " " 
     }
+    ipsumText += j > 1 ? "" : "                                                   "
+  }
 
-    // console.log("numLines ", numLines);
-    // [...Array(4)].forEach(function() {
-    //   console.log("gomggmo")
-    // })
-  
-  // let lorem = ""
 
-  // [...Array(numLines)].forEach((item, index) => lorem += ipsumArray[Math.floor(Math.random() * ipsumArray.length)])
-
-  // return lorem
   return ipsumText
 }
 
 const IndexPage = () => {
-  // console.log("eeeyy", lyrics)
   const [numLines, setLines] = useState(7)
-  let ipsumText = buildLorem(numLines, lyrics)
+  const [numParagraphs, setParagraphs] = useState(1)
+  let ipsumText = buildLorem(numLines, numParagraphs, lyrics)
 
   return (
     <Layout>
@@ -40,9 +35,9 @@ const IndexPage = () => {
       <h1>We are the crazy people</h1>
       <div>
         <label>Lines of text per paragraph</label>
-        <input type="number" defaultValue={7} />
+        <input type="number" defaultValue={7} onChange={(e) => setLines(e.target.value)}/>
         <label> Number of Paragraphs</label>
-        <input type="number" defaultValue={3} />
+        <input type="number" defaultValue={1} onChange={(e) => setParagraphs(e.target.value)}/>
         <button>Copy to Clipboard</button>
         <button>Generate</button>
         <div className="ipsum-content-container">
