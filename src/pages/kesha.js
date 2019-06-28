@@ -10,11 +10,11 @@ const buildLorem = (numLines, numParagraphs, ipsumArray) => {
 
   for (let j = 0; j < numParagraphs; j++) {
     for (let i = 0; i < numLines; i++) {
-      `${ipsumText} ${ipsumArray[Math.floor(Math.random() * ipsumArray.length)]}`;
+      ipsumText += ipsumArray[Math.floor(Math.random() * ipsumArray.length)];
       
       ipsumText += ipsumText.split('').pop().match(/^[a-z0-9]+$/i) ? ". " : " " 
     }
-    ipsumText += j > 1 ? "" : "                                                   "
+    ipsumText += j > 1 ? "" : ""
   }
 
 
