@@ -86,7 +86,19 @@ class SecondPage extends React.Component {
               metric={this.state.metric}
               key={w.kg}
               incrementTotal={this.updateTotalByWeights}
-              weight={this.state.metric ? w.kg : w.lbs}
+              weight={ w.kg}
+              color={w.color}
+            />
+          ))}
+        </div>
+        <div className="container">
+          {weights.map(w => (
+            <Weight
+              reset={this.state.reset}
+              metric={!this.state.metric}
+              key={w.kg}
+              incrementTotal={this.updateTotalByWeights}
+              weight={ w.lbs}
               color={w.color}
             />
           ))}
@@ -94,9 +106,6 @@ class SecondPage extends React.Component {
         <div className="container">
           <button className="click-target" onClick={this.resetTotal}>
             reset
-          </button>
-          <button className="click-target" onClick={this.toggleMetric}>
-            Switch weightset to {!this.state.metric ? "Metric" : "Imperial"}
           </button>
         </div>
         <WeightOutput total={this.state.total} units={this.state.metric} />
