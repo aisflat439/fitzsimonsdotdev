@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import styled from "styled-components"
-import { colors, mixins } from "../theme"
+import { mixins } from "../theme"
 
 const StyledArticle = styled.article`
   ${mixins.boxShadow};
