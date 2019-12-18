@@ -5,11 +5,10 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import styled from "styled-components"
-import { colors } from "../theme"
+import { colors, mixins } from "../theme"
 
 const StyledArticle = styled.article`
-  border: 1px solid ${colors.secondary};
-  max-width: 40vw;
+  ${mixins.boxShadow};
   margin: 10px;
   padding: 10px;
 `
