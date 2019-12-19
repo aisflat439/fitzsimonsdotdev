@@ -26,7 +26,7 @@ const IndexPage = () => (
     <h1>Ecommerce design and development tips, reviews, opinions and products</h1>
     <main>
       <StyledArticle>
-        <h2>What are tips from a deveopers perspective?</h2>
+        <h2>What are tips from a developers perspective?</h2>
         <p>
           Developement is difficult work that requires focus, understanding and
           great attention to detail. An ecommerce site is easy to get started but extremely challenging to grow. While there are ample resources for shop owners to get started there are very few that communicate what a shop owner can do to get the most out of their site from a developers perspective.
