@@ -11,7 +11,7 @@ const StyledFooter = styled.footer`
 
 const Footer = () => {
     return (
-        <StyledFooter>
+        <StyledFooter data-testid="footer">
         <section>
             <h5>email</h5>
             <p>sign up for updates</p>
