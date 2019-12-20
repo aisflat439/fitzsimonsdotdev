@@ -1,6 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
+import { Link, useStaticQuery } from "gatsby"
 
 import styled from "styled-components"
 import { colors } from "../theme"
@@ -10,6 +9,17 @@ const StyledFooter = styled.footer`
 `
 
 const Footer = () => {
+    const { allDirectory } = useStaticQuery(graphql`
+    query FoldersQuery {
+        allDirectory {
+            edges {
+                node {
+                    base
+                }
+            }
+        }
+    }
+    `)
     return (
         <StyledFooter data-testid="footer">
         <section>
@@ -19,18 +29,14 @@ const Footer = () => {
         <section>
             <h5>links</h5>
             <ul>
-            <li>
-                <Link to="/tips">Tips</Link>
-            </li>
-            <li>
-                <Link to="/site-reviews">Site Reviews</Link>
-            </li>
-            <li>
-                <Link to="/products">Products</Link>
-            </li>
-            <li>
-                <Link to="/thoughts">Thoughts</Link>
-            </li>
+                { allDirectory.edges.map(({node}) => {
+                    if (node.base === 'deprecated' || node.base === 'images') return null
+                        return (
+                    <li>
+                        <Link to={`/${node.base}`}>{`${node.base}`}</Link>
+                    </li>
+                        )
+                        })}
             </ul>
         </section>
         <section>
