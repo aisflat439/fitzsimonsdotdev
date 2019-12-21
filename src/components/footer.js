@@ -1,13 +1,6 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import styled from "styled-components"
-import { colors } from "../theme"
-
-const StyledFooter = styled.footer`
-  background: ${colors.secondary}
-`
-
 const Footer = () => {
     const { allDirectory } = useStaticQuery(graphql`
         query FoldersQuery {
@@ -21,7 +14,7 @@ const Footer = () => {
         }
     `)
     return (
-        <StyledFooter data-testid="footer">
+        <div data-testid="footer">
         <section>
             <h5>email</h5>
             <p>sign up for updates</p>
@@ -48,7 +41,7 @@ const Footer = () => {
             </ul>
         </section>
         © {new Date().getFullYear()}
-    </StyledFooter>
+    </div>
     )
 }
 

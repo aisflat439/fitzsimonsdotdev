@@ -1,35 +1,40 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-import styled from "styled-components"
-import { colors } from "../theme"
+import { AppBar, Toolbar, IconButton, Typography, Slide, useScrollTrigger } from "@material-ui/core"
+import { Brightness4} from "@material-ui/icons"
 
-const StyledHeader = styled.header`
-  background: ${colors.primary}
-`
+function HideOnScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({ target: window ? window() : undefined });
 
-const Header = ({ siteTitle }) => (
-  <StyledHeader>
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h3 style={{ margin: 0 }}>
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+
+const Header = ({ siteTitle }, props ) => (
+  <HideOnScroll {...props}>
+  <AppBar>
+    <Toolbar>
+      <Typography >
         <Link
           to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
+          >
           {siteTitle}
         </Link>
-      </h3>
-    </div>
-  </StyledHeader>
+      </Typography>
+      <IconButton >
+        <Brightness4 />
+      </IconButton>
+    </Toolbar>
+</AppBar>
+</HideOnScroll>
 )
 
 Header.propTypes = {
