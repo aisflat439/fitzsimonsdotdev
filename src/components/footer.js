@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, useStaticQuery } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 
 import styled from "styled-components"
 import { colors } from "../theme"
@@ -10,15 +10,15 @@ const StyledFooter = styled.footer`
 
 const Footer = () => {
     const { allDirectory } = useStaticQuery(graphql`
-    query FoldersQuery {
-        allDirectory {
-            edges {
-                node {
-                    base
+        query FoldersQuery {
+            allDirectory {
+                edges {
+                    node {
+                        base
+                    }
                 }
             }
         }
-    }
     `)
     return (
         <StyledFooter data-testid="footer">
@@ -27,13 +27,13 @@ const Footer = () => {
             <p>sign up for updates</p>
         </section>
         <section>
-            <h5>links</h5>
+            <h5>link</h5>
             <ul>
                 { allDirectory.edges.map(({node}) => {
-                    if (node.base === 'deprecated' || node.base === 'images') return null
+                    if (node.base === 'deprecated' || node.base === 'images'|| node.base === 'posts') return null
                         return (
-                    <li>
-                        <Link to={`/${node.base}`}>{`${node.base}`}</Link>
+                            <li key={node.id}>
+                        <Link  to={`/${node.base}`}>{`${node.base}`}</Link>
                     </li>
                         )
                         })}
