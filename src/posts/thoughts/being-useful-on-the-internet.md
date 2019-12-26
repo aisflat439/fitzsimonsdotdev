@@ -1,0 +1,19 @@
+---
+date: "2020-1-01"
+updated: "202-1-01"
+title: "Being Useful on the Internet"
+slug: "/being-useful-on-the-internet"
+hashtags: "thoughts, random, usefulness, agencies"
+---
+
+# Useful
+
+I've been enjoying [The Art of Product Podcast](https://artofproductpodcast.com/) as I work on growing my business. One of the themes that continuosly pops up on that show is being useful on the internet. This will endear you to your people, make solving problems easier, help you find help faster, and should you have something worth selling someday, create an audience of likely buyers. This site, is intended to be a location where I'm useful on the internet. I'm not a genius developer, designer, digital marketer, SEO expert, data analyst or ecommerce shop owner. I have however proven to be quite valuable in the ecommerce space because I'm a developer with  understanding of the incentives of those who interact with successful ecommerce shop owners. Said another way, I can speak "data analyst" to an ecommerce shop owner, at least from a developers perspective. It's my hope that I can manage to take that skill, write it down, and that you will find it useful. I'm not a terribly skilled writer, so apologies in advance for that. I'll do my best to edit and make my content easily able to consume.
+
+# My People
+
+So who are the people for whom I'm trying to be helpful? That's an interesting thought. To be frank, I'm not sure. My ideal mix would developers, designers, SEO's, digital marketers, some agencies, and ecommerce shop owners. I'd be really pleased if I could help anyone in that group make better websites. There are a lot of straightforward things that "My People" can do to make the internet better and as a side effect, more profitable. Agencies can make faster sites, marketers can make their plans have more impact, SEO's can increase time on site, and shop owners can know what work to request. That said, what's the right mix of "My People"? One way to know is if you let me know when you read this. Another is analytics, which I have on this site. Hopefully, as my site evolves, as the tools I develop get more useful, and as I practice being useful on the internet, I can make a post that shows the breakdown of the folks for whom I'm useful. We'll see, there's a lot to do. I'm going to give the whole "be useful on the internet" thing a try. I'll use the analytics and feedback as best I can but also fully intend to be as contrarian as I am in real life. Hopefully, this site doesn't end up as oldmanyellsatcloud.gif, but we'll find out together.
+
+# Content Treadmill
+
+One other theme that comes up on [The Art of Product Podcast](https://artofproductpodcast.com/) repeatedly is avoiding, whereever possible, being stuck on a content treadmill where you're posting to a schedule, or expected to put a certain amount of time on social media etc... I'll be deliberately avoiding this. I'll post when I have a thought. I'll interact on social media on my schedule. I'll respond to emails when it makes sense for me. While my time is valuable and I want to avoid a content treadmill for that reason, my happiness is even more valuable and that will be the metric that guides frequency of updates.
