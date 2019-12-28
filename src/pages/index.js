@@ -23,8 +23,8 @@ const IndexPage = () => (
         `ecommerce design and development`,
       ]}
     />
-    <h1>Ecommerce design and development tips, reviews, opinions and products</h1>
     <Box component="main">
+      <h1>Ecommerce design and development tips, reviews, opinions and products</h1>
       <Grid container spacing={2}>
       
         <Grid item sm={6}> 
