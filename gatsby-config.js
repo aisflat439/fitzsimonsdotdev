@@ -6,6 +6,7 @@ module.exports = {
     twitterUsername: "@fitzsimons.dev",
   },
   plugins: [
+    'gatsby-plugin-top-layout',
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
