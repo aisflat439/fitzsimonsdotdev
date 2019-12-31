@@ -2,8 +2,12 @@ import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
 import Typography from "@material-ui/core/Typography"
 import  { makeStyles }  from "@material-ui/core"
+
+import Link from '.'
 
 const useStyles = makeStyles(({palette}) => ({
     root: {
@@ -53,11 +57,11 @@ const Footer = () => {
                 </Grid>
                 <Grid item xs={12} md={3}>
                     <Typography>social</Typography>
-                    <ul>
-                    <li>twitter</li>
-                    <li>instagram</li>
-                    <li>linkedin</li>
-                    </ul>
+                    <List component="nav" aria-label="main mailbox folders">
+                        <ListItem><Link>twitter</Link></ListItem>
+                        <ListItem><Link>instagram</Link></ListItem>
+                        <ListItem><Link>linkedin</Link></ListItem>
+                    </List>
                 </Grid>
             </Grid>
         © {new Date().getFullYear()}
