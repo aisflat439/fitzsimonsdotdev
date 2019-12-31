@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import List from '@material-ui/core/List'
@@ -7,7 +7,7 @@ import ListItem from '@material-ui/core/ListItem'
 import Typography from "@material-ui/core/Typography"
 import  { makeStyles }  from "@material-ui/core"
 
-import Link from '.'
+import Link from './Link'
 
 const useStyles = makeStyles(({palette}) => ({
     root: {
