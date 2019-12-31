@@ -3,7 +3,7 @@ import { Link, useStaticQuery, graphql } from "gatsby"
 import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import Typography from "@material-ui/core/Typography"
-import  {makeStyles}  from "@material-ui/core"
+import  { makeStyles }  from "@material-ui/core"
 
 const useStyles = makeStyles(({palette}) => ({
     root: {
@@ -25,7 +25,6 @@ const Footer = () => {
     `)
 
     const classes = useStyles()
-
 
     return (
         <Box component="footer" data-testid="footer" className={classes.root}>
