@@ -13,6 +13,11 @@ import Link from './Link'
 const useStyles = makeStyles(({ palette }) => ({
   root: {
     backgroundColor: palette.secondary.main,
+  },
+  width: {
+    maxWidth: 1440,
+    margin: 'auto',
+    padding: 24
   }
 }))
 
@@ -33,7 +38,7 @@ const Footer = () => {
 
   return (
     <Box component="footer" data-testid="footer" className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} className={classes.width}>
         <Grid item xs={12} md={3}>
           <Box component="section" >
             <Typography component="h5">Site Links</Typography>
@@ -42,7 +47,7 @@ const Footer = () => {
                 if (node.base === 'deprecated' || node.base === 'images' || node.base === 'posts') return null
                 return (
                   <ListItem key={node.id}>
-                    <Link to={`/${node.base}`}>{`${node.base}`}</Link>
+                    <Link color="textSecondary" to={`/${node.base}`}>{`${node.base}`}</Link>
                   </ListItem>
                 )
               })}
@@ -59,13 +64,15 @@ const Footer = () => {
         <Grid item xs={12} md={3}>
           <Typography>social</Typography>
           <List component="nav" aria-label="external social links">
-            <ListItem><MuiLink>twitter</MuiLink></ListItem>
-            <ListItem><MuiLink>instagram</MuiLink></ListItem>
-            <ListItem><MuiLink>linkedin</MuiLink></ListItem>
+            <ListItem><MuiLink color="textSecondary">twitter</MuiLink></ListItem>
+            <ListItem><MuiLink color="textSecondary">instagram</MuiLink></ListItem>
+            <ListItem><MuiLink color="textSecondary">linkedin</MuiLink></ListItem>
           </List>
         </Grid>
       </Grid>
-      © {new Date().getFullYear()}
+      <Box className={classes.width}>
+        © {new Date().getFullYear()} by Devin Fitzsimons
+      </Box>
     </Box>
   )
 }
