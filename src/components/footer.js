@@ -28,6 +28,7 @@ const Footer = () => {
         edges {
           node {
             base
+            id
           }
         }
       }
