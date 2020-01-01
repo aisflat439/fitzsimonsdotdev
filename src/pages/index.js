@@ -26,10 +26,10 @@ const IndexPage = () => (
     <Box component="main">
       <h1>Ecommerce design and development tips, reviews, opinions and products</h1>
       <Grid container spacing={2}>
-      
-        <Grid item sm={6}> 
-          <Card>
-            <CardHeader 
+
+        <Grid item sm={6}>
+          <Box component={Card} height="100%">
+            <CardHeader
               avatar={
                 <Avatar aria-label="tips">
                   tips
@@ -47,12 +47,12 @@ const IndexPage = () => (
               <Link to="/tips">Most recent tip</Link>
               <Link to="/tips">all tips</Link>
             </CardActions>
-          </Card>
+          </Box>
         </Grid>
-        
+
         <Grid item sm={6}>
-          <Card>
-            <CardHeader 
+          <Box component={Card} height="100%">
+            <CardHeader
               avatar={
                 <Avatar aria-label="site-reviews">
                   R
@@ -69,12 +69,12 @@ const IndexPage = () => (
               <Link to="/site-reviews">Reviews</Link>
               <Link to="/site-reviews">Request a review</Link>
             </CardActions>
-          </Card>
+          </Box>
         </Grid>
 
         <Grid item sm={6}>
-          <Card>
-            <CardHeader 
+          <Box component={Card} height="100%">
+            <CardHeader
               avatar={
                 <Avatar aria-label="Thoughts">
                   ?
@@ -82,20 +82,20 @@ const IndexPage = () => (
               }
               title="General Ecommerce Thoughts"
               subheader="More broad thoughts around ecommerce and it's ecosystem" />
-              <CardContent>
-                <Typography>
-                  Whamboozles abound
+            <CardContent>
+              <Typography>
+                Whamboozles abound
                 </Typography>
-              </CardContent>
+            </CardContent>
             <CardActions>
               <Link to="/thoughts">Thoughts</Link>
             </CardActions>
-          </Card>
+          </Box>
         </Grid>
 
         <Grid item sm={6}>
-          <Card>
-            <CardHeader 
+          <Box component={Card} height="100%">
+            <CardHeader
               avatar={
                 <Avatar aria-label="Tools and products">
                   R
@@ -103,15 +103,15 @@ const IndexPage = () => (
               }
               title="Tools and products"
               subheader="I have tools and products available" />
-              <CardContent>
-                <Typography>
-                  I have several tools to help you have more productive hours. They're in alpha join the list
+            <CardContent>
+              <Typography>
+                I have several tools to help you have more productive hours. They're in alpha join the list
                 </Typography>
-              </CardContent>
+            </CardContent>
             <CardActions>
               <Link to="/tools">Join the list</Link>
             </CardActions>
-          </Card>
+          </Box>
         </Grid>
 
       </Grid>

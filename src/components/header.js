@@ -1,8 +1,13 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-import { AppBar, Toolbar, IconButton, Typography, Slide, useScrollTrigger } from "@material-ui/core"
-import { Brightness4} from "@material-ui/icons"
+import { makeStyles, useScrollTrigger } from "@material-ui/core"
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import IconButton from '@material-ui/core/IconButton'
+import Typography from '@material-ui/core/Typography'
+import Slide from '@material-ui/core/Slide'
+import { Brightness4 } from "@material-ui/icons"
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -18,24 +23,34 @@ function HideOnScroll(props) {
   );
 }
 
-const Header = ({ siteTitle }, props ) => (
-  <HideOnScroll {...props}>
-  <AppBar>
-    <Toolbar>
-      <Typography >
-        <Link
-          to="/"
-          >
-          {siteTitle}
-        </Link>
-      </Typography>
-      <IconButton >
-        <Brightness4 />
-      </IconButton>
-    </Toolbar>
-</AppBar>
-</HideOnScroll>
-)
+const useStyles = makeStyles(({ palette }) => ({
+  root: {
+    backgroundColor: palette.primary.main,
+  }
+}))
+
+const Header = ({ siteTitle }, props) => {
+  const classes = useStyles()
+
+  return (
+    <HideOnScroll {...props}>
+      <AppBar className={classes.root}>
+        <Toolbar>
+          <Typography >
+            <Link
+              to="/"
+            >
+              {siteTitle}
+            </Link>
+          </Typography>
+          <IconButton >
+            <Brightness4 />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+    </HideOnScroll>
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
