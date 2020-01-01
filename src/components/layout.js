@@ -28,7 +28,7 @@ const Layout = ({ children }) => (
     render={data => (
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <Box my={10}>{children}</Box>
+        <Box maxWidth={1440} px={3} my={10} mx="auto">{children}</Box>
         <Footer />
       </>
     )}

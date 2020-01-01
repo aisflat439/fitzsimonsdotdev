@@ -26,6 +26,15 @@ function HideOnScroll(props) {
 const useStyles = makeStyles(({ palette }) => ({
   root: {
     backgroundColor: palette.primary.main,
+  },
+  title: {
+    flexGrow: 1
+  },
+  width: {
+    maxWidth: 1440,
+    width: '100%',
+    margin: '0 auto',
+    padding: '0 24px'
   }
 }))
 
@@ -35,8 +44,8 @@ const Header = ({ siteTitle }, props) => {
   return (
     <HideOnScroll {...props}>
       <AppBar className={classes.root}>
-        <Toolbar>
-          <Typography >
+        <Toolbar className={classes.width}>
+          <Typography className={classes.title}>
             <Link
               to="/"
             >
