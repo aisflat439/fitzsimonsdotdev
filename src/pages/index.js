@@ -62,7 +62,7 @@ const IndexPage = () => (
               subheader="Opportunities a developer sees when they look at your ecommerce site" />
             <CardContent>
               <Typography>
-                I do brief site rei vews from time to time and post them on the internet. If you'd like me to review your site let me know **here**.
+                I do brief site reviews from time to time and post them on the internet. If you'd like me to review your site let me know **here**.
               </Typography>
             </CardContent>
             <CardActions>
@@ -98,7 +98,7 @@ const IndexPage = () => (
             <CardHeader
               avatar={
                 <Avatar aria-label="Tools and products">
-                  R
+                  T
                 </Avatar>
               }
               title="Tools and products"
