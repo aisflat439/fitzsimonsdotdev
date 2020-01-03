@@ -1,5 +1,7 @@
 import React from "react"
 
+import { graphql } from 'gatsby'
+
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
@@ -22,5 +24,31 @@ const IndexPage = () => (
     </aside>
   </Layout>
 )
+
+export const query = graphql`
+query {
+  allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}, filter: {fileAbsolutePath: {regex: "/tips/"}}) {
+    totalCount
+    group(field: frontmatter___hashtags) {
+      tag: fieldValue
+      totalCount
+    }
+    edges {
+      node {
+        id
+        frontmatter {
+          title
+          hashtags
+        }
+        fields {
+          slug
+        }
+        excerpt
+      }
+    }
+  }
+}
+
+`
 
 export default IndexPage
