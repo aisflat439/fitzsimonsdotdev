@@ -3,7 +3,7 @@ date: "2019-12-28"
 updated: "2019-12-28"
 title: "Always check responsive sizing"
 slug: "/always-check-responsive-sizing"
-hashtags: "tips, images, responsive, agencies"
+hashtags: ["tips", "images", "responsive", "agencies"]
 ---
 
 # Responsize content

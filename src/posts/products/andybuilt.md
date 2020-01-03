@@ -3,7 +3,7 @@ date: "2020-1-1"
 updated: "2020-1-1"
 title: "Andybuilt"
 slug: "/andybuilt"
-hashtags: "products, tools"
+hashtags: ["products", "tools"]
 ---
 
 # andybuilt
