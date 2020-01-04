@@ -7,7 +7,6 @@ jest.mock("../../components/layout", () => ({ children }) => <div>{children}</di
 jest.mock("../../components/seo", () => () => 'SEO')
 
 const renderWith = (overrides) => {
-  const { edgesOverrides, groupOverrides } = overrides
   const props = {
     data: {
       allMarkdownRemark: {
@@ -36,7 +35,7 @@ const renderWith = (overrides) => {
           }
         ],
         ...overrides
-      }
+      },
     },
   }
 
@@ -44,7 +43,7 @@ const renderWith = (overrides) => {
 }
 
 describe("Thoughts", () => {
-  it("Only renders the first excerpt", () => {
+  it("only renders the first excerpt", () => {
     const mockData = {
       edges: [
         {
@@ -75,5 +74,38 @@ describe("Thoughts", () => {
 
     expect(getByText(/something something/i)).toBeInTheDocument()
     expect(queryByText(/nothing nothing/i)).not.toBeInTheDocument()
+  })
+
+  it("doesn't render the first post in previous posts", () => {
+    const mockData = {
+      edges: [
+        {
+          node: {
+            frontmatter: {
+              title: "yee",
+            },
+            excerpt: 'something something',
+            fields: {
+              slug: '/not-rendered'
+            }
+          }
+        },
+        {
+          node: {
+            frontmatter: {
+              title: "Not this title",
+            },
+            excerpt: "nothing nothing",
+            fields: {
+              slug: '/the-rendered-path'
+            }
+          }
+        },
+      ],
+    }
+    const { getByTestId, queryByTestId } = renderWith(mockData)
+
+    expect(getByTestId('/the-rendered-path')).toBeInTheDocument()
+    expect(queryByTestId('/not-rendered')).not.toBeInTheDocument()
   })
 })

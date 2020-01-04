@@ -25,10 +25,12 @@ const ThoughtsPage = ({ data }) => (
       </Box>
       <Box>
         <Typography variant="h2">Previous Posts</Typography>
-        {data.allMarkdownRemark.edges.map(({ title, slug }, index) => {
+        {data.allMarkdownRemark.edges.map(({ node }, index) => {
+          const { title } = node.frontmatter
+          const { slug } = node.fields
           if (index === 0) return null
           return (
-            <Box key={slug}>
+            <Box key={slug} data-testid={`${slug}`}>
               <p>{title}</p>
               <p>{slug}</p>
             </Box>
