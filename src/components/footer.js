@@ -39,7 +39,7 @@ const Footer = () => {
   const classes = useStyles()
 
   return (
-    <Box component="footer" data-testid="footer" className={classes.root}>
+    <Box component="footer" px={3} data-testid="footer" className={classes.root}>
       <Grid container spacing={3} className={classes.width}>
         <Grid item xs={12} md={3}>
           <Box component="section" >

@@ -18,7 +18,7 @@ const Contact = () => {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: encode({ "form-name": "contact", "email": email })
         })
-            .then(() => alert("Success!"))
+            .then(() => alert("Success! I'm sorry, I just haven't had time to do this correctly yet."))
             .catch(error => alert(error));
 
         e.preventDefault();

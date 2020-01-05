@@ -27,7 +27,7 @@ const IndexPage = () => (
       <h1>Ecommerce design and development tips, reviews, opinions and products</h1>
       <Grid container spacing={2}>
 
-        <Grid item sm={6}>
+        <Grid item md={6}>
           <Box component={Card} height="100%">
             <CardHeader
               avatar={
@@ -50,7 +50,7 @@ const IndexPage = () => (
           </Box>
         </Grid>
 
-        <Grid item sm={6}>
+        <Grid item md={6}>
           <Box component={Card} height="100%">
             <CardHeader
               avatar={
@@ -72,7 +72,7 @@ const IndexPage = () => (
           </Box>
         </Grid>
 
-        <Grid item sm={6}>
+        <Grid item md={6}>
           <Box component={Card} height="100%">
             <CardHeader
               avatar={
@@ -93,7 +93,7 @@ const IndexPage = () => (
           </Box>
         </Grid>
 
-        <Grid item sm={6}>
+        <Grid item md={6}>
           <Box component={Card} height="100%">
             <CardHeader
               avatar={
@@ -106,10 +106,10 @@ const IndexPage = () => (
             <CardContent>
               <Typography>
                 I have several tools to help you have more productive hours. They're in alpha join the list
-                </Typography>
+              </Typography>
             </CardContent>
             <CardActions>
-              <Link to="/tools">Join the list</Link>
+              <Link to="/products">Join the list</Link>
             </CardActions>
           </Box>
         </Grid>
