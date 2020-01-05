@@ -8,6 +8,7 @@ import ListItem from '@material-ui/core/ListItem'
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core"
 
+import Contact from './contact'
 import Link from './Link'
 
 const useStyles = makeStyles(({ palette }) => ({
@@ -57,9 +58,7 @@ const Footer = () => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Box component="section" >
-            <Typography component="h5">email</Typography>
-            <Typography>I haven't made this yet... but eventually</Typography>
-            <Typography>sign up for updates</Typography>
+            <Contact />
           </Box>
         </Grid>
         <Grid item xs={12} md={3}>
