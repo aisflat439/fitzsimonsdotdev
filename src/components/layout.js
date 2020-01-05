@@ -11,8 +11,7 @@ import { StaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import Footer from "./footer"
-import "./layout.css"
-import { Box } from "@material-ui/core"
+import Box from "@material-ui/core/Box"
 
 const Layout = ({ children }) => (
   <StaticQuery
