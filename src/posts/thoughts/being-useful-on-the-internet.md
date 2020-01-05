@@ -3,7 +3,7 @@ date: "2020-1-01"
 updated: "202-1-01"
 title: "Being Useful on the Internet"
 slug: "/being-useful-on-the-internet"
-hashtags: ["thoughts", "random", "usefulness", "agencies"]
+hashtags: ["thoughts", "random", "usefulness", "two words", "agencies"]
 ---
 
 # Useful
