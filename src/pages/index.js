@@ -1,11 +1,13 @@
 import React from "react"
-import { Link } from "gatsby"
 
 import Layout from "../components/layout"
+import Link from "../components/Link"
 import SEO from "../components/seo"
+import ContactMeDialog from "../components/ContactMeDialog"
 
 import Avatar from '@material-ui/core/Avatar'
 import Box from '@material-ui/core/Box'
+import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
@@ -44,7 +46,7 @@ const IndexPage = () => (
               </Typography>
             </CardContent>
             <CardActions>
-              <Link to="/tips">Most recent tip</Link>
+              <Button component={Link} color="secondary" to="/tips">Most recent tip</Button>
               <Link to="/tips">all tips</Link>
             </CardActions>
           </Box>
@@ -62,12 +64,12 @@ const IndexPage = () => (
               subheader="Opportunities a developer sees when they look at your ecommerce site" />
             <CardContent>
               <Typography>
-                I do brief site reviews from time to time and post them on the internet. If you'd like me to review your site let me know **here**.
+                I do brief site reviews from time to time and post them on the internet. If you'd like me to review your site let me know!
               </Typography>
             </CardContent>
             <CardActions>
-              <Link to="/site-reviews">Reviews</Link>
-              <Link to="/site-reviews">Request a review</Link>
+              <Button component={Link} color="secondary" to="/site-reviews">Reviews</Button >
+              <ContactMeDialog title="Request a review" form="contact" />
             </CardActions>
           </Box>
         </Grid>
@@ -109,7 +111,8 @@ const IndexPage = () => (
               </Typography>
             </CardContent>
             <CardActions>
-              <Link to="/products">Join the list</Link>
+              <Button component={Link} color="secondary" to="/products">Learn about andybuilt</Button>
+              <ContactMeDialog title="Get on the list" form="newsletter" />
             </CardActions>
           </Box>
         </Grid>

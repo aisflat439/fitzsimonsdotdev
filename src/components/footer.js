@@ -8,7 +8,7 @@ import ListItem from '@material-ui/core/ListItem'
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core"
 
-import Contact from './contact'
+import Contact from './Contact'
 import Link from './Link'
 
 const useStyles = makeStyles(({ palette }) => ({
