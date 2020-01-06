@@ -3,6 +3,7 @@ import { render } from "@testing-library/react"
 
 import ThoughtsPage from "../thoughts"
 
+jest.mock('@material-ui/core/Link', () => ({ children }) => <div>{children}</div>)
 jest.mock("../../components/layout", () => ({ children }) => <div>{children}</div>)
 jest.mock("../../components/seo", () => () => 'SEO')
 
