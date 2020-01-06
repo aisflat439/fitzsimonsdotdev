@@ -3,7 +3,7 @@ import Box from '@material-ui/core/Box';
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 
-import encode from '../utils'
+import { encode } from '../utils'
 
 const Contact = () => {
     const [email, setEmail] = React.useState('')
