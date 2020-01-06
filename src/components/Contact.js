@@ -3,20 +3,17 @@ import Box from '@material-ui/core/Box';
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 
-const encode = (data) => {
-    return Object.keys(data)
-        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-        .join("&");
-}
+import encode from '../utils'
 
 const Contact = () => {
     const [email, setEmail] = React.useState('')
+    const [domain, setDomain] = React.useState('')
 
     const handleSubmit = e => {
         fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: encode({ "form-name": "contact", "email": email })
+            body: encode({ "form-name": "contact", "email": email, "domain": domain })
         })
             .then(() => alert("Success! I'm sorry, I just haven't had time to do this correctly yet."))
             .catch(error => alert(error));
@@ -24,13 +21,20 @@ const Contact = () => {
         e.preventDefault();
     };
 
-    const handleChange = e => setEmail(e.target.value);
+    const handleChange = e => {
+        e.target.name === 'email' ? setEmail(e.target.value) : setDomain(e.target.value);
+    }
 
     return (
         <form onSubmit={handleSubmit}>
             <p>
                 <label>
                     Your Email: <input type="email" name="email" value={email} onChange={handleChange} />
+                </label>
+            </p>
+            <p>
+                <label>
+                    Your Domain: <input type="text" name="domain" value={domain} onChange={handleChange} />
                 </label>
             </p>
             <p>
