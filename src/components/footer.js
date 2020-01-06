@@ -10,6 +10,7 @@ import { makeStyles } from "@material-ui/core"
 
 import Contact from './Contact'
 import Link from './Link'
+import TwitterIcon from "./TwitterIcon";
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -62,11 +63,11 @@ const Footer = () => {
           </Box>
         </Grid>
         <Grid item xs={12} md={3}>
-          <Typography>social</Typography>
+          <Typography>Social</Typography>
           <List component="nav" aria-label="external social links">
-            <ListItem><MuiLink color="textSecondary">twitter</MuiLink></ListItem>
+            <ListItem><MuiLink target="blank" rel="noopener" href="https://twitter.com/fitzsimons_dev" color="textSecondary"><TwitterIcon />Twitter</MuiLink></ListItem>
             <ListItem><MuiLink color="textSecondary">instagram</MuiLink></ListItem>
-            <ListItem><MuiLink color="textSecondary">linkedin</MuiLink></ListItem>
+            <ListItem><MuiLink target="blank" rel="noopener" href="https://www.linkedin.com/in/fitzsimonsdevin" color="textSecondary">LinkedIn</MuiLink></ListItem>
           </List>
         </Grid>
       </Grid>
