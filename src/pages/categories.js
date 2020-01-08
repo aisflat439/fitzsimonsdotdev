@@ -1,10 +1,14 @@
 import React from "react"
-import PropTypes from "prop-types"
 
 import { Helmet } from "react-helmet"
 import { Link, graphql } from "gatsby"
-import Layout from '../components/layout'
+import List from "@material-ui/core/List"
+import Typography from "@material-ui/core/Typography"
+import GridListTileBar from "@material-ui/core/GridListTileBar"
+import { Card, GridList, GridListTile, IconButton } from "@material-ui/core"
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import Layout from '../components/layout'
 import { dashCase } from '../utils'
 
 const TagsPage = ({
@@ -18,16 +22,24 @@ const TagsPage = ({
     <Layout>
       <Helmet title={title} />
       <div>
-        <h1>Tags</h1>
-        <ul>
-          {group.map(tag => (
-            <li key={tag.fieldValue}>
-              <Link to={`/categories/${dashCase(tag.fieldValue)}/`}>
-                {tag.fieldValue} ({tag.totalCount})
-            </Link>
-            </li>
-          ))}
-        </ul>
+        <Typography variant='h1'>Categories</Typography>
+        <List component="nav" aria-label="main category listing">
+          <GridList cols="4">
+            {group.map(tag => (
+              <GridListTile grid="item" component={Card} key={tag.fieldValue}>
+                <GridListTileBar
+                  title={<Link to={`/categories/${dashCase(tag.fieldValue)}/`}>
+                    {tag.fieldValue} ({tag.totalCount})
+                  </Link>}
+                  actionIcon={
+                    < IconButton >
+                      <ExpandMoreIcon />
+                    </IconButton>
+                  } />
+              </GridListTile>
+            ))}
+          </GridList>
+        </List>
       </div>
     </Layout>
   )
