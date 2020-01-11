@@ -2,13 +2,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
+import { Provider } from "react-redux"
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
+
+import createStore from "../../src/redux/createStore"
 import theme from '../../src/theme';
 
 export default function TopLayout(props) {
+    // Instantiating store in `wrapRootElement` handler ensures:
+    //  - there is fresh store for each SSR page
+    //  - it will be called only once in browser, when React mounts
+    const store = createStore()
+
     return (
-        <React.Fragment>
+        <Provider store={store}>
             <Helmet>
                 <meta
                     name="viewport"
@@ -24,7 +32,7 @@ export default function TopLayout(props) {
                 <CssBaseline />
                 {props.children}
             </ThemeProvider>
-        </React.Fragment>
+        </Provider>
     );
 }
 
