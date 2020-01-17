@@ -1,7 +1,9 @@
-import { createStore, combineReducers } from 'redux';
-import { configureStore, createAction, createReducer, createSlice } from '@reduxjs/toolkit'
+import { combineReducers, getDefaultMiddleware } from 'redux';
+import { configureStore } from '@reduxjs/toolkit'
 
 import counterSlice from './counterSlice'
+
+// const middleware = [...getDefaultMiddleware()]
 
 const reducers = combineReducers({
     counterSlice
@@ -9,5 +11,10 @@ const reducers = combineReducers({
 
 // preloadedState will be passed in by the plugin
 export default preloadedState => {
-    return configureStore({ reducer: reducers }, preloadedState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+    return configureStore(
+        { reducer: reducers },
+        // middleware,
+        preloadedState,
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    );
 };
