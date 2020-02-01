@@ -1,8 +1,6 @@
 import React from "react"
 import { useSelector, useDispatch } from 'react-redux'
 
-import { increment, decrement } from '../redux/counterSlice'
-
 import Layout from "../components/layout"
 import Link from "../components/Link"
 import SEO from "../components/seo"
@@ -19,8 +17,6 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
 const IndexPage = () => {
-  const counter = useSelector(state => state.counterSlice)
-  const dispatch = useDispatch()
 
   return (
     <Layout>
@@ -34,9 +30,7 @@ const IndexPage = () => {
       />
       <Box component="main">
 
-        <h1>{counter}Ecommerce design and development tips, reviews, opinions and products</h1>
-        <button onClick={() => dispatch(increment())}>Up Button</button>
-        <button onClick={() => dispatch(decrement())}> down Button</button>
+        <h1>Ecommerce design and development tips, reviews, opinions and products</h1>
 
         <Grid container spacing={2}>
 

@@ -1,20 +1,30 @@
-import { combineReducers, getDefaultMiddleware } from 'redux';
-import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers } from 'redux';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 
-import counterSlice from './counterSlice'
+// import { createMiddleware } from 'redux-beacon';
+// import GoogleAnalytics, { trackPageView } from '@redux-beacon/google-analytics';
 
-// const middleware = [...getDefaultMiddleware()]
+import counterSlice from './userPreferencesSlice'
+
+// const eventsMap = {
+//   'review/requestReview': ''
+// };
+
+// const gaMiddleware = createMiddleware(eventsMap, GoogleAnalytics());
+
+
+const middleware = [...getDefaultMiddleware()]
 
 const reducers = combineReducers({
-    counterSlice
+  counter: counterSlice,
 })
 
 // preloadedState will be passed in by the plugin
 export default preloadedState => {
-    return configureStore(
-        { reducer: reducers },
-        // middleware,
-        preloadedState,
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    );
+  return configureStore(
+    { reducer: reducers },
+    middleware,
+    preloadedState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
 };

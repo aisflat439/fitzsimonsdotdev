@@ -7,6 +7,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
+import { useDispatch } from 'react-redux';
+
+import { requestReview } from '../redux/actions/gtmActions'
 import Contact from './Contact';
 import NewsletterSignup from './NewsletterSignup';
 
@@ -15,10 +18,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const ContactMeDialog = ({ title, form }) => {
+  const dispatch = useDispatch()
   const [open, setOpen] = React.useState(false);
   const isContactForm = form === "contact"
 
-  const handleClickOpen = () => {
+  const handleOpen = (e) => {
+    dispatch(requestReview(e.target.value))
     setOpen(true);
   };
 
@@ -28,7 +33,7 @@ const ContactMeDialog = ({ title, form }) => {
 
   return (
     <>
-      <Button variant="contained" color="secondary" onClick={handleClickOpen}>{title}</Button>
+      <Button variant="contained" color="secondary" onClick={handleOpen}>{title}</Button>
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -37,8 +42,11 @@ const ContactMeDialog = ({ title, form }) => {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        {isContactForm && <DialogTitle id="alert-dialog-slide-title">Request a site review</DialogTitle>}
-        {!isContactForm && <DialogTitle id="alert-dialog-slide-title">Sign up for updates</DialogTitle>}
+        {isContactForm ?
+          (<DialogTitle id="alert-dialog-slide-title">Request a site review</DialogTitle>)
+          :
+          (<DialogTitle id="alert-dialog-slide-title">Sign up for updates</DialogTitle>)
+        }
 
         <DialogContent>
           {isContactForm ? (
