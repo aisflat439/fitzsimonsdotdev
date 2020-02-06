@@ -23,12 +23,12 @@ const ContactMeDialog = ({ title, form }) => {
   const isContactForm = form === "contact"
 
   const handleOpen = (e) => {
-    dispatch(requestReview(e.target.value))
-    setOpen(true);
+    dispatch(requestReview(e.target.textContent))
+    setOpen(!open);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen(!open);
   };
 
   return (
@@ -45,7 +45,7 @@ const ContactMeDialog = ({ title, form }) => {
         {isContactForm ?
           (<DialogTitle id="alert-dialog-slide-title">Request a site review</DialogTitle>)
           :
-          (<DialogTitle id="alert-dialog-slide-title">Sign up for updates</DialogTitle>)
+          (<DialogTitle id="alert-dialog-slide-title" data-testid="newsletter-title">Sign up for updates</DialogTitle>)
         }
 
         <DialogContent>
