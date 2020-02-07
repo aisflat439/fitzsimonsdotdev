@@ -1,7 +1,7 @@
 import { createAction } from "@reduxjs/toolkit";
 import { EVENT_TRACK } from '../constants/gtmConstants'
 
-export const requestReview = createAction('review/requestReview', (label) => (
+export const requestReview = createAction('review/requestReview', ({ label }) => (
   {
     payload: {
       event: EVENT_TRACK,
@@ -12,4 +12,5 @@ export const requestReview = createAction('review/requestReview', (label) => (
     }
   }
 ))
+
 export const colorTheme = createAction('colorTheme')

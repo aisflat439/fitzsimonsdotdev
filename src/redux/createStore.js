@@ -1,19 +1,19 @@
 import { combineReducers } from 'redux';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 
-// import { createMiddleware } from 'redux-beacon';
-// import GoogleAnalytics, { trackPageView } from '@redux-beacon/google-analytics';
+import { createMiddleware } from 'redux-beacon';
+import GoogleTagManager from '@redux-beacon/google-tag-manager';
 
 import userPreferencesSlice from './userPreferencesSlice'
+import { requestReview } from './actions/gtmActions';
 
-// const eventsMap = {
-//   'review/requestReview': ''
-// };
+const eventsMap = {
+  'review/requestReview': requestReview,
+};
 
-// const gaMiddleware = createMiddleware(eventsMap, GoogleAnalytics());
+const gaMiddleware = createMiddleware(eventsMap, GoogleTagManager());
 
-
-const middleware = [...getDefaultMiddleware()]
+const middleware = [...getDefaultMiddleware(), gaMiddleware]
 
 const reducers = combineReducers({
   userPreferences: userPreferencesSlice,
