@@ -2,21 +2,17 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const userPreferencesSlice = createSlice({
   name: 'userPreferences',
-  initialState: { count: 40432, lightmode: true },
+  initialState: { lightmode: true },
   reducers: {
-    increment(state) {
-      return { count: state.count + 1 }
-    },
-    decrement(state) {
-      return { count: state.count - 1 }
-    },
-    toggleLightMode(state) {
-      return { ...initialState, lightmode: !lightmode }
+    toggleThemeMode(state) {
+      return {
+        lightmode: !state.lightmode
+      }
     }
   },
 })
 
 
-export const { increment, decrement } = userPreferencesSlice.actions
+export const { increment, decrement, toggleThemeMode } = userPreferencesSlice.actions
 
 export default userPreferencesSlice.reducer

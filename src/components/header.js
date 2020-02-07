@@ -1,6 +1,7 @@
+import React from "react"
+import { useDispatch } from "react-redux"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React from "react"
 import { makeStyles, useScrollTrigger } from "@material-ui/core"
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -8,6 +9,8 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import Slide from '@material-ui/core/Slide'
 import { Brightness4 } from "@material-ui/icons"
+
+import { toggleThemeMode } from '../redux/userPreferencesSlice'
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -40,6 +43,11 @@ const useStyles = makeStyles(({ palette }) => ({
 
 const Header = ({ siteTitle }, props) => {
   const classes = useStyles()
+  const dispatch = useDispatch()
+
+  const onClick = () =>
+    dispatch(toggleThemeMode())
+
 
   return (
     <HideOnScroll {...props}>
@@ -52,7 +60,7 @@ const Header = ({ siteTitle }, props) => {
               {siteTitle}
             </Link>
           </Typography>
-          <IconButton >
+          <IconButton onClick={onClick}>
             <Brightness4 />
           </IconButton>
         </Toolbar>

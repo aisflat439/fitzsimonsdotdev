@@ -4,7 +4,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 // import { createMiddleware } from 'redux-beacon';
 // import GoogleAnalytics, { trackPageView } from '@redux-beacon/google-analytics';
 
-import counterSlice from './userPreferencesSlice'
+import userPreferencesSlice from './userPreferencesSlice'
 
 // const eventsMap = {
 //   'review/requestReview': ''
@@ -16,7 +16,7 @@ import counterSlice from './userPreferencesSlice'
 const middleware = [...getDefaultMiddleware()]
 
 const reducers = combineReducers({
-  counter: counterSlice,
+  userPreferences: userPreferencesSlice,
 })
 
 // preloadedState will be passed in by the plugin
