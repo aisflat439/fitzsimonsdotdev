@@ -8,9 +8,14 @@ import ListItem from '@material-ui/core/ListItem'
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core"
 
+import TwitterIcon from '@material-ui/icons/Twitter';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import RedditIcon from '@material-ui/icons/Reddit';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+
 import Contact from './Contact'
 import Link from './Link'
-import TwitterIcon from "./TwitterIcon";
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -66,8 +71,10 @@ const Footer = () => {
           <Typography>Social</Typography>
           <List component="nav" aria-label="external social links">
             <ListItem><MuiLink target="blank" rel="noopener" href="https://twitter.com/fitzsimons_dev" color="textSecondary"><TwitterIcon />Twitter</MuiLink></ListItem>
-            <ListItem><MuiLink color="textSecondary">instagram</MuiLink></ListItem>
-            <ListItem><MuiLink target="blank" rel="noopener" href="https://www.linkedin.com/in/fitzsimonsdevin" color="textSecondary">LinkedIn</MuiLink></ListItem>
+            <ListItem><MuiLink color="textSecondary"><InstagramIcon />instagram</MuiLink></ListItem>
+            <ListItem><MuiLink target="blank" rel="noopener" href="https://github.com/aisflat439/fitzsimonsdotdev" color="textSecondary"><GitHubIcon />github</MuiLink></ListItem>
+            <ListItem><MuiLink color="textSecondary"><RedditIcon />reddit</MuiLink></ListItem>
+            <ListItem><MuiLink target="blank" rel="noopener" href="https://www.linkedin.com/in/fitzsimonsdevin" color="textSecondary"><LinkedInIcon />LinkedIn</MuiLink></ListItem>
           </List>
         </Grid>
       </Grid>
