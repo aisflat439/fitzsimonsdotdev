@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography"
 import Layout from "../components/layout"
 import PostSnippet from "../components/PostSnippet"
 import SEO from "../components/seo"
+import Link from '../components/Link'
 
 
 const ThoughtsPage = ({ data }) => {
@@ -35,10 +36,9 @@ const ThoughtsPage = ({ data }) => {
           if (index === 0) return null
           return (
             <Box key={slug}>
-              <Typography variant="h2">Previous Posts</Typography>
+              {index === 1 && <Typography variant="h2">Previous Posts</Typography>}
               <Box data-testid={`${slug}`}>
-                <p>{title}</p>
-                <p>{slug}</p>
+                <Link to={slug}>{title}</Link>
               </Box>
             </Box>
           )

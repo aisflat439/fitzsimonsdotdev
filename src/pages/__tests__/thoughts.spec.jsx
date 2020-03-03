@@ -22,6 +22,26 @@ const renderWith = (overrides) => {
               }
             }
           },
+          {
+            node: {
+              frontmatter: {
+                title: "The other title"
+              },
+              fields: {
+                slug: '/the-other-path'
+              }
+            }
+          },
+          {
+            node: {
+              frontmatter: {
+                title: "The last title"
+              },
+              fields: {
+                slug: '/the-last-path'
+              }
+            }
+          },
         ],
         group: [
           {
@@ -83,9 +103,9 @@ describe("Thoughts", () => {
         {
           node: {
             frontmatter: {
-              title: "yee",
+              title: "I don't get rendered",
             },
-            excerpt: 'something something',
+            excerpt: 'something about an excerpt',
             fields: {
               slug: '/not-rendered'
             }
@@ -94,9 +114,9 @@ describe("Thoughts", () => {
         {
           node: {
             frontmatter: {
-              title: "Not this title",
+              title: "I get rendered",
             },
-            excerpt: "nothing nothing",
+            excerpt: "something about an excerpt",
             fields: {
               slug: '/the-rendered-path'
             }
@@ -108,5 +128,12 @@ describe("Thoughts", () => {
 
     expect(getByTestId('/the-rendered-path')).toBeInTheDocument()
     expect(queryByTestId('/not-rendered')).not.toBeInTheDocument()
+  })
+
+  it('only renders the h2 title (Previous Posts) once', () => {
+    const { getByText, queryAllByText } = renderWith()
+
+    expect(getByText(/Previous Posts/i)).toBeInTheDocument()
+    expect(queryAllByText(/Previous Posts/i).length).toEqual(1)
   })
 })
