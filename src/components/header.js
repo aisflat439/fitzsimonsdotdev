@@ -12,7 +12,7 @@ import { Brightness4 } from "@material-ui/icons"
 
 import { toggleThemeMode } from '../redux/userPreferencesSlice'
 
-function HideOnScroll(props) {
+const HideOnScroll = (props) => {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
   // will default to window.

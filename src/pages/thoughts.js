@@ -7,6 +7,7 @@ import Layout from "../components/layout"
 import PostSnippet from "../components/PostSnippet"
 import SEO from "../components/seo"
 import Link from '../components/Link'
+import Tag from '../components/Tag'
 
 
 const ThoughtsPage = ({ data }) => {
@@ -26,8 +27,8 @@ const ThoughtsPage = ({ data }) => {
       <Box>
         <Box>
           <Typography variant="h2">Related Posts</Typography>
-          {data.allMarkdownRemark.group.map(({ tag }) => (
-            <p key={tag}>{tag}</p>
+          {data.allMarkdownRemark.group.map(({ tag, totalCount }) => (
+            <Tag key={`${tag}-${totalCount}`} title={tag} count={totalCount} />
           ))}
         </Box>
         {data.allMarkdownRemark.edges.map(({ node }, index) => {
