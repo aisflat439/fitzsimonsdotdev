@@ -77,7 +77,20 @@ function SEO({ description, lang, meta, keywords, title }) {
             : []
         )
         .concat(meta)}
-    />
+    >
+      <script type="application/ld+json">{`
+    {
+      "@context": "http://schema.org",
+      "@type": "Peresonal",
+      "url": "http://www.fitzsimons.dev",
+      "sameAs" : [ 
+        "https://github.com/aisflat439"
+        "http://www.twitter.com/fitzsimons_dev",
+        "https://www.linkedin.com/in/fitzsimonsdevin/",
+      ]
+    }
+    `}</script>
+    </Helmet>
   )
 }
 
