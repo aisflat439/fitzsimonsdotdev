@@ -84,7 +84,7 @@ function SEO({ description, lang, meta, keywords, title }) {
       "@type": "Peresonal",
       "url": "http://www.fitzsimons.dev",
       "sameAs" : [ 
-        "https://github.com/aisflat439"
+        "https://github.com/aisflat439",
         "http://www.twitter.com/fitzsimons_dev",
         "https://www.linkedin.com/in/fitzsimonsdevin/",
       ]
