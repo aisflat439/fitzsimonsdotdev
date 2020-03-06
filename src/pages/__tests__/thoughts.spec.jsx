@@ -47,12 +47,10 @@ const renderWith = (overrides) => {
           {
             tag: 'One',
             totalCount: 1
-
           },
           {
             tag: 'Two',
             totalCount: 4
-
           }
         ],
         ...overrides
