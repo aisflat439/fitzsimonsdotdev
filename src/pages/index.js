@@ -1,5 +1,4 @@
 import React from "react"
-import { useSelector, useDispatch } from 'react-redux'
 
 import Layout from "../components/layout"
 import Link from "../components/Link"
@@ -24,13 +23,30 @@ const IndexPage = () => {
         title="Home"
         keywords={[
           `ecommerce`,
+          `gatsby`,
           `ecommerce development`,
           `ecommerce design and development`,
         ]}
       />
       <Box component="main">
 
-        <h1>Ecommerce design and development tips, reviews, opinions and products</h1>
+        <Typography variant="h3" component="h1" paragraph>Ecommerce design and development tips, reviews, opinions and products</Typography>
+        <Typography paragraph>Hello! The goal of this site is to be a useful place to keep my general thoughts about the web development on the internet. This is not a professional blog. I don't really know anything about blogging. THis is more a location for me to keep the useful information I have, perhaps let people know about the things that I make, and experiment with discussing the things about web development that I'm interested in.
+          <ul> Things you can expect to find here relate to:
+            <li>ecommerce</li>
+            <li>agencies</li>
+            <li>Gatsby</li>
+            <li>working in public</li>
+            <li>projects and things I've made</li>
+            <li>rants and raves about websites</li>
+          </ul>
+          <ul> Things you wont find:
+            <li>news related stuff</li>
+            <li>stuff about how I feel</li>
+            <li>regular updates, expect more when I have time and something to say</li>
+          </ul>
+          I'll do my absolute best to keep this useful, or at least useful adjacent. Thanks for coming by
+        </Typography>
 
         <Grid container spacing={2}>
 
@@ -43,6 +59,7 @@ const IndexPage = () => {
                 </Avatar>
                 }
                 title="Ecommerce tips from a developer"
+                titleTypographyProps={{ component: 'h2' }}
                 subheader="Straightforward choices a site can make to delight it's users" />
               <CardContent>
                 <Typography>
@@ -66,6 +83,7 @@ const IndexPage = () => {
                 </Avatar>
                 }
                 title="Site Reviews"
+                titleTypographyProps={{ component: 'h2' }}
                 subheader="Opportunities a developer sees when they look at your ecommerce site" />
               <CardContent>
                 <Typography>
@@ -88,6 +106,7 @@ const IndexPage = () => {
                 </Avatar>
                 }
                 title="General Ecommerce Thoughts"
+                titleTypographyProps={{ component: 'h2' }}
                 subheader="More broad thoughts around ecommerce and it's ecosystem" />
               <CardContent>
                 <Typography>
@@ -109,6 +128,7 @@ const IndexPage = () => {
                 </Avatar>
                 }
                 title="Tools and products"
+                titleTypographyProps={{ component: 'h2' }}
                 subheader="I have tools and products available" />
               <CardContent>
                 <Typography>
