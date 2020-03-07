@@ -3,9 +3,11 @@ module.exports = {
     title: `Fitzsimons.dev`,
     description: `Mostly I just click f5 a lot and hope it works.`,
     author: `@aisflat439`,
-    twitterUsername: "@fitzsimons.dev",
+    twitterUsername: "@fitzsimons_dev",
+    siteUrl: `https://www.fitzsimons.dev`,
   },
   plugins: [
+    `gatsby-plugin-sitemap`,
     'gatsby-plugin-top-layout',
     {
       resolve: 'gatsby-plugin-material-ui',
