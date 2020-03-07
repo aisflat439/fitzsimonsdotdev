@@ -79,16 +79,19 @@ function SEO({ description, lang, meta, keywords, title }) {
         .concat(meta)}
     >
       <script type="application/ld+json">{`
-    {
-      "@context": "http://schema.org",
-      "@type": "Peresonal",
-      "url": "http://www.fitzsimons.dev",
-      "sameAs" : [ 
-        "https://github.com/aisflat439",
-        "http://www.twitter.com/fitzsimons_dev",
-        "https://www.linkedin.com/in/fitzsimonsdevin/",
-      ]
-    }
+{
+  "@context": "https://schema.org/",
+  "@type": "Person",
+  "name": "Devin",
+  "url": "http://www.fitzsimons.dev",
+  "image": "",
+  "sameAs": [
+    "https://twitter.com/fitzsimons_dev",
+    "https://www.linkedin.com/in/fitzsimonsdevin/",
+    "https://github.com/aisflat439"
+  ],
+  "jobTitle": "software engineer"  
+}
     `}</script>
     </Helmet>
   )
