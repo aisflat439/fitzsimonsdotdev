@@ -60,7 +60,7 @@ const Header = ({ siteTitle }, props) => {
               {siteTitle}
             </Link>
           </Typography>
-          <IconButton onClick={onClick}>
+          <IconButton onClick={onClick} role="button">
             <Brightness4 />
           </IconButton>
         </Toolbar>
