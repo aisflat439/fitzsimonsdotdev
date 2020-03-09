@@ -41,8 +41,23 @@ module.exports = {
         icon: `src/images/df-favicon.png`, // This path is relative to the root of the site.
       },
     },
-
-    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          `gatsby-remark-relative-images`,
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 500,
+              linkImagesToOriginal: false,
+              sizeByPixelDensity: true,
+              showCaptions: true
+            }
+          },
+        ]
+      }
+    },
     `gatsby-plugin-netlify`,
     {
       resolve: "gatsby-plugin-google-tagmanager",
