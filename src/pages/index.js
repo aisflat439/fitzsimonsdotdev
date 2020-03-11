@@ -29,20 +29,24 @@ const IndexPage = () => {
       <Box component="main">
 
         <Typography variant="h3" component="h1" paragraph>Ecommerce design and development tips, reviews, opinions and products</Typography>
-        <Typography paragraph>Hello! The goal of this site is to be a useful place to keep my general thoughts about the web development on the internet. This is not a professional blog. I don't really know anything about blogging. This is more a location for me to keep the useful information I have, perhaps let people know about the things that I make, and experiment with discussing the things about web development that I'm interested in.
-          <ul> Things you can expect to find here relate to:
-            <li>ecommerce</li>
-            <li>agencies</li>
-            <li>Gatsby</li>
-            <li>working in public</li>
-            <li>projects and things I've made</li>
-            <li>rants and raves about websites</li>
-          </ul>
-          <ul> Things you wont find:
-            <li>news related stuff</li>
-            <li>stuff about how I feel</li>
-            <li>regular updates, expect more when I have time and something to say</li>
-          </ul>
+        <Typography paragraph>Hello! The goal of this site is to be a useful place to keep my general thoughts about the web development on the internet. This is not a professional blog. I don't really know anything about blogging. THis is more a location for me to keep the useful information I have, perhaps let people know about the things that I make, and experiment with discussing the things about web development that I'm interested in.
+        </Typography>
+        Things you can expect to find here relate to:
+        <ul>
+          <li>ecommerce</li>
+          <li>agencies</li>
+          <li>Gatsby</li>
+          <li>working in public</li>
+          <li>projects and things I've made</li>
+          <li>rants and raves about websites</li>
+        </ul>
+        Things you wont find:
+        <ul>
+          <li>news related stuff</li>
+          <li>stuff about how I feel</li>
+          <li>regular updates, expect more when I have time and something to say</li>
+        </ul>
+        <Typography paragraph>
           I'll do my absolute best to keep this useful, or at least useful adjacent. Thanks for coming by
         </Typography>
 

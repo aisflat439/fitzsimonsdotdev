@@ -19,7 +19,8 @@ import Link from './Link'
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
-    backgroundColor: palette.secondary.main,
+    backgroundColor: palette.secondary.dark,
+    color: palette.primary.main,
   },
   width: {
     maxWidth: 1440,
@@ -55,7 +56,7 @@ const Footer = () => {
                 if (node.base === 'deprecated' || node.base === 'images' || node.base === 'posts') return null
                 return (
                   <ListItem key={node.id}>
-                    <Link color="textSecondary" to={`/${node.base}`}>{`${node.base}`}</Link>
+                    <Link to={`/${node.base}`}>{`${node.base}`}</Link>
                   </ListItem>
                 )
               })}
@@ -70,11 +71,11 @@ const Footer = () => {
         <Grid item xs={12} md={3}>
           <Typography>Social</Typography>
           <List component="nav" aria-label="external social links">
-            <ListItem><MuiLink target="blank" rel="noopener" href="https://twitter.com/fitzsimons_dev" color="textSecondary"><TwitterIcon />Twitter</MuiLink></ListItem>
-            <ListItem><MuiLink color="textSecondary"><InstagramIcon />instagram</MuiLink></ListItem>
-            <ListItem><MuiLink target="blank" rel="noopener" href="https://github.com/aisflat439/fitzsimonsdotdev" color="textSecondary"><GitHubIcon />github</MuiLink></ListItem>
-            <ListItem><MuiLink color="textSecondary"><RedditIcon />reddit</MuiLink></ListItem>
-            <ListItem><MuiLink target="blank" rel="noopener" href="https://www.linkedin.com/in/fitzsimonsdevin" color="textSecondary"><LinkedInIcon />LinkedIn</MuiLink></ListItem>
+            <ListItem><MuiLink target="blank" rel="noopener" href="https://twitter.com/fitzsimons_dev"><TwitterIcon />Twitter</MuiLink></ListItem>
+            <ListItem><MuiLink><InstagramIcon />instagram</MuiLink></ListItem>
+            <ListItem><MuiLink target="blank" rel="noopener" href="https://github.com/aisflat439/fitzsimonsdotdev"><GitHubIcon />github</MuiLink></ListItem>
+            <ListItem><MuiLink><RedditIcon />reddit</MuiLink></ListItem>
+            <ListItem><MuiLink target="blank" rel="noopener" href="https://www.linkedin.com/in/fitzsimonsdevin"><LinkedInIcon />LinkedIn</MuiLink></ListItem>
           </List>
         </Grid>
       </Grid>
