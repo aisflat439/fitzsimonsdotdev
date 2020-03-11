@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b6736b90-6dd4-4321-953a-bcaae445ab60/deploy-status)](https://app.netlify.com/sites/vigorous-darwin-afd2a3/deploys)
+
 ## 🚀 Quick start
 
 0. **Ensure you have gatsby-cli installed** 
