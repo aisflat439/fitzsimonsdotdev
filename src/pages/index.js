@@ -4,14 +4,12 @@ import Layout from "../components/layout"
 import Link from "../components/Link"
 import SEO from "../components/seo"
 import ContactMeDialog from "../components/ContactMeDialog"
+import HomePageCardContent from "../components/HomePageCardContent"
 
-import Avatar from '@material-ui/core/Avatar'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import CardHeader from '@material-ui/core/CardHeader'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
@@ -31,7 +29,7 @@ const IndexPage = () => {
       <Box component="main">
 
         <Typography variant="h3" component="h1" paragraph>Ecommerce design and development tips, reviews, opinions and products</Typography>
-        <Typography paragraph>Hello! The goal of this site is to be a useful place to keep my general thoughts about the web development on the internet. This is not a professional blog. I don't really know anything about blogging. THis is more a location for me to keep the useful information I have, perhaps let people know about the things that I make, and experiment with discussing the things about web development that I'm interested in.
+        <Typography paragraph>Hello! The goal of this site is to be a useful place to keep my general thoughts about the web development on the internet. This is not a professional blog. I don't really know anything about blogging. This is more a location for me to keep the useful information I have, perhaps let people know about the things that I make, and experiment with discussing the things about web development that I'm interested in.
           <ul> Things you can expect to find here relate to:
             <li>ecommerce</li>
             <li>agencies</li>
@@ -52,21 +50,12 @@ const IndexPage = () => {
 
           <Grid item md={6}>
             <Box component={Card} height="100%">
-              <CardHeader
-                avatar={
-                  <Avatar aria-label="tips">
-                    tips
-                </Avatar>
-                }
+              <HomePageCardContent
+                avatar="tips"
                 title="Ecommerce tips from a developer"
-                titleTypographyProps={{ component: 'h2' }}
-                subheader="Straightforward choices a site can make to delight it's users" />
-              <CardContent>
-                <Typography>
-                  Development is difficult work that requires focus, understanding and
-                  great attention to detail. An ecommerce site is easy to get started but extremely challenging to grow. While there are ample resources for shop owners to get started there are very few that communicate what a shop owner can do to get the most out of their site from a developers perspective.
-              </Typography>
-              </CardContent>
+                subheader="Straightforward choices a site can make to delight it's users"
+                content="Development is difficult work that requires focus, understanding and great attention to detail. An ecommerce site is easy to get started but extremely challenging to grow. While there are ample resources for shop owners to get started there are very few that communicate what a shop owner can do to get the most out of their site from a developers perspective."
+              />
               <CardActions>
                 <Button component={Link} color="secondary" to="/tips">Most recent tip</Button>
                 <Link to="/tips">all tips</Link>
@@ -76,20 +65,12 @@ const IndexPage = () => {
 
           <Grid item md={6}>
             <Box component={Card} height="100%">
-              <CardHeader
-                avatar={
-                  <Avatar aria-label="site-reviews">
-                    R
-                </Avatar>
-                }
+              <HomePageCardContent
+                avatar="reviews"
                 title="Site Reviews"
-                titleTypographyProps={{ component: 'h2' }}
-                subheader="Opportunities a developer sees when they look at your ecommerce site" />
-              <CardContent>
-                <Typography>
-                  I do brief site reviews from time to time and post them on the internet. If you'd like me to review your site let me know!
-              </Typography>
-              </CardContent>
+                subheader="Opportunities a developer sees when they look at your ecommerce site"
+                content="I do brief site reviews from time to time and post them on the internet. If you'd like me to review your site let me know!"
+              />
               <CardActions>
                 <Button component={Link} color="secondary" to="/site-reviews">Reviews</Button >
                 <ContactMeDialog title="Request a review" form="contact" />
@@ -99,20 +80,12 @@ const IndexPage = () => {
 
           <Grid item md={6}>
             <Box component={Card} height="100%">
-              <CardHeader
-                avatar={
-                  <Avatar aria-label="Thoughts">
-                    ?
-                </Avatar>
-                }
+              <HomePageCardContent
+                avatar="Thoughts"
                 title="General Ecommerce Thoughts"
-                titleTypographyProps={{ component: 'h2' }}
-                subheader="More broad thoughts around ecommerce and it's ecosystem" />
-              <CardContent>
-                <Typography>
-                  Whamboozles abound
-                </Typography>
-              </CardContent>
+                subheader="More broad thoughts around ecommerce and it's ecosystem"
+                content="Whamboozles abound"
+              />
               <CardActions>
                 <Link to="/thoughts">Thoughts</Link>
               </CardActions>
@@ -121,20 +94,12 @@ const IndexPage = () => {
 
           <Grid item md={6}>
             <Box component={Card} height="100%">
-              <CardHeader
-                avatar={
-                  <Avatar aria-label="Tools and products">
-                    T
-                </Avatar>
-                }
-                title="Tools and products"
-                titleTypographyProps={{ component: 'h2' }}
-                subheader="I have tools and products available" />
-              <CardContent>
-                <Typography>
-                  I have several tools to help you have more productive hours. They're in alpha join the list
-              </Typography>
-              </CardContent>
+              <HomePageCardContent
+                avatar="Products and Tools"
+                title="Products and Tools"
+                subheader="Check out the things I build"
+                content="I have several tools to help you have more productive hours. None are publicy for sale today and in various stages of development. If you have a problem or would like information, sign up on the list!"
+              />
               <CardActions>
                 <Button component={Link} color="secondary" to="/products">Learn about andybuilt</Button>
                 <ContactMeDialog title="Get on the list" form="newsletter" />
