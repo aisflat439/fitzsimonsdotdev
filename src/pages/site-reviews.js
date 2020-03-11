@@ -2,11 +2,12 @@ import React from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { Typography } from "@material-ui/core"
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Posts" keywords={[`ecommerce`, `ecommerce development`, `shopfiy`]} />
-    <h1>Site Reviews</h1>
+    <Typography variant="h3" component="h1">Site Reviews</Typography>
     <p>Yee.</p>
   </Layout>
 )
