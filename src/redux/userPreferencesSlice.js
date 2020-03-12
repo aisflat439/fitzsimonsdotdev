@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const userPreferencesSlice = createSlice({
   name: 'userPreferences',
-  initialState: { lightmode: true },
+  initialState: { lightmode: undefined },
   reducers: {
     toggleThemeMode(state) {
       return {
