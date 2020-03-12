@@ -14,8 +14,8 @@ import RedditIcon from '@material-ui/icons/Reddit';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
-import Contact from './Contact'
 import Link from './Link'
+import NewsletterSignup from "./NewsletterSignup";
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -26,6 +26,11 @@ const useStyles = makeStyles(({ palette }) => ({
     maxWidth: 1440,
     margin: 'auto',
     padding: 24
+  },
+  footerColumn: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   }
 }))
 
@@ -64,8 +69,8 @@ const Footer = () => {
           </Box>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Box component="section" >
-            <Contact />
+          <Box component="section" className={classes.footerColumn}>
+            <NewsletterSignup />
           </Box>
         </Grid>
         <Grid item xs={12} md={3}>
