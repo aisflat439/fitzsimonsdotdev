@@ -1,5 +1,6 @@
 import React from 'react'
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 
@@ -21,30 +22,21 @@ const NewsletterSignup = () => {
     };
 
     const handleChange = e => {
-        e.target.name === 'email' ? setEmail(e.target.value) : setDomain(e.target.value);
+        setEmail(e.target.value)
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <p>
-                <label>
-                    Your Email: <input type="email" name="email" value={email} onChange={handleChange} />
-                </label>
-            </p>
-            <p>
-                <button type="submit">Send</button>
-            </p>
-        </form>
-        // <Box display="flex" component="form" name="newsletter" method="post" noValidate autoComplete="off" data-netlify="true" data-netlify-honeypot="bot-field">
-        //     <Input type="hidden" name="bot-field" />
-        //     <TextField
-        //         label="Email"
-        //         id="mui-theme-provider-standard-input"
-        //         variant="outlined"
-        //         required
-        //     />
-        //     <Input type="submit" value="Sign Up" />
-        // </Box>
+        <Box display="flex" component="form" name="newsletter" method="post" noValidate autoComplete="off" data-netlify="true" data-netlify-honeypot="bot-field">
+            <Input type="hidden" name="bot-field" />
+            <TextField
+                onChange={handleChange}
+                label="Email"
+                id="mui-theme-provider-standard-input"
+                variant="outlined"
+                required
+            />
+            <Button type="submit" >Sign Up</Button>
+        </Box >
     )
 }
 
