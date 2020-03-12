@@ -10,6 +10,7 @@ import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 import { useSelector } from "react-redux"
 import { createMuiTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from "@material-ui/core/Box"
@@ -20,9 +21,14 @@ import Header from "./header"
 import Footer from "./footer"
 
 const Layout = ({ children }) => {
-  const isLightMode = useSelector(state => state.userPreferences.lightmode)
-  theme.palette.type = isLightMode ? 'light' : 'dark'
-  const customTheme = createMuiTheme(theme)
+  let prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const hasSelectedPreference = useSelector(state => state.userPreferences.lightmode)
+  if (hasSelectedPreference !== undefined) {
+    prefersDarkMode = hasSelectedPreference
+  }
+
+  theme.palette.type = prefersDarkMode ? 'dark' : 'light'
+  const customTheme = React.useMemo(() => createMuiTheme(theme), [prefersDarkMode]);
 
   return (
     <StaticQuery

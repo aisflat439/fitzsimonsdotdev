@@ -29,7 +29,7 @@ const IndexPage = () => {
       <Box component="main">
 
         <Typography variant="h3" component="h1" paragraph>Ecommerce design and development tips, reviews, opinions and products</Typography>
-        <Typography paragraph>Hello! The goal of this site is to be a useful place to keep my general thoughts about the web development on the internet. This is not a professional blog. I don't really know anything about blogging. THis is more a location for me to keep the useful information I have, perhaps let people know about the things that I make, and experiment with discussing the things about web development that I'm interested in.
+        <Typography paragraph>Hello! The goal of this site is to be a useful place to keep my general thoughts about web development on the internet. This is not a professional blog. I don't really know anything about blogging. Think of this more as a location for me to keep the useful information I have, perhaps let people know about the things that I make, and experiment with discussing the things about web development.
         </Typography>
         Things you can expect to find here relate to:
         <ul>
@@ -47,7 +47,7 @@ const IndexPage = () => {
           <li>regular updates, expect more when I have time and something to say</li>
         </ul>
         <Typography paragraph>
-          I'll do my absolute best to keep this useful, or at least useful adjacent. Thanks for coming by
+          I'll do my absolute best to keep this useful, or at least useful adjacent. Thanks for coming by!
         </Typography>
 
         <Grid container spacing={2}>
@@ -57,7 +57,7 @@ const IndexPage = () => {
               <HomePageCardContent
                 avatar="tips"
                 title="Ecommerce tips from a developer"
-                subheader="Straightforward choices a site can make to delight it's users"
+                subheader="Straightforward choices a site can make to delight it's customers"
                 content="Development is difficult work that requires focus, understanding and great attention to detail. An ecommerce site is easy to get started but extremely challenging to grow. While there are ample resources for shop owners to get started there are very few that communicate what a shop owner can do to get the most out of their site from a developers perspective."
               />
               <CardActions>
@@ -102,7 +102,7 @@ const IndexPage = () => {
                 avatar="Products and Tools"
                 title="Products and Tools"
                 subheader="Check out the things I build"
-                content="I have several tools to help you have more productive hours. None are publicy for sale today and in various stages of development. If you have a problem or would like information, sign up on the list!"
+                content="I have several tools to help you have more productive hours. None are publicy for sale today and all are in various stages of development. If you have a problem or would like information, sign up on the list!"
               />
               <CardActions>
                 <Button component={Link} color="secondary" to="/products">Learn about andybuilt</Button>
