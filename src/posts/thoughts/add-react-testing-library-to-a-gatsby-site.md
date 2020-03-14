@@ -1,0 +1,172 @@
+---
+date: "2020-3-12"
+updated: "2020-3-12"
+title: "Add React Testing Library to a Gatsby site"
+slug: "/add-react-testing-library-to-a-gatsby-site"
+hashtags: ["tutorial", "testing", "react", "gatsby"]
+---
+
+## Goal
+
+Take a plain gatsby site and add react testing library to it.
+
+## Prerequisites
+
+- Gatsby CLI
+- Node
+- Yarn
+
+### Step One
+
+Create a gatsby site named reactTestingGatsby using `gatsby new reactTestingGatsby`. Change into that directory `cd reactTestingGatsby` and run `gatsby develop`. Your site should work. If not, go back. Now you'll need to add a couple of packages. These will all be added as dev dependencies because we don't them in the final build.
+
+ - `yarn add jest --dev`
+ - `yarn add @testing-library/react --dev`
+ - `yarn add @testing-library/jest-dom --dev`
+ - `yarn add react-test-renderer --dev`
+
+So far we've added Testing Library, usually referred to as React Testing Library or RTL. Jest, and the React Testing Library Jest package. Frankly, I have no idea what that last one does. I imagine it links Jest and RTL so things "just work". But, so you know, the thing about testing is that it seldom just works. That's kinda the point.
+
+### Let's Test!
+
+This won't work, so you know in advance. Because, like I just said, the thing about testing is that it seldom just works. There's lots of little things in testing that are tricky and sorta strange. That's actaully good. It makes you a way better developer. It makes the code you write better. But it definitely takes a certain mental attitude. I've been fortunate to work with some smart people who have that attitude.
+
+We have to run the tests right? We need a command that runs all the test. Jest has us covered with `jest --watch`. It watches for changes in your files and runs the tests when that happens. This way you know right away when you break stuff. Pretty handy. Even though this won't work, pop open the terminal and run `yarn jest --watch`. Hopefully you'll see something that looks like a little menu of single letter options. Press `a` to run all the tests and watch them blow up. Look for the error `Jest encountered an unexpected token`. The next message explains what's what. You're trying to parse something that's not JavaScript. React isn't Javascript. You need to transpile it all in order to make just Javascript. If you're anything like me you forget that all the time. 
+
+### Add some more configuration
+
+First we need jest to babel-ify our files. Let's `yarn add babel-jest --dev` and try again (it should still fail)! If you read the errors again you should find some that talk mostly about babel not being found, polyfills and things not being transformed. That's great! You want to read those errors. Basically, they're trying to encourage you to configure Jest. Luckily, it's pretty straightforward to do! Add a `jest.config.js` and a `jest-preprocess.js` to your site along with the following:
+```
+// jest-preprocess.js
+const babelOptions = {
+  presets: ["babel-preset-gatsby"],
+}
+
+module.exports = require("babel-jest").createTransformer(babelOptions)
+```
+
+```
+// jest.config.js
+module.exports = {
+    transform: {
+      "^.+\\.jsx?$": `<rootDir>/jest-preprocess.js`,
+    },
+    moduleNameMapper: {
+      ".+\\.(css|styl|less|sass|scss)$": `identity-obj-proxy`,
+      ".+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": `<rootDir>/__mocks__/file-mock.js`,
+    },
+    testPathIgnorePatterns: [`node_modules`, `.cache`, `public`],
+    transformIgnorePatterns: [`node_modules/(?!(gatsby)/)`],
+    globals: {
+      __PATH_PREFIX__: ``,
+    },
+    testURL: `http://localhost`,
+    setupFiles: [`<rootDir>/loadershim.js`],
+    setupFilesAfterEnv: ["<rootDir>/setup-test-env.js"],
+  }
+```
+
+First, `jest-preprocess.js`. I have no idea how I found that but it's kinda obvious what it does right? Set's a preset option of Gatsby on babel, transforms and exports it. In order to use it however, we need to add the `babel-preset-gatsby` package.
+
+- `yarn add babel-preset-gatsby --dev`
+
+The next file configures jest. First, we declare transform and reference that file we just created. Then we map some module names. In the second line there's something interesting to take note of `<rootDir>/__mocks__/file-mock.js`. That's just mocking all these kinds of files. When Jest is rendering your site for testing, you don't want it to make images and music files and such. Otherwise, it will take forever to run. So this is going to see those file extensions, and then fake the response. Testing folks call that mocking. It's a super important concept in testing. If your application is small, probably doesn't matter. But the larger it gets the more speed in your testing suite matters. Let's add that file, in that folder and mock some files. One line is all it takes.
+
+```
+// reactTestingGatsby/__mocks__/file-mocks.js
+module.exports = "test-file-stub"
+```
+
+Now when a file is found by Jest when it's building your site it will respond with the string "test-file-stub" rather than a PNG or JPEG. Next we ignore nodemodules, which makes sense, we don't want to test other packages. We then also ignore transpiling them as well. Add a global path prefix and a testURL. We then need a setupFiles and a setupFilesAfterEnv. Start with `loadershim.js`.
+
+```
+// loadershim.js
+global.___loader = {
+    enqueue: jest.fn(),
+  }
+```
+
+This sets enqueue to return a jest.fn(). A jest function is basically just a special kind of empty function that doesn't return anything. You can however, get information about it, like number of times the function is called or what arguments it's called with. Next add a `setup-test-env.js`. This does exactly what it sounds like. After the test enviroment is set up, we add testing library, and extend expect.
+
+```
+// setup-test-env.js
+import "@testing-library/jest-dom/extend-expect"
+```
+
+Maybe our jest suite runs now. Open the terminal and run `yarn jest --watch` and see if it works! If everything is going right, you should have no tests to run. That's a great sign. We're almost there on configuring Gatsby for RTL. Let's create a test and see what errors we get.
+
+```
+// pages/index.spec.js
+
+describe("<IndexPage />", () => {
+  it("works", () => {
+    expect(1).toBe(1)
+  })
+})
+
+```
+
+If you run your tests, you should have errors around identity-obj-proxy. This error is confusing but google helps if you search for it you'll find it's a package. add it with `yarn add identity-obj-proxy --dev`. I've no idea what it does. However, you should now see your test works! Lets update out test to validate that "Hi people!" shows up on the IndexPage, spoiler alert, it won't work.
+
+```
+// pages/index.spec.js
+
+import React from "react"
+import { render } from "@testing-library/react"
+
+import IndexPage from "."
+
+describe("<IndexPage />", () => {
+  it("renders an H1 with the expected text", () => {
+    const { getByText } = render(<IndexPage />)
+    
+    expect(getByText('Hi people!')).toBeInTheDocument()
+  })
+})
+```
+
+This fails with a pretty helpful message about how Gatsby is misconfigured and Layout is having issues with GraphQl. Take a look at `index.js`, that calls `<Layout />` which in turn has a graphql query. We'll that's not at all something we care about. We're only trying to test that there is an H1 on the page with "Hi people!" in it. What we want, is to not actually render what is inside `<Layout />` and instead just assume that Layout works as expected. This is exactly what mocking is for. We have a little experience with it from earlier. This time, we're going to mock the layout component, but render it's contents.
+
+```
+// pages/index.spec.js
+
+import React from "react"
+import { render } from "@testing-library/react"
+
+import IndexPage from "."
+
+jest.mock("../components/layout", () => ({ children }) => <div>{children}</div>)
+
+describe("<IndexPage />", () => {
+  it("renders an H1 with the expected text", () => {
+    const { getByText } = render(<IndexPage />)
+    
+    expect(getByText('Hi people!')).toBeInTheDocument()
+  })
+})
+```
+
+If you run the tests again, you should have a new failure message that looks super similar. This time about `<Image />`. This mock is a little different. We don't need to render the children of `<Image />`. Really any image will do. You should see the same error with `<SEO />` if you scroll. We don't need that here either. We might want either of both of those to be tested, but in their own components, not on the `IndexPage` file. Generally, we shouldn't components we're importing, they should be tested on their own. This is a principle of Unit Testing and it takes some getting used to to follow. We'll have both image and seo return their strings instead.
+
+```
+// pages/index.spec.js
+
+import React from "react"
+import { render } from "@testing-library/react"
+
+import IndexPage from "."
+
+jest.mock("../components/layout", () => ({ children }) => <div>{children}</div>)
+jest.mock("../components/image", () => () => 'Image')
+jest.mock("../components/seo", () => () => 'Seo')
+
+describe("<IndexPage />", () => {
+  it("renders an H1 with the expected text", () => {
+    const { getByText } = render(<IndexPage />)
+    
+    expect(getByText('Hi people!')).toBeInTheDocument()
+  })
+})
+```
+
+Success!! We have now validated that "Hi people" shows up on the homepage.
