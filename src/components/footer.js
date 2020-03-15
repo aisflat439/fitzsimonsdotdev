@@ -27,26 +27,34 @@ const useStyles = makeStyles(({ palette }) => ({
     margin: 'auto',
     padding: 24
   },
-  footerColumn: {
+  centerFlex: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  }
+  },
 }))
 
 const Footer = () => {
-  const { allDirectory } = useStaticQuery(graphql`
-    query FoldersQuery {
-      allDirectory {
-        edges {
-          node {
-            base
-            id
-          }
+  const { allDirectory, site: { siteMetadata } } = useStaticQuery(graphql`
+  query FoldersQuery {
+    allDirectory {
+      edges {
+        node {
+          base
+          id
         }
       }
     }
-`)
+    site {
+      siteMetadata {
+        identityData {
+          siteLink
+          siteName
+        }
+      }
+    }
+  }
+  `)
 
   const classes = useStyles()
 
@@ -69,18 +77,25 @@ const Footer = () => {
           </Box>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Box component="section" className={classes.footerColumn}>
+          <Box component="section" className={classes.centerFlex}>
             <NewsletterSignup />
           </Box>
         </Grid>
         <Grid item xs={12} md={3}>
           <Typography>Social</Typography>
           <List component="nav" aria-label="external social links">
-            <ListItem><MuiLink target="blank" rel="noopener" href="https://twitter.com/fitzsimons_dev"><TwitterIcon />Twitter</MuiLink></ListItem>
-            <ListItem><MuiLink><InstagramIcon />instagram</MuiLink></ListItem>
-            <ListItem><MuiLink target="blank" rel="noopener" href="https://github.com/aisflat439/fitzsimonsdotdev"><GitHubIcon />github</MuiLink></ListItem>
-            <ListItem><MuiLink><RedditIcon />reddit</MuiLink></ListItem>
-            <ListItem><MuiLink target="blank" rel="noopener" href="https://www.linkedin.com/in/fitzsimonsdevin"><LinkedInIcon />LinkedIn</MuiLink></ListItem>
+            {siteMetadata.identityData.map(({ siteLink, siteName }) => (
+              <ListItem>
+                <MuiLink target="blank" rel="noopener" href={siteLink} className={classes.centerFlex}>
+                  {siteName === 'Twitter' && <Box component={TwitterIcon} mr={1} />}
+                  {siteName === 'LinkedIn' && <Box component={LinkedInIcon} mr={1} />}
+                  {siteName === 'Github' && <Box component={GitHubIcon} mr={1} />}
+                  {siteName === 'Reddit' && <Box component={RedditIcon} mr={1} />}
+                  {siteName === 'Instagram' && <Box component={InstagramIcon} mr={1} />}
+                  {siteName}
+                </MuiLink>
+              </ListItem>
+            ))}
           </List>
         </Grid>
       </Grid>
