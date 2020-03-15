@@ -9,6 +9,10 @@ module.exports = {
     siteUrl: `https://www.fitzsimons.dev`,
     identityData: [
       {
+        siteName: 'YouTube',
+        siteLink: "https://www.youtube.com/channel/UC9PwbeLvbGiIxF_lFBvmN-A",
+      },
+      {
         siteName: 'Twitter',
         siteLink: 'https://twitter.com/fitzsimons_dev',
       },

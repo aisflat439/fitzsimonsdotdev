@@ -13,6 +13,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import RedditIcon from '@material-ui/icons/Reddit';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import YouTubeIcon from '@material-ui/icons/YouTube';
 
 import Link from './Link'
 import NewsletterSignup from "./NewsletterSignup";
@@ -85,9 +86,10 @@ const Footer = () => {
           <Typography>Social</Typography>
           <List component="nav" aria-label="external social links">
             {siteMetadata.identityData.map(({ siteLink, siteName }) => (
-              <ListItem>
+              <ListItem key={siteName}>
                 <MuiLink target="blank" rel="noopener" href={siteLink} className={classes.centerFlex}>
                   {siteName === 'Twitter' && <Box component={TwitterIcon} mr={1} />}
+                  {siteName === 'YouTube' && <Box component={YouTubeIcon} mr={1} />}
                   {siteName === 'LinkedIn' && <Box component={LinkedInIcon} mr={1} />}
                   {siteName === 'Github' && <Box component={GitHubIcon} mr={1} />}
                   {siteName === 'Reddit' && <Box component={RedditIcon} mr={1} />}

@@ -24,6 +24,16 @@ describe('<Footer/>', () => {
           },
         ]
       },
+      site: {
+        siteMetadata: {
+          identityData: [
+            {
+              siteName: 'Twitter',
+              siteLink: 'https://twitter.com/fitzsimons_dev',
+            },
+          ]
+        }
+      }
     }
     )
   })
