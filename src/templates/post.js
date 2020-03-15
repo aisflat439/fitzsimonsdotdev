@@ -12,7 +12,15 @@ export default ({ data }) => {
           figcaption {
             color: gray;
             text-align: center;
-          }`}
+          }
+          p, ul {
+            font-size: 1rem;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+            letter-spacing: 0.00938em;
+          }
+          `}
         </style>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </div>

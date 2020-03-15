@@ -7,6 +7,20 @@ module.exports = {
     author: `@aisflat439`,
     twitterUsername: "@fitzsimons_dev",
     siteUrl: `https://www.fitzsimons.dev`,
+    identityData: [
+      {
+        siteName: 'Twitter',
+        siteLink: 'https://twitter.com/fitzsimons_dev',
+      },
+      {
+        siteName: 'LinkedIn',
+        siteLink: "https://www.linkedin.com/in/fitzsimonsdevin/",
+      },
+      {
+        siteName: 'Github',
+        siteLink: "https://github.com/aisflat439",
+      },
+    ]
   },
   plugins: [
     `gatsby-plugin-sitemap`,
