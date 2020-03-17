@@ -1,11 +1,16 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 
 export default ({ data }) => {
   const post = data.markdownRemark
   return (
     <Layout>
+      <SEO
+        title="Home"
+        keywords="yee"
+      />
       <div>
         <h1>{post.frontmatter.title}</h1>
         <style>{`
@@ -30,11 +35,11 @@ export default ({ data }) => {
 
 export const query = graphql`
   query($slug: String!) {
-        markdownRemark(fields: {slug: {eq: $slug } }) {
+      markdownRemark(fields: {slug: {eq: $slug } }) {
         html
-      frontmatter {
-        title
-      }
+        frontmatter {
+          title
+        }
       }
     }
   `
