@@ -9,7 +9,12 @@ export default ({ data }) => {
     <Layout>
       <SEO
         title="Home"
-        keywords="yee"
+        keywords={[
+          `ecommerce`,
+          `gatsby`,
+          `ecommerce tips`,
+          `ecommerce design and development`,
+        ]}
       />
       <div>
         <h1>{post.frontmatter.title}</h1>

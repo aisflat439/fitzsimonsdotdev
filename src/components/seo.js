@@ -10,7 +10,15 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang, meta, keywords, title }) {
+function SEO({
+  description,
+  lang,
+  meta,
+  keywords,
+  title,
+  canonical
+}) {
+
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -26,24 +34,17 @@ function SEO({ description, lang, meta, keywords, title }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
-  const schema = `{[{
-          "@context": "https://schema.org/",
-          "@type": "Person",
-          "name": "Devin",
-          "url": "http://www.fitzsimons.dev",
-          "image": "",
-          "sameAs": [
-            "https://twitter.com/fitzsimons_dev",
-            "https://www.linkedin.com/in/fitzsimonsdevin/",
-            "https://github.com/aisflat439"
-          ],
-          "jobTitle": "software engineer"
-        }]}`
+
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
+      link={
+        canonical
+          ? [{ rel: 'canonical', key: canonical, href: canonical }]
+          : []
+      }
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
@@ -90,11 +91,7 @@ function SEO({ description, lang, meta, keywords, title }) {
         )
         .concat(meta)}
     >
-      {/* Insert schema.org data conditionally (webpage/article) + everytime (breadcrumbs) */}
-      {/* {!article && <script type="application/ld+json">{JSON.stringify(schemaOrgWebPage)}</script>} */}
-      {/* {article && <script type="application/ld+json">{JSON.stringify(schemaArticle)}</script>} */}
-      <script type="application/ld+json">{JSON.stringify(schema)}</script>
-      {/* <script type="application/ld+json">{`
+      <script type="application/ld+json">{`
 {
   "@context": "https://schema.org/",
   "@type": "Person",
@@ -108,7 +105,7 @@ function SEO({ description, lang, meta, keywords, title }) {
   ],
   "jobTitle": "software engineer"  
 }
-    `}</script> */}
+    `}</script>
     </Helmet>
   )
 }
