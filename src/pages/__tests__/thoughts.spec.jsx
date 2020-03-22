@@ -70,7 +70,7 @@ describe("Thoughts", () => {
             frontmatter: {
               title: "yee",
             },
-            excerpt: 'something something',
+            html: 'something something',
             fields: {
               slug: '/the-path'
             }
@@ -81,7 +81,7 @@ describe("Thoughts", () => {
             frontmatter: {
               title: "Not this title",
             },
-            excerpt: "nothing nothing",
+            html: "nothing nothing",
             fields: {
               slug: '/the-other-path'
             }
@@ -103,7 +103,7 @@ describe("Thoughts", () => {
             frontmatter: {
               title: "I don't get rendered",
             },
-            excerpt: 'something about an excerpt',
+            html: 'something about an excerpt',
             fields: {
               slug: '/not-rendered'
             }
@@ -114,7 +114,7 @@ describe("Thoughts", () => {
             frontmatter: {
               title: "I get rendered",
             },
-            excerpt: "something about an excerpt",
+            html: "something about an excerpt",
             fields: {
               slug: '/the-rendered-path'
             }
@@ -133,5 +133,32 @@ describe("Thoughts", () => {
 
     expect(getByText(/Previous Posts/i)).toBeInTheDocument()
     expect(queryAllByText(/Previous Posts/i).length).toEqual(1)
+  })
+
+  it('renders a grid of related posts if there are related posts', () => {
+    const relatedPosts = {
+      group: [
+        {
+          tag: 'OMG',
+          totalCount: 1
+        },
+        {
+          tag: 'GMO',
+          totalCount: 4
+        }
+      ],
+    }
+    const { getByTestId } = renderWith(relatedPosts)
+
+    expect(getByTestId("tags")).toBeInTheDocument()
+  })
+
+  it('does not renders a grid if there are no related posts', () => {
+    const relatedPosts = {
+      group: [],
+    }
+    const { queryByTestId } = renderWith(relatedPosts)
+
+    expect(queryByTestId("tags")).not.toBeInTheDocument()
   })
 })

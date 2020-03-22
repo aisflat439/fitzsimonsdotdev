@@ -4,6 +4,8 @@ import { useStaticQuery } from "gatsby"
 
 import Seo from '../seo'
 
+jest.mock('react-helmet', () => () => 'Helmet')
+
 const renderWith = (overrides) => {
   const props = {
     title: "I'm a title!",
