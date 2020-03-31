@@ -19,6 +19,10 @@ export default ({ data }) => {
       <div>
         <h1>{post.frontmatter.title}</h1>
         <style>{`
+          pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+          }
           figcaption {
             color: gray;
             text-align: center;
