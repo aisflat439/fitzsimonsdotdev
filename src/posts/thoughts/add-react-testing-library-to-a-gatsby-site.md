@@ -206,4 +206,4 @@ Success!! We have now validated that "Hi people" shows up on the homepage. Our t
 
 I've added a repo for this so you can look at the final result should you need it. 
 
-Visit [the repo on my github]('https://github.com/aisflat439/reactTestingGatsby') or shoot me a message if you need something or have questions.
+Visit [the repo on my github](https://github.com/aisflat439/reactTestingGatsby) or shoot me a message if you need something or have questions.
