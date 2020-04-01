@@ -20,6 +20,15 @@ const theme = {
             main: red.A400,
         },
     },
+    overrides: {
+        MuiLink: {
+            root: {
+                '&:hover': {
+                    opacity: '.75'
+                }
+            }
+        }
+    }
 };
 
 export default theme;
