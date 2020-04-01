@@ -16,37 +16,50 @@ const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Posts" keywords={[`ecommerce`, `ecommerce development`, `shopfiy`]} />
     <Typography variant="h3" component="h1">Site Reviews</Typography>
-    <p>{data.youtubeVideo.description}</p>
     <List >
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="placeholder" aria-label="Reviews">R</Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          primary="YouTube review"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                color="textPrimary"
-              >
-                Some site I can't remember
-              </Typography>
-              {" — text here…"}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
+      {data.allYoutubeVideo.edges.map(({ node: video }) => (
+        <>
+          <ListItem alignItems="flex-start">
+            <ListItemAvatar>
+              <Avatar alt="placeholder" aria-label="Reviews">R</Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary={video.title}
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    component="span"
+                    variant="body2"
+                    color="textPrimary"
+                  >
+                    {video.description}
+                  </Typography>
+                </React.Fragment>
+              }
+            />
+          </ListItem>
+          <Divider variant="inset" component="li" />
+        </>
+      )).reverse()}
     </List>
   </Layout>
 )
 
 export const query = graphql`
 query {
-  youtubeVideo {
-    description
+  allYoutubeVideo(filter: {publishedAt: {gt: "2020"}}) {
+    edges {
+      node {
+        description
+        thumbnail {
+          url
+          height
+          width
+        }
+        title
+        publishedAt
+      }
+    }
   }
 }
 `
