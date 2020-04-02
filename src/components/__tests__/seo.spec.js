@@ -28,7 +28,8 @@ describe('<SEO />', () => {
       site: {
         siteMetadata: {
           title: "I'm a title!",
-          description: "Yolo!"
+          description: "Yolo!",
+          identityData: ["Yolo!"]
         }
       }
     }
