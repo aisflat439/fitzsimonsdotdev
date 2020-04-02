@@ -27,6 +27,10 @@ function SEO({
             title
             description
             author
+            identityData {
+              siteLink
+              siteName
+            }
           }
         }
       }
@@ -95,18 +99,18 @@ function SEO({
 {
   "@context": "https://schema.org/",
   "@type": "Person",
-  "name": "Devin",
+  "name": "Devin Fitzsimons",
+  "givenName": "Devin Fitzsimons",
+  "alternateName": "aisflat439",
   "url": "http://www.fitzsimons.dev",
   "image": "",
   "sameAs": [
-    "https://twitter.com/fitzsimons_dev",
-    "https://www.linkedin.com/in/fitzsimonsdevin/",
-    "https://github.com/aisflat439"
+    ${site.siteMetadata.identityData.map(identity => `"${identity.siteLink}"`)}
   ],
   "jobTitle": "software engineer"  
 }
     `}</script>
-    </Helmet>
+    </Helmet >
   )
 }
 

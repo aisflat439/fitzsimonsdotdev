@@ -4,7 +4,7 @@ module.exports = {
   siteMetadata: {
     title: `Fitzsimons.dev`,
     description: `Mostly I just click f5 a lot and hope it works.`,
-    author: `@aisflat439`,
+    author: `Devin Fitzsimons`,
     twitterUsername: "@fitzsimons_dev",
     siteUrl: `https://www.fitzsimons.dev`,
     identityData: [
@@ -23,6 +23,14 @@ module.exports = {
       {
         siteName: 'Github',
         siteLink: "https://github.com/aisflat439",
+      },
+      {
+        siteName: 'Indiehackers',
+        siteLink: "https://www.indiehackers.com/aisflat439",
+      },
+      {
+        siteName: 'Reddit',
+        siteLink: "https://www.reddit.com/user/fitzsimonsdotdev",
       },
     ]
   },

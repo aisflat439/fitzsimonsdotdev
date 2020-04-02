@@ -2,48 +2,24 @@ import React from "react"
 import { graphql } from 'gatsby'
 
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import VideoListing from "../components/VideoListing";
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <SEO title="Posts" keywords={[`ecommerce`, `ecommerce development`, `shopfiy`]} />
+    <SEO title="Posts" keywords={[`ecommerce`, `ecommerce development`, `shopify`, 'youtube']} />
     <Typography variant="h3" component="h1">Site Reviews</Typography>
     <List >
       {data.allYoutubeVideo.edges.map(({ node: video }) => (
-        <>
-          <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar alt="placeholder" aria-label="Reviews">R</Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary={video.title}
-              secondary={
-                <React.Fragment>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    color="textPrimary"
-                  >
-                    {video.description}
-                  </Typography>
-                </React.Fragment>
-              }
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-        </>
-      )).reverse()}
+        <VideoListing key={video.publishedAt} video={video} />
+      )).sort((a, b) => new Date(b.props.video.publishedAt) - new Date(a.props.video.publishedAt))}
     </List>
   </Layout>
 )
+
 
 export const query = graphql`
 query {
@@ -51,13 +27,16 @@ query {
     edges {
       node {
         description
-        thumbnail {
-          url
-          height
-          width
-        }
         title
         publishedAt
+        videoId
+        localThumbnail {
+          childImageSharp {
+            fixed(height: 80, width: 80) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
       }
     }
   }
