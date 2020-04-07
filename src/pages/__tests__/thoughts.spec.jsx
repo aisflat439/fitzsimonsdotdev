@@ -4,6 +4,7 @@ import { render } from "@testing-library/react"
 import ThoughtsPage from "../thoughts"
 
 jest.mock('@material-ui/core/Link', () => ({ children }) => <div>{children}</div>)
+jest.mock("../../components/PostSnippet", () => () => <div data-testid="TEST-PostSnippet">PostSnippet</div>)
 jest.mock("../../components/layout", () => ({ children }) => <div>{children}</div>)
 jest.mock("../../components/seo", () => () => 'SEO')
 
@@ -62,37 +63,10 @@ const renderWith = (overrides) => {
 }
 
 describe("Thoughts", () => {
-  it("only renders the first excerpt", () => {
-    const mockData = {
-      edges: [
-        {
-          node: {
-            frontmatter: {
-              title: "yee",
-            },
-            html: 'something something',
-            fields: {
-              slug: '/the-path'
-            }
-          }
-        },
-        {
-          node: {
-            frontmatter: {
-              title: "Not this title",
-            },
-            html: "nothing nothing",
-            fields: {
-              slug: '/the-other-path'
-            }
-          }
-        },
-      ],
-    }
-    const { getByText, queryByText } = renderWith(mockData)
+  it("only renders one post", () => {
+    const { queryByTestId } = renderWith()
 
-    expect(getByText(/something something/i)).toBeInTheDocument()
-    expect(queryByText(/nothing nothing/i)).not.toBeInTheDocument()
+    expect(queryByTestId('TEST-PostSnippet')).toBeInTheDocument()
   })
 
   it("doesn't render the first post in previous posts", () => {

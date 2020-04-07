@@ -11,6 +11,7 @@ import Slide from '@material-ui/core/Slide'
 import { Brightness4 } from "@material-ui/icons"
 
 import { toggleThemeMode } from '../redux/userPreferencesSlice'
+import HeaderLinks from './HeaderLinks'
 
 export const HideOnScroll = (props) => {
   const { children, window } = props;
@@ -25,7 +26,7 @@ export const HideOnScroll = (props) => {
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
-    backgroundColor: palette.primary.main,
+    background: `linear-gradient(to top, ${palette.primary.main} 10%, ${palette.primary.contrastText} 10%)`
   },
   title: {
     flexGrow: 1
@@ -51,11 +52,7 @@ const Header = ({ siteTitle }, props) => {
       <AppBar className={classes.root}>
         <Toolbar className={classes.width}>
           <Typography className={classes.title}>
-            <Link
-              to="/"
-            >
-              {siteTitle}
-            </Link>
+            <HeaderLinks siteTitle={siteTitle} />
           </Typography>
           <IconButton data-testid="theme-toggle" onClick={onClick}>
             <Brightness4 />

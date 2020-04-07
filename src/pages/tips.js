@@ -8,20 +8,16 @@ import SEO from "../components/seo"
 const IndexPage = ({ data }) => {
   const keywords = data.allMarkdownRemark.group.map(keyword => keyword.tag)
   const { title } = data.allMarkdownRemark.edges[0].node.frontmatter
-  const { excerpt, fields } = data.allMarkdownRemark.edges[0].node
+  const { html, fields } = data.allMarkdownRemark.edges[0].node
   const { slug } = fields
 
   return (
     <Layout>
-      <SEO title="Posts" keywords={keywords} />
+      <SEO title="Tips" keywords={keywords} />
       <h1>Ecommerce from a developers perspective</h1>
       <main>
         <h2>Most Recent Tip</h2>
-        <PostSnippet title={title} excerpt={excerpt} slug={slug} />
-        <article>
-          <h3>Tip!</h3>
-          <p>Do the things!</p>
-        </article>
+        <PostSnippet title={title} content={html} slug={slug} />
       </main>
       <aside>
         <h2>Tips Listing</h2>
@@ -51,7 +47,7 @@ query {
         fields {
           slug
         }
-        excerpt
+        html
       }
     }
   }
