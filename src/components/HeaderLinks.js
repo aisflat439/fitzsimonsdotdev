@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 
 const HeaderLinks = ({ siteTitle }) => {
   const classes = useStyles()
-  const location = useLocation()
 
   return (
     <>
