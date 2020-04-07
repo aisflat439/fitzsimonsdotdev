@@ -27,6 +27,11 @@ const theme = {
                     opacity: '.75'
                 }
             }
+        },
+        MuiPaper: {
+            elevation4: {
+                boxShadow: 'none',
+            }
         }
     }
 };

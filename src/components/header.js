@@ -26,7 +26,7 @@ export const HideOnScroll = (props) => {
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
-    backgroundColor: palette.primary.main,
+    background: `linear-gradient(to top, ${palette.primary.main} 10%, ${palette.primary.contrastText} 10%)`
   },
   title: {
     flexGrow: 1
