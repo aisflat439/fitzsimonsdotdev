@@ -1,5 +1,9 @@
 import { red } from '@material-ui/core/colors';
 
+const typography = {
+    fontFamily: 'Roboto',
+}
+
 // A custom theme for this app
 const theme = {
     palette: {
@@ -33,7 +37,10 @@ const theme = {
                 boxShadow: 'none',
             }
         }
-    }
+    },
+    typography,
 };
+
+console.log(theme)
 
 export default theme;
