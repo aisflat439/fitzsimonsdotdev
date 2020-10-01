@@ -1,21 +1,21 @@
-import React from "react"
-import { graphql } from 'gatsby'
-import Box from "@material-ui/core/Box"
-import Grid from "@material-ui/core/Grid"
-import Typography from "@material-ui/core/Typography"
+import React from 'react';
+import { graphql } from 'gatsby';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
-import Layout from "../components/layout"
-import PostSnippet from "../components/PostSnippet"
-import SEO from "../components/seo"
-import Link from '../components/Link'
-import Tag from '../components/Tag'
-
+import Layout from '../components/layout';
+import PostSnippet from '../components/PostSnippet';
+import SEO from '../components/seo';
+import Link from '../components/Link';
+import Tag from '../components/Tag';
 
 const ThoughtsPage = ({ data }) => {
-  const keywords = data.allMarkdownRemark.group.map(keyword => keyword.tag)
-  const { title } = data.allMarkdownRemark.edges[0].node.frontmatter
-  const { html, fields, timeToRead } = data.allMarkdownRemark.edges[0].node
-  const { slug } = fields
+  const keywords = data.allMarkdownRemark.group.map((keyword) => keyword.tag);
+  const { title } = data.allMarkdownRemark.edges[0].node.frontmatter;
+  const { html, fields, timeToRead } = data.allMarkdownRemark.edges[0].node;
+  console.log('timeToRead', timeToRead);
+  const { slug } = fields;
 
   return (
     <Layout>
@@ -27,21 +27,22 @@ const ThoughtsPage = ({ data }) => {
       <Box>
         <Box>
           <Typography variant="h2">Related Posts</Typography>
-          {data.allMarkdownRemark.group.length &&
-            <Grid container spacing={3} data-testid="tags">
-              {data.allMarkdownRemark.group.map(({ tag, totalCount }) => (
-                <Grid key={`${tag}-${totalCount}`} item xs={6} sm={3} md={2}>
-                  <Tag title={tag} count={totalCount} />
-                </Grid>
-              ))}
-            </Grid>
-          }
+          {data.allMarkdownRemark.group.length
+            && (
+              <Grid container spacing={3} data-testid="tags">
+                {data.allMarkdownRemark.group.map(({ tag, totalCount }) => (
+                  <Grid key={`${tag}-${totalCount}`} item xs={6} sm={3} md={2}>
+                    <Tag title={tag} count={totalCount} />
+                  </Grid>
+                ))}
+              </Grid>
+            )}
         </Box>
         {
           data.allMarkdownRemark.edges.map(({ node }, index) => {
-            const { title } = node.frontmatter
-            const { slug } = node.fields
-            if (index === 0) return null
+            const { title } = node.frontmatter;
+            const { slug } = node.fields;
+            if (index === 0) return null;
             return (
               <Box key={slug}>
                 {index === 1 && <Typography variant="h2">Previous Posts</Typography>}
@@ -49,13 +50,13 @@ const ThoughtsPage = ({ data }) => {
                   <Link to={slug}>{title}</Link>
                 </Box>
               </Box>
-            )
+            );
           })
         }
       </Box>
-    </Layout >
-  )
-}
+    </Layout>
+  );
+};
 
 export const query = graphql`
   query {
@@ -80,6 +81,6 @@ export const query = graphql`
     }
   }
 }
-`
+`;
 
-export default ThoughtsPage
+export default ThoughtsPage;

@@ -1,15 +1,15 @@
-import React from "react"
-import { graphql } from 'gatsby'
+import React from 'react';
+import { graphql } from 'gatsby';
 
-import PostSnippet from "../components/PostSnippet"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import PostSnippet from '../components/PostSnippet';
+import Layout from '../components/layout';
+import SEO from '../components/seo';
 
 const IndexPage = ({ data }) => {
-  const keywords = data.allMarkdownRemark.group.map(keyword => keyword.tag)
-  const { title } = data.allMarkdownRemark.edges[0].node.frontmatter
-  const { html, fields } = data.allMarkdownRemark.edges[0].node
-  const { slug } = fields
+  const keywords = data.allMarkdownRemark.group.map((keyword) => keyword.tag);
+  const { title } = data.allMarkdownRemark.edges[0].node.frontmatter;
+  const { html, fields, timeToRead } = data.allMarkdownRemark.edges[0].node;
+  const { slug } = fields;
 
   return (
     <Layout>
@@ -17,7 +17,7 @@ const IndexPage = ({ data }) => {
       <h1>Ecommerce from a developers perspective</h1>
       <main>
         <h2>Most Recent Tip</h2>
-        <PostSnippet title={title} content={html} slug={slug} />
+        <PostSnippet title={title} content={html} slug={slug} timeToRead={timeToRead} />
       </main>
       <aside>
         <h2>Tips Listing</h2>
@@ -26,8 +26,8 @@ const IndexPage = ({ data }) => {
         </ul>
       </aside>
     </Layout>
-  )
-}
+  );
+};
 
 export const query = graphql`
 query {
@@ -48,11 +48,12 @@ query {
           slug
         }
         html
+        timeToRead
       }
     }
   }
 }
 
-`
+`;
 
-export default IndexPage
+export default IndexPage;
