@@ -1,12 +1,12 @@
-import React from "react"
-import { render } from "@testing-library/react"
+import React from 'react';
+import { render } from '@testing-library/react';
 
-import ThoughtsPage from "../thoughts"
+import ThoughtsPage from '../thoughts';
 
-jest.mock('@material-ui/core/Link', () => ({ children }) => <div>{children}</div>)
-jest.mock("../../components/PostSnippet", () => () => <div data-testid="TEST-PostSnippet">PostSnippet</div>)
-jest.mock("../../components/layout", () => ({ children }) => <div>{children}</div>)
-jest.mock("../../components/seo", () => () => 'SEO')
+jest.mock('@material-ui/core/Link', () => ({ children }) => <div>{children}</div>);
+jest.mock('../../components/PostSnippet', () => () => <div data-testid="TEST-PostSnippet">PostSnippet</div>);
+jest.mock('../../components/layout', () => ({ children }) => <div>{children}</div>);
+jest.mock('../../components/seo', () => () => 'SEO');
 
 const renderWith = (overrides) => {
   const props = {
@@ -16,7 +16,7 @@ const renderWith = (overrides) => {
           {
             node: {
               frontmatter: {
-                title: "The title"
+                title: 'The title'
               },
               fields: {
                 slug: '/the-path'
@@ -26,7 +26,7 @@ const renderWith = (overrides) => {
           {
             node: {
               frontmatter: {
-                title: "The other title"
+                title: 'The other title'
               },
               fields: {
                 slug: '/the-other-path'
@@ -36,7 +36,7 @@ const renderWith = (overrides) => {
           {
             node: {
               frontmatter: {
-                title: "The last title"
+                title: 'The last title'
               },
               fields: {
                 slug: '/the-last-path'
@@ -57,17 +57,17 @@ const renderWith = (overrides) => {
         ...overrides
       },
     },
-  }
+  };
 
-  return render(<ThoughtsPage {...props} />)
-}
+  return render(<ThoughtsPage {...props} />);
+};
 
-describe("Thoughts", () => {
-  it("only renders one post", () => {
-    const { queryByTestId } = renderWith()
+describe('Thoughts', () => {
+  it('only renders one post', () => {
+    const { queryByTestId } = renderWith();
 
-    expect(queryByTestId('TEST-PostSnippet')).toBeInTheDocument()
-  })
+    expect(queryByTestId('TEST-PostSnippet')).toBeInTheDocument();
+  });
 
   it("doesn't render the first post in previous posts", () => {
     const mockData = {
@@ -86,28 +86,28 @@ describe("Thoughts", () => {
         {
           node: {
             frontmatter: {
-              title: "I get rendered",
+              title: 'I get rendered',
             },
-            html: "something about an excerpt",
+            html: 'something about an excerpt',
             fields: {
               slug: '/the-rendered-path'
             }
           }
         },
       ],
-    }
-    const { getByTestId, queryByTestId } = renderWith(mockData)
+    };
+    const { getByTestId, queryByTestId } = renderWith(mockData);
 
-    expect(getByTestId('/the-rendered-path')).toBeInTheDocument()
-    expect(queryByTestId('/not-rendered')).not.toBeInTheDocument()
-  })
+    expect(getByTestId('/the-rendered-path')).toBeInTheDocument();
+    expect(queryByTestId('/not-rendered')).not.toBeInTheDocument();
+  });
 
   it('only renders the h2 title (Previous Posts) once', () => {
-    const { getByText, queryAllByText } = renderWith()
+    const { getByText, queryAllByText } = renderWith();
 
-    expect(getByText(/Previous Posts/i)).toBeInTheDocument()
-    expect(queryAllByText(/Previous Posts/i).length).toEqual(1)
-  })
+    expect(getByText(/Previous Posts/i)).toBeInTheDocument();
+    expect(queryAllByText(/Previous Posts/i).length).toEqual(1);
+  });
 
   it('renders a grid of related posts if there are related posts', () => {
     const relatedPosts = {
@@ -121,18 +121,18 @@ describe("Thoughts", () => {
           totalCount: 4
         }
       ],
-    }
-    const { getByTestId } = renderWith(relatedPosts)
+    };
+    const { getByTestId } = renderWith(relatedPosts);
 
-    expect(getByTestId("tags")).toBeInTheDocument()
-  })
+    expect(getByTestId('tags')).toBeInTheDocument();
+  });
 
   it('does not renders a grid if there are no related posts', () => {
     const relatedPosts = {
       group: [],
-    }
-    const { queryByTestId } = renderWith(relatedPosts)
+    };
+    const { queryByTestId } = renderWith(relatedPosts);
 
-    expect(queryByTestId("tags")).not.toBeInTheDocument()
-  })
-})
+    expect(queryByTestId('tags')).not.toBeInTheDocument();
+  });
+});
