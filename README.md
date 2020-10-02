@@ -13,6 +13,7 @@
     cd fitzsimonsdotdev/
     npm i
     gatsby develop
+    npm run test
     ```
 
 2.  **Open the source code and start editing!**
@@ -24,7 +25,7 @@
 ## 🧐 What's inside?
 
 1. Gatsby
-2. Material UI
+2. Styled Components
 3. Jest
 4. @testing-library/react
 5. redux

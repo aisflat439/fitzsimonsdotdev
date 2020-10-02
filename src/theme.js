@@ -8,7 +8,11 @@ const typography = {
 
 // A custom theme for this app
 const theme = {
+    text: {
+        header: '#91D4CF',
+    },
     palette: {
+        main: '#15173D',
         type: 'light',
         primary: {
             light: '#64d8cb',

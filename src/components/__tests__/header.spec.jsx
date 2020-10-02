@@ -1,44 +1,52 @@
-import React from "react"
-import { render, fireEvent } from "@testing-library/react"
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
 import { useDispatch } from 'react-redux';
 
-import Header from "../header"
+import { ThemeProvider } from 'styled-components';
+import theme from '../../theme';
 
-jest.mock('@material-ui/core/AppBar', () => ({ children }) => <div>{children}</div>)
-jest.mock('@material-ui/core/Toolbar', () => ({ children }) => <div>{children}</div>)
-jest.mock('@material-ui/core/Typography', () => ({ children }) => <div>{children}</div>)
-jest.mock('@material-ui/core/Slide', () => ({ children }) => <div>{children}</div>)
-jest.mock('@material-ui/core/Link', () => 'Link')
+import Header from '../header';
+
+jest.mock('@material-ui/core/AppBar', () => ({ children }) => <div>{children}</div>);
+jest.mock('@material-ui/core/Toolbar', () => ({ children }) => <div>{children}</div>);
+jest.mock('@material-ui/core/Typography', () => ({ children }) => <div>{children}</div>);
+jest.mock('@material-ui/core/Hidden', () => ({ children }) => <div>{children}</div>);
+jest.mock('@material-ui/core/Slide', () => ({ children }) => <div>{children}</div>);
+jest.mock('@material-ui/core/Link', () => 'Link');
 
 jest.mock('react-redux', () => ({
   useDispatch: jest.fn()
-}))
+}));
 
 const renderWith = (overrides) => {
   const props = {
-    siteTitle: "OMG the Site!",
+    siteTitle: 'OMG the Site!',
     ...overrides
-  }
+  };
 
-  return render(<Header {...props} />)
-}
+  return render(
+    <ThemeProvider theme={theme}>
+      <Header {...props} />
+    </ThemeProvider>
+  );
+};
 
-describe("Header", () => {
-  it("renders correctly", () => {
-    const { getByText } = renderWith({
+describe('Header', () => {
+  it('renders correctly', () => {
+    const { getAllByText } = renderWith({
       siteTitle: 'Title'
-    })
+    });
 
-    expect(getByText(/Title/i)).toBeInTheDocument()
-  })
+    expect(getAllByText(/Title/i)[0]).toBeInTheDocument();
+  });
 
-  it("dispatches toggle theme mode on click", () => {
-    const mockDispatch = jest.fn()
-    useDispatch.mockReturnValue(mockDispatch)
-    const { getByTestId } = renderWith()
+  it('dispatches toggle theme mode on click', () => {
+    const mockDispatch = jest.fn();
+    useDispatch.mockReturnValue(mockDispatch);
+    const { getByTestId } = renderWith();
 
-    expect(mockDispatch).not.toHaveBeenCalled()
-    fireEvent.click(getByTestId('theme-toggle'))
-    expect(mockDispatch).toHaveBeenCalled()
-  })
-})
+    expect(mockDispatch).not.toHaveBeenCalled();
+    fireEvent.click(getByTestId('theme-toggle'));
+    expect(mockDispatch).toHaveBeenCalled();
+  });
+});
