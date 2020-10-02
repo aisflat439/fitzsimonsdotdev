@@ -2,7 +2,9 @@ import { red } from '@material-ui/core/colors';
 
 const typography = {
     fontFamily: 'Roboto',
-}
+    fontSize: 18,
+    lineHeight: '145%'
+};
 
 // A custom theme for this app
 const theme = {
@@ -40,7 +42,5 @@ const theme = {
     },
     typography,
 };
-
-console.log(theme)
 
 export default theme;
