@@ -12,7 +12,26 @@ const theme = {
         header: '#91D4CF',
     },
     palette: {
-        main: '#15173D',
+        main: {
+            base: '#15173D',
+            saturated: '#020650',
+            lowlight: '#020650'
+        },
+        highlight: {
+            base: '#D1AD70',
+            saturated: '#fdb844',
+            lowlight: '#020650'
+        },
+        brand: {
+            base: '#87CCB0',
+            saturated: '#59fab9',
+            lowlight: '#020650'
+        },
+        alternate: {
+            base: '#91D4CF',
+            saturated: '#68fdf2',
+            lowlight: '#020650'
+        },
         type: 'light',
         primary: {
             light: '#64d8cb',
