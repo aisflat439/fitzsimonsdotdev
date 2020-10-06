@@ -2,11 +2,36 @@ import { red } from '@material-ui/core/colors';
 
 const typography = {
     fontFamily: 'Roboto',
-}
+    fontSize: 18,
+    lineHeight: '145%'
+};
 
 // A custom theme for this app
 const theme = {
+    text: {
+        header: '#91D4CF',
+    },
     palette: {
+        main: {
+            base: '#15173D',
+            saturated: '#020650',
+            lowlight: '#020650'
+        },
+        highlight: {
+            base: '#D1AD70',
+            saturated: '#fdb844',
+            lowlight: '#020650'
+        },
+        brand: {
+            base: '#87CCB0',
+            saturated: '#59fab9',
+            lowlight: '#020650'
+        },
+        alternate: {
+            base: '#91D4CF',
+            saturated: '#68fdf2',
+            lowlight: '#020650'
+        },
         type: 'light',
         primary: {
             light: '#64d8cb',
@@ -40,7 +65,5 @@ const theme = {
     },
     typography,
 };
-
-console.log(theme)
 
 export default theme;

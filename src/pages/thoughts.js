@@ -1,5 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import T from 'prop-types';
+
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -12,17 +14,16 @@ import Tag from '../components/Tag';
 
 const ThoughtsPage = ({ data }) => {
   const keywords = data.allMarkdownRemark.group.map((keyword) => keyword.tag);
-  const { title } = data.allMarkdownRemark.edges[0].node.frontmatter;
-  const { html, fields, timeToRead } = data.allMarkdownRemark.edges[0].node;
-  console.log('timeToRead', timeToRead);
-  const { slug } = fields;
+  const { postTitle } = data.allMarkdownRemark.edges[0].node.frontmatter;
+  const { html: body, fields, timeToRead } = data.allMarkdownRemark.edges[0].node;
+  const { postSlug } = fields;
 
   return (
     <Layout>
       <SEO title="Posts" keywords={keywords} />
       <Box>
         <Typography component="h3" variant="h5">Most recent post:</Typography>
-        <PostSnippet title={title} timeToRead={timeToRead} content={html} slug={slug} />
+        <PostSnippet title={postTitle} timeToRead={timeToRead} content={body} slug={postSlug} />
       </Box>
       <Box>
         <Box>
@@ -67,20 +68,24 @@ export const query = graphql`
       }
       edges {
         node {
-        id
-        frontmatter {
-          title
-          hashtags
-        }
-        fields {
+          id
+          frontmatter {
+            title
+            hashtags
+          }
+                  fields {
           slug
         }
         timeToRead
         html
+        }
       }
     }
   }
-}
 `;
+
+ThoughtsPage.propTypes = {
+  data: T.shape().isRequired
+};
 
 export default ThoughtsPage;

@@ -1,66 +1,44 @@
-import React from 'react'
-import { Link } from "gatsby"
-import { makeStyles } from "@material-ui/core"
-import { useLocation } from "@reach/router"
+import React from 'react';
+import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    color: `orange`,
-    fontWeight: 'bolder',
-    fontSize: '1rem',
-    textDecoration: 'none',
-    position: 'relative',
-    marginRight: '1.75rem',
-    display: 'inline-block',
-    whiteSpace: 'nowrap',
-    '&:not(:last-child)': {
-      '&::after': {
-        [theme.breakpoints.up('sm')]: {
-          content: '""',
-          height: '10px',
-          width: '10px',
-          right: '-19px',
-          backgroundColor: `${theme.palette.primary.main}`,
-          borderRadius: '50%',
-          position: 'absolute',
-          top: '25%',
-        }
-      }
-    }
-  },
-}))
+const StyledLink = styled(Link)`
+  font-size: 2rem;
+  display: inline-block;
+  margin: 0 1rem;
+  padding: 1rem 0;
+  text-decoration: none;
+  color: ${(props) => props.theme.text.header}
+`;
 
-const HeaderLinks = ({ siteTitle }) => {
-  const classes = useStyles()
+const HeaderLinks = ({ siteTitle }) => (
+  <>
+    <StyledLink
+      to="/"
+    >
+      {siteTitle}
+    </StyledLink>
+    <StyledLink
+      to="/site-reviews"
+    >
+      Site Reviews
+    </StyledLink>
+    <StyledLink
+      to="/thoughts"
+    >
+      Thoughts
+    </StyledLink>
+    <StyledLink
+      to="/tips"
+    >
+      Tips
+    </StyledLink>
+  </>
+);
 
-  return (
-    <>
-      <Link
-        className={classes.root}
-        to="/"
-      >
-        {siteTitle}
-      </Link>
-      <Link
-        className={`${classes.root}`}
-        to="/site-reviews"
-      >
-        Site Reviews
-    </Link>
-      <Link
-        className={classes.root}
-        to="/thoughts"
-      >
-        Thoughts
-      </Link>
-      <Link
-        className={classes.root}
-        to="/tips"
-      >
-        Tips
-      </Link>
-    </>
-  )
-}
+HeaderLinks.propTypes = {
+  siteTitle: PropTypes.string.isRequired,
+};
 
-export default HeaderLinks
+export default HeaderLinks;

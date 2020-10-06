@@ -1,16 +1,16 @@
-require('dotenv').config()
+require('dotenv').config();
 
 module.exports = {
   siteMetadata: {
-    title: `Fitzsimons.dev`,
-    description: `Mostly I just click f5 a lot and hope it works.`,
-    author: `Devin Fitzsimons`,
-    twitterUsername: "@fitzsimons_dev",
-    siteUrl: `https://www.fitzsimons.dev`,
+    title: 'Fitzsimons.dev',
+    description: 'Mostly I just click f5 a lot and hope it works.',
+    author: 'Devin Fitzsimons',
+    twitterUsername: '@fitzsimons_dev',
+    siteUrl: 'https://www.fitzsimons.dev',
     identityData: [
       {
         siteName: 'YouTube',
-        siteLink: "https://www.youtube.com/channel/UC9PwbeLvbGiIxF_lFBvmN-A",
+        siteLink: 'https://www.youtube.com/channel/UC9PwbeLvbGiIxF_lFBvmN-A',
       },
       {
         siteName: 'Twitter',
@@ -18,64 +18,71 @@ module.exports = {
       },
       {
         siteName: 'LinkedIn',
-        siteLink: "https://www.linkedin.com/in/fitzsimonsdevin/",
+        siteLink: 'https://www.linkedin.com/in/fitzsimonsdevin/',
       },
       {
         siteName: 'Github',
-        siteLink: "https://github.com/aisflat439",
+        siteLink: 'https://github.com/aisflat439',
       },
       {
         siteName: 'Indiehackers',
-        siteLink: "https://www.indiehackers.com/aisflat439",
+        siteLink: 'https://www.indiehackers.com/aisflat439',
       },
       {
         siteName: 'Reddit',
-        siteLink: "https://www.reddit.com/user/fitzsimonsdotdev",
+        siteLink: 'https://www.reddit.com/user/fitzsimonsdotdev',
       },
     ]
   },
   plugins: [
-    `gatsby-plugin-sitemap`,
+    'gatsby-plugin-sitemap',
+    'gatsby-plugin-styled-components',
     'gatsby-plugin-top-layout',
     {
       resolve: 'gatsby-plugin-material-ui',
     },
-    `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-plugin-mdx',
       options: {
-        name: `images`,
+        extensions: ['.mdx', '.md'],
+      },
+    },
+    'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'images',
         path: `${__dirname}/src/images`,
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: `posts`,
+        name: 'posts',
         path: `${__dirname}/src/posts`,
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-manifest',
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/df-favicon.png`, // This path is relative to the root of the site.
+        name: 'gatsby-starter-default',
+        short_name: 'starter',
+        start_url: '/',
+        background_color: '#663399',
+        theme_color: '#663399',
+        display: 'minimal-ui',
+        icon: 'src/images/df-favicon.png', // This path is relative to the root of the site.
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
-          `gatsby-remark-relative-images`,
+          'gatsby-remark-relative-images',
           {
-            resolve: `gatsby-remark-images`,
+            resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 500,
               linkImagesToOriginal: false,
@@ -85,11 +92,11 @@ module.exports = {
         ]
       }
     },
-    `gatsby-plugin-netlify`,
+    'gatsby-plugin-netlify',
     {
-      resolve: "gatsby-plugin-google-tagmanager",
+      resolve: 'gatsby-plugin-google-tagmanager',
       options: {
-        id: "GTM-PNSX53M",
+        id: 'GTM-PNSX53M',
 
         // Include GTM in development.
         // Defaults to false meaning GTM will only be loaded in production.
@@ -98,7 +105,7 @@ module.exports = {
         // datalayer to be set before GTM is loaded
         // should be an object or a function that is executed in the browser
         // Defaults to null
-        defaultDataLayer: { platform: "gatsby" },
+        defaultDataLayer: { platform: 'gatsby' },
 
         // Specify optional GTM environment details.
         // gtmAuth: "YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_AUTH_STRING",
@@ -107,10 +114,10 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: 'gatsby-plugin-google-analytics',
       options: {
         // The property ID; the tracking code won't be generated without it
-        trackingId: "UA-157553434-1",
+        trackingId: 'UA-157553434-1',
         // Defines where to place the tracking script - `true` in the head and `false` in the body
         head: true,
         // Setting this parameter is optional
@@ -131,7 +138,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-react-redux`,
+      resolve: 'gatsby-plugin-react-redux',
       options: {
         // [required] - path to your createStore module
         pathToCreateStoreModule: './src/redux/createStore',
@@ -146,7 +153,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-youtube-v2`,
+      resolve: 'gatsby-source-youtube-v2',
       options: {
         channelId: ['UC9PwbeLvbGiIxF_lFBvmN-A'],
         apiKey: process.env.YOUTUBE_API_KEY,
@@ -157,4 +164,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby- plugin - offline`,
   ],
-}
+};
