@@ -1,24 +1,41 @@
-import React from "react"
-import { render } from "@testing-library/react"
-import { useStaticQuery } from "gatsby"
+import React from 'react';
+import { render } from '@testing-library/react';
+import { useStaticQuery } from 'gatsby';
 
-import Footer from '../footer'
-jest.mock('@material-ui/core/Link', () => ({ children }) => <div>{children}</div>)
+import { ThemeProvider } from 'styled-components';
+import theme from '../../theme';
+import Footer from '../footer';
 
 describe('<Footer/>', () => {
+  const setup = (overrides) => {
+    const props = {
+      ...overrides
+    };
+
+    const R = render(
+      <ThemeProvider theme={theme}>
+        <Footer {...props} />
+      </ThemeProvider>
+    );
+
+    return {
+      ...R,
+      props
+    };
+  };
   beforeEach(() => {
     useStaticQuery.mockReturnValue({
       allDirectory: {
         edges: [
           {
             node: {
-              base: "deprecated",
+              base: 'query',
               id: 123,
             }
           },
           {
             node: {
-              base: "anything else",
+              base: 'response',
               id: 1234,
             }
           },
@@ -34,22 +51,19 @@ describe('<Footer/>', () => {
           ]
         }
       }
-    }
-    )
-  })
+    });
+  });
 
-  it("renders", () => {
-    const { getByTestId } = render(<Footer />)
+  it('renders', () => {
+    const { getByText } = setup();
 
-    expect(getByTestId("footer")).toBeInTheDocument()
-  })
+    expect(getByText(/Site Links/i)).toBeInTheDocument();
+  });
 
-  it("displays only the correct folders", () => {
-    const { queryByText } = render(<Footer />)
+  it('displays the query reponse', () => {
+    const { queryByText } = setup();
 
-    expect(queryByText("deprecated")).not.toBeInTheDocument()
-    expect(queryByText("images")).not.toBeInTheDocument()
-    expect(queryByText("posts")).not.toBeInTheDocument()
-    expect(queryByText("anything else")).toBeInTheDocument()
-  })
-})
+    expect(queryByText('query')).toBeInTheDocument();
+    expect(queryByText('response')).toBeInTheDocument();
+  });
+});
