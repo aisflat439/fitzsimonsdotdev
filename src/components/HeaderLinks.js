@@ -13,7 +13,7 @@ const StyledLink = styled(Link)`
 `;
 
 const HeaderLinks = ({ siteTitle }) => (
-  <>
+  <div>
     <StyledLink
       to="/"
     >
@@ -34,7 +34,7 @@ const HeaderLinks = ({ siteTitle }) => (
     >
       Tips
     </StyledLink>
-  </>
+  </div>
 );
 
 HeaderLinks.propTypes = {

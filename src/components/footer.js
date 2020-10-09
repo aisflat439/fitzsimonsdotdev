@@ -5,12 +5,22 @@ import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 
 const StyledFooter = styled.footer`
+  max-width: 1440;
   background: linear-gradient(to right, ${({ theme }) => theme.palette.main.base} 50%, ${({ theme }) => theme.palette.main.saturated} );
   border-bottom: 5px solid #d1ad70;
   border-top: 5px solid #d1ad70;
   display: flex;
   justify-content: space-around;
   color: ${(props) => props.theme.text.header};
+
+  a {
+    color: ${(props) => props.theme.text.header};
+    text-decoration: none
+  }
+
+  ul {
+    list-style: none
+  }
 `;
 
 const Footer = () => {
@@ -63,13 +73,17 @@ const Footer = () => {
           </ul>
         </div>
       </StyledFooter>
-      <Box style={{ maxWidth: 1440 }}>
+      <div style={{
+        maxWidth: 1440,
+        margin: '0 auto'
+      }}
+      >
         ©
         {' '}
         {new Date().getFullYear()}
         {' '}
         by Devin Fitzsimons
-      </Box>
+      </div>
     </>
   );
 };
