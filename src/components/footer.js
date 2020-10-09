@@ -3,39 +3,6 @@ import { useStaticQuery, graphql, Link } from 'gatsby';
 import styled from 'styled-components';
 
 import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import MuiLink from '@material-ui/core/Link';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core';
-
-import TwitterIcon from '@material-ui/icons/Twitter';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import RedditIcon from '@material-ui/icons/Reddit';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import YouTubeIcon from '@material-ui/icons/YouTube';
-
-// import Link from './Link';
-import NewsletterSignup from './NewsletterSignup';
-
-const useStyles = makeStyles(({ palette }) => ({
-  root: {
-    backgroundColor: palette.secondary.dark,
-    color: palette.primary.main,
-  },
-  width: {
-    maxWidth: 1440,
-    margin: 'auto',
-    padding: 24
-  },
-  centerFlex: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-}));
 
 const StyledFooter = styled.footer`
   background: linear-gradient(to right, ${({ theme }) => theme.palette.main.base} 50%, ${({ theme }) => theme.palette.main.saturated} );
@@ -68,8 +35,6 @@ const Footer = () => {
   }
   `);
 
-  const classes = useStyles();
-
   return (
     <>
       <StyledFooter>
@@ -88,6 +53,7 @@ const Footer = () => {
             {siteMetadata.identityData.map((
               { siteLink, siteName }
             ) => (
+                // eslint-disable-next-line react/jsx-indent
                 <li key={siteLink}>
                   <Link to={`/${siteLink}`}>
                     {`${siteName}`}
@@ -97,7 +63,7 @@ const Footer = () => {
           </ul>
         </div>
       </StyledFooter>
-      <Box className={classes.width}>
+      <Box style={{ maxWidth: 1440 }}>
         ©
         {' '}
         {new Date().getFullYear()}

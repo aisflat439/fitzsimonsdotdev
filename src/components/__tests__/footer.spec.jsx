@@ -60,7 +60,7 @@ describe('<Footer/>', () => {
     expect(getByText(/Site Links/i)).toBeInTheDocument();
   });
 
-  it('displays the query reponse', () => {
+  it('displays the query response', () => {
     const { queryByText } = setup();
 
     expect(queryByText('query')).toBeInTheDocument();
