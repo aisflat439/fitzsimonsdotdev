@@ -163,12 +163,15 @@ const Footer = () => {
                   </li>
                 ))}
             </ul>
-            <ShowMoreButton
-              onClick={() => handleClick()}
-              aria-expanded="false"
-            >
-              {buttonText}
-            </ShowMoreButton>
+            {maxSocialLength > 3
+              && (
+                <ShowMoreButton
+                  onClick={() => handleClick()}
+                  aria-expanded="false"
+                >
+                  {buttonText}
+                </ShowMoreButton>
+              )}
           </div>
         </FooterLinks>
         <div>
