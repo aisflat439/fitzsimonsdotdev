@@ -11,7 +11,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import { useSelector } from 'react-redux';
 import { createMuiTheme, ThemeProvider as MUITheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { ThemeProvider as StyledThemeProvider, ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';

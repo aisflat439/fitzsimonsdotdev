@@ -4,13 +4,15 @@ import styled from 'styled-components';
 
 import HeaderLinks from './HeaderLinks';
 
-export const HideOnScroll = () => (<></>);
-
-
 const StyledHeader = styled.header`
-  border-top: 5px solid #d1ad70;
-  border-bottom: 5px solid #d1ad70;
   background: linear-gradient(to right, ${({ theme }) => theme.palette.main.base} 50%, ${({ theme }) => theme.palette.main.saturated} );
+  border-bottom: 5px solid #d1ad70;
+  border-top: 5px solid #d1ad70;
+  
+   div {
+    margin: 0 auto;
+    max-width: 1440px;
+  }
 `;
 
 const Header = ({ siteTitle }) => (

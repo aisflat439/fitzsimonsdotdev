@@ -9,20 +9,12 @@ module.exports = {
     siteUrl: 'https://www.fitzsimons.dev',
     identityData: [
       {
-        siteName: 'YouTube',
-        siteLink: 'https://www.youtube.com/channel/UC9PwbeLvbGiIxF_lFBvmN-A',
+        siteName: 'Github',
+        siteLink: 'https://github.com/aisflat439',
       },
       {
         siteName: 'Twitter',
         siteLink: 'https://twitter.com/fitzsimons_dev',
-      },
-      {
-        siteName: 'LinkedIn',
-        siteLink: 'https://www.linkedin.com/in/fitzsimonsdevin/',
-      },
-      {
-        siteName: 'Github',
-        siteLink: 'https://github.com/aisflat439',
       },
       {
         siteName: 'Indiehackers',
@@ -31,6 +23,14 @@ module.exports = {
       {
         siteName: 'Reddit',
         siteLink: 'https://www.reddit.com/user/fitzsimonsdotdev',
+      },
+      {
+        siteName: 'YouTube',
+        siteLink: 'https://www.youtube.com/channel/UC9PwbeLvbGiIxF_lFBvmN-A',
+      },
+      {
+        siteName: 'LinkedIn',
+        siteLink: 'https://www.linkedin.com/in/fitzsimonsdevin/',
       },
     ]
   },

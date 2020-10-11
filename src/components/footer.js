@@ -1,44 +1,109 @@
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import Box from '@material-ui/core/Box'
-import Grid from '@material-ui/core/Grid'
-import MuiLink from '@material-ui/core/Link';
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import Typography from "@material-ui/core/Typography"
-import { makeStyles } from "@material-ui/core"
+import React from 'react';
+import { useStaticQuery, graphql, Link } from 'gatsby';
+import styled from 'styled-components';
 
-import TwitterIcon from '@material-ui/icons/Twitter';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import RedditIcon from '@material-ui/icons/Reddit';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import YouTubeIcon from '@material-ui/icons/YouTube';
+const StyledFooter = styled.footer`
+  margin-top: 9rem;
+  background: linear-gradient(to right, ${({ theme }) => theme.palette.main.base} 50%, ${({ theme }) => theme.palette.main.saturated} );
+  border-bottom: 5px solid #d1ad70;
+  border-top: 5px solid #d1ad70;
+  color: ${(props) => props.theme.text.header};
+  text-align: center;
+  
+  div {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+`;
 
-import Link from './Link'
-import NewsletterSignup from "./NewsletterSignup";
+const StyledChevron = styled.div`
+  font-size: 4rem;
+  height: 8rem;
+  position: relative;
 
-const useStyles = makeStyles(({ palette }) => ({
-  root: {
-    backgroundColor: palette.secondary.dark,
-    color: palette.primary.main,
-  },
-  width: {
-    maxWidth: 1440,
-    margin: 'auto',
-    padding: 24
-  },
-  centerFlex: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-}))
+  div {
+    border: 5px solid #d1ad70;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 10rem;
+    top: -5rem;
+    left: 50%;
+    right: 50%;
+    background-color: ${({ theme }) => theme.palette.alternate.base};
+    position: absolute;
+    transform: rotate(45deg) translate(-3rem, 3rem);
+    
+    span {
+      color: ${({ theme }) => theme.palette.main.base};
+      transform: rotate(-45deg);  
+    }
+  }
+`;
+
+const FooterLinks = styled.div`
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 3rem;
+
+  a {
+    color: ${(props) => props.theme.text.header};
+    text-decoration: none;
+    display: block;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  li {
+    padding: 2rem 1rem;
+    border-bottom: 2px solid ${({ theme }) => theme.palette.alternate.base};
+    position: relative;
+
+    ::after {
+      content: "";
+      position: absolute;
+      transform: translate(-.7rem,1.3rem) rotate(45deg);
+      height: 1.5rem;
+      width: 1.5rem;
+      background-color: ${({ theme }) => theme.palette.alternate.base};
+      border: 2px solid ${({ theme }) => theme.palette.highlight.base};
+    }
+  }
+`;
+
+const ShowMoreButton = styled.button`
+  font-size: 100%;
+  font-family: inherit;
+  padding: 2rem 1rem;
+  border: 0;
+  width: 100%;
+  background: none; 
+  color: inherit;
+  position: relative;
+  border-bottom: 2px solid ${({ theme }) => theme.palette.alternate.base};
+
+  ::after {
+      content: "";
+      position: absolute;
+      transform: translate(-3.2rem ,2.6rem) rotate(45deg);
+      height: 1.5rem;
+      width: 1.5rem;
+      background-color: ${({ theme }) => theme.palette.alternate.base};
+      border: 2px solid ${({ theme }) => theme.palette.highlight.base};
+    }
+ `;
 
 const Footer = () => {
+  const [socialLength, setSocialLength] = React.useState(2);
   const { allDirectory, site: { siteMetadata } } = useStaticQuery(graphql`
   query FoldersQuery {
-    allDirectory {
+    allDirectory(filter: {base: {nin: ["images", "deprecated", "posts"]}}) {
       edges {
         node {
           base
@@ -55,57 +120,67 @@ const Footer = () => {
       }
     }
   }
-  `)
+  `);
 
-  const classes = useStyles()
+  const buttonText = socialLength === 2 ? 'View more' : 'View less';
+  const maxSocialLength = siteMetadata.identityData.length;
+  const socialLinks = siteMetadata.identityData.filter((item, index) => index <= socialLength);
+  const handleClick = () => {
+    setSocialLength(socialLength === maxSocialLength ? 2 : maxSocialLength);
+  };
 
   return (
-    <Box component="footer" px={3} data-testid="footer" className={classes.root}>
-      <Grid container spacing={3} className={classes.width}>
-        <Grid item xs={12} md={3}>
-          <Box component="section" >
-            <Typography component="h5">Site Links</Typography>
-            <List component="nav" aria-label="main site links">
-              {allDirectory.edges.map(({ node }) => {
-                if (node.base === 'deprecated' || node.base === 'images' || node.base === 'posts') return null
-                return (
-                  <ListItem key={node.id}>
-                    <Link to={`/${node.base}`}>{`${node.base}`}</Link>
-                  </ListItem>
-                )
-              })}
-            </List>
-          </Box>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Box component="section" className={classes.centerFlex}>
-            <NewsletterSignup />
-          </Box>
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <Typography>Social</Typography>
-          <List component="nav" aria-label="external social links">
-            {siteMetadata.identityData.map(({ siteLink, siteName }) => (
-              <ListItem key={siteName}>
-                <MuiLink target="blank" rel="noopener" href={siteLink} className={classes.centerFlex}>
-                  {siteName === 'Twitter' && <Box component={TwitterIcon} mr={1} />}
-                  {siteName === 'YouTube' && <Box component={YouTubeIcon} mr={1} />}
-                  {siteName === 'LinkedIn' && <Box component={LinkedInIcon} mr={1} />}
-                  {siteName === 'Github' && <Box component={GitHubIcon} mr={1} />}
-                  {siteName === 'Reddit' && <Box component={RedditIcon} mr={1} />}
-                  {siteName === 'Instagram' && <Box component={InstagramIcon} mr={1} />}
-                  {siteName}
-                </MuiLink>
-              </ListItem>
-            ))}
-          </List>
-        </Grid>
-      </Grid>
-      <Box className={classes.width}>
-        © {new Date().getFullYear()} by Devin Fitzsimons
-      </Box>
-    </Box>
-  )
-}
+    <>
+      <StyledFooter>
+        <StyledChevron>
+          <div>
+            <span>
+              DF
+            </span>
+          </div>
+        </StyledChevron>
+        <FooterLinks>
+          <div>
+            <h4>Site Links</h4>
+            <ul>
+              {allDirectory.edges.map(({ node }) => (
+                <li key={node.base}><Link to={`/${node.base}`}>{`${node.base}`}</Link></li>
+              ))}
+            </ul>
+          </div>
+          <div><h4>Newsletter</h4></div>
+          <div>
+            <h4>Social</h4>
+            <ul>
+              {socialLinks.map((
+                { siteLink, siteName }
+              ) => (
+                  // eslint-disable-next-line react/jsx-indent
+                  <li key={siteLink}>
+                    <Link to={`/${siteLink}`}>
+                      {`${siteName}`}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+            <ShowMoreButton
+              onClick={() => handleClick()}
+              aria-expanded="false"
+            >
+              {buttonText}
+            </ShowMoreButton>
+          </div>
+        </FooterLinks>
+        <div>
+          ©
+          {' '}
+          {new Date().getFullYear()}
+          {' '}
+          by Devin Fitzsimons
+        </div>
+      </StyledFooter>
+    </>
+  );
+};
 
-export default Footer
+export default Footer;

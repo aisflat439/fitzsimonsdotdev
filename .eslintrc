@@ -4,7 +4,8 @@
     "env": {
         "node": true,
         "es6": true,
-        "browser": true
+        "browser": true,
+        "jest": true
     },
     "rules": {
         "react/jsx-filename-extension": [
@@ -19,6 +20,7 @@
         "implicit-arrow-linebreak": "off",
         "comma-dangle": "off",
         "indent": "off",
-        "no-trailing-spaces": "off"
+        "no-trailing-spaces": "off",
+        "react/jsx-props-no-spreading": "off"
     }
 }
