@@ -72,7 +72,7 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "jest --watch",
+    "test": "jest --watch --no-cache",
     "test:ci": "jest"
   },
   "repository": {
