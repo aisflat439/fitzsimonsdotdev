@@ -163,7 +163,7 @@ const Footer = () => {
                   </li>
                 ))}
             </ul>
-            {socialLinks.length > 3
+            {maxSocialLength > 3
               && (
                 <ShowMoreButton
                   onClick={() => handleClick()}
