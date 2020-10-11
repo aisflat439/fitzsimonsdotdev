@@ -202,7 +202,7 @@ describe('<Footer/>', () => {
     expect(queryByText(/View more/i)).not.toBeInTheDocument();
   });
 
-  it.only('hides the button if there are 3 or fewer social links', () => {
+  it('hides the button if there are 3 or fewer social links', () => {
     useStaticQuery.mockReturnValue({
       allDirectory: {
         edges: [
