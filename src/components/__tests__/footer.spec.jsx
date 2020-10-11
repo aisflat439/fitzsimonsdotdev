@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import { useStaticQuery } from 'gatsby';
 
 import { ThemeProvider } from 'styled-components';
@@ -111,7 +111,7 @@ describe('<Footer/>', () => {
   });
 
   it('shows and hides all links', () => {
-    useStaticQuery.mockReturnValueOnce({
+    useStaticQuery.mockReturnValue({
       allDirectory: {
         edges: [
           {
@@ -146,9 +146,96 @@ describe('<Footer/>', () => {
       }
     });
 
-    const { queryByText, getByText, getByRole } = setup();
+    const {
+      queryByText, getByText, getByRole
+    } = setup();
 
     expect(queryByText(/Four/i)).not.toBeInTheDocument();
-    // userEvent.click(getByRole('button'));
+    userEvent.click(getByRole('button'));
+    expect(getByText(/Four/i)).toBeInTheDocument();
+  });
+
+  it('Updates the button text', () => {
+    useStaticQuery.mockReturnValue({
+      allDirectory: {
+        edges: [
+          {
+            node: {
+              base: 'query',
+              id: 123,
+            }
+          },
+        ]
+      },
+      site: {
+        siteMetadata: {
+          identityData: [
+            {
+              siteName: 'One',
+              siteLink: 'One-link',
+            },
+            {
+              siteName: 'Two',
+              siteLink: 'Two-link',
+            },
+            {
+              siteName: 'Three',
+              siteLink: 'Three-link',
+            },
+            {
+              siteName: 'Four',
+              siteLink: 'Four-link',
+            },
+          ]
+        }
+      }
+    });
+
+    const {
+      queryByText, getByText, getByRole
+    } = setup();
+
+    expect(getByText(/View more/i)).toBeInTheDocument();
+    expect(queryByText(/View less/i)).not.toBeInTheDocument();
+    userEvent.click(getByRole('button'));
+    expect(getByText(/View less/i)).toBeInTheDocument();
+    expect(queryByText(/View more/i)).not.toBeInTheDocument();
+  });
+
+  it.only('hides the button if there are 3 or fewer social links', () => {
+    useStaticQuery.mockReturnValue({
+      allDirectory: {
+        edges: [
+          {
+            node: {
+              base: 'query',
+              id: 123,
+            }
+          },
+        ]
+      },
+      site: {
+        siteMetadata: {
+          identityData: [
+            {
+              siteName: 'One',
+              siteLink: 'One-link',
+            },
+            {
+              siteName: 'Two',
+              siteLink: 'Two-link',
+            },
+            {
+              siteName: 'Three',
+              siteLink: 'Three-link',
+            },
+          ]
+        }
+      }
+    });
+
+    const { queryByText } = setup();
+
+    expect(queryByText(/View more/i)).not.toBeInTheDocument();
   });
 });
