@@ -77,7 +77,30 @@ const FooterLinks = styled.div`
   }
 `;
 
+const ShowMoreButton = styled.button`
+  font-size: 100%;
+  font-family: inherit;
+  padding: 2rem 1rem;
+  border: 0;
+  width: 100%;
+  background: none; 
+  color: inherit;
+  position: relative;
+  border-bottom: 2px solid ${({ theme }) => theme.palette.alternate.base};
+
+  ::after {
+      content: "";
+      position: absolute;
+      transform: translate(-3.2rem ,2.6rem) rotate(45deg);
+      height: 1.5rem;
+      width: 1.5rem;
+      background-color: ${({ theme }) => theme.palette.alternate.base};
+      border: 2px solid ${({ theme }) => theme.palette.highlight.base};
+    }
+ `;
+
 const Footer = () => {
+  const [socialLength, setSocialLength] = React.useState(2);
   const { allDirectory, site: { siteMetadata } } = useStaticQuery(graphql`
   query FoldersQuery {
     allDirectory(filter: {base: {nin: ["images", "deprecated", "posts"]}}) {
@@ -98,6 +121,13 @@ const Footer = () => {
     }
   }
   `);
+
+  const buttonText = socialLength === 2 ? 'View more' : 'View less';
+  const maxSocialLength = siteMetadata.identityData.length;
+  const socialLinks = siteMetadata.identityData.filter((item, index) => index <= socialLength);
+  const handleClick = () => {
+    setSocialLength(socialLength === maxSocialLength ? 2 : maxSocialLength);
+  };
 
   return (
     <>
@@ -122,7 +152,7 @@ const Footer = () => {
           <div>
             <h4>Social</h4>
             <ul>
-              {siteMetadata.identityData.map((
+              {socialLinks.map((
                 { siteLink, siteName }
               ) => (
                   // eslint-disable-next-line react/jsx-indent
@@ -133,6 +163,12 @@ const Footer = () => {
                   </li>
                 ))}
             </ul>
+            <ShowMoreButton
+              onClick={() => handleClick()}
+              aria-expanded="false"
+            >
+              {buttonText}
+            </ShowMoreButton>
           </div>
         </FooterLinks>
         <div>
