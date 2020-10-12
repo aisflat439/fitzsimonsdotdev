@@ -5,8 +5,8 @@ import styled from 'styled-components';
 const StyledFooter = styled.footer`
   margin-top: 9rem;
   background: linear-gradient(to right, ${({ theme }) => theme.palette.main.base} 50%, ${({ theme }) => theme.palette.main.saturated} );
-  border-bottom: 5px solid #d1ad70;
-  border-top: 5px solid #d1ad70;
+  border-bottom: 5px solid ${({ theme }) => theme.palette.highlight.base};
+  border-top: 5px solid ${({ theme }) => theme.palette.highlight.base};
   color: ${(props) => props.theme.text.header};
   text-align: center;
   
@@ -22,7 +22,7 @@ const StyledChevron = styled.div`
   position: relative;
 
   div {
-    border: 5px solid #d1ad70;
+    border: 5px solid ${({ theme }) => theme.palette.highlight.base};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,7 +80,7 @@ const FooterLinks = styled.div`
 const ShowMoreButton = styled.button`
   font-size: 100%;
   font-family: inherit;
-  padding: 2rem 1rem;
+  padding: 2.15rem 1rem;
   border: 0;
   width: 100%;
   background: none; 
