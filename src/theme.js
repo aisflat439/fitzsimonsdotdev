@@ -15,22 +15,22 @@ const theme = {
         main: {
             base: '#15173D',
             saturated: '#020650',
-            lowlight: '#020650'
+            lowlight: '#e4e5f6'
         },
         highlight: {
             base: '#D1AD70',
             saturated: '#fdb844',
-            lowlight: '#020650'
+            lowlight: '#fcfaf6'
         },
         brand: {
             base: '#87CCB0',
             saturated: '#59fab9',
-            lowlight: '#020650'
+            lowlight: '#daefe6'
         },
         alternate: {
             base: '#91D4CF',
             saturated: '#68fdf2',
-            lowlight: '#020650'
+            lowlight: '#f4fbfa'
         },
         type: 'light',
         primary: {

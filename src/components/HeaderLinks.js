@@ -20,11 +20,6 @@ const HeaderLinks = ({ siteTitle }) => (
       {siteTitle}
     </StyledLink>
     <StyledLink
-      to="/site-reviews"
-    >
-      Site Reviews
-    </StyledLink>
-    <StyledLink
       to="/thoughts"
     >
       Thoughts
@@ -33,6 +28,11 @@ const HeaderLinks = ({ siteTitle }) => (
       to="/tips"
     >
       Tips
+    </StyledLink>
+    <StyledLink
+      to="/site-reviews"
+    >
+      Site Reviews
     </StyledLink>
   </div>
 );

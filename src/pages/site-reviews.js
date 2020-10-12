@@ -1,25 +1,24 @@
-import React from "react"
-import { graphql } from 'gatsby'
+import React from 'react';
+import { graphql } from 'gatsby';
 
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import VideoListing from "../components/VideoListing";
+import Layout from '../components/layout';
+import SEO from '../components/seo';
+import VideoListing from '../components/VideoListing';
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <SEO title="Posts" keywords={[`ecommerce`, `ecommerce development`, `shopify`, 'youtube']} />
+    <SEO title="Site Reviews" keywords={['ecommerce', 'ecommerce development', 'shopify', 'youtube']} />
     <Typography variant="h3" component="h1">Site Reviews</Typography>
-    <List >
+    <List>
       {data.allYoutubeVideo.edges.map(({ node: video }) => (
         <VideoListing key={video.publishedAt} video={video} />
       )).sort((a, b) => new Date(b.props.video.publishedAt) - new Date(a.props.video.publishedAt))}
     </List>
   </Layout>
-)
-
+);
 
 export const query = graphql`
 query {
@@ -41,6 +40,6 @@ query {
     }
   }
 }
-`
+`;
 
-export default IndexPage
+export default IndexPage;

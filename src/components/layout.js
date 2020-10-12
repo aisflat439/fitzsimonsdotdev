@@ -9,16 +9,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import { useSelector } from 'react-redux';
+
+import styled, { ThemeProvider } from 'styled-components';
 import { createMuiTheme, ThemeProvider as MUITheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { ThemeProvider } from 'styled-components';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Box from '@material-ui/core/Box';
 
 import theme from '../theme';
 import Header from './header';
 import Footer from './footer';
+
+const StyledPage = styled.div`
+  max-width: 1440px;
+  margin: 1rem;
+  background-color: ${(props) => props.theme.palette.alternate.lowlight};
+`;
 
 const Layout = ({ children }) => {
   let prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -48,7 +54,7 @@ const Layout = ({ children }) => {
               {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
               <CssBaseline />
               <Header siteTitle={site.siteMetadata.title} />
-              <Box maxWidth={1440} px={3} my={10} mx="auto">{children}</Box>
+              <StyledPage>{children}</StyledPage>
               <Footer />
             </MUITheme>
           </ThemeProvider>
