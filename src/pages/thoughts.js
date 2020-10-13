@@ -21,11 +21,11 @@ const ThoughtsPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Posts" keywords={keywords} />
-      <Box>
+      <Box style={{ maxWidth: '900px', margin: '0 auto' }}>
         <Typography component="h3" variant="h5">Most recent post:</Typography>
         <PostSnippet title={postTitle} timeToRead={timeToRead} content={body} slug={postSlug} />
       </Box>
-      <Box>
+      <Box style={{ maxWidth: '900px', margin: '0 auto' }}>
         <Box>
           <Typography variant="h2">Related Posts</Typography>
           {data.allMarkdownRemark.group.length
