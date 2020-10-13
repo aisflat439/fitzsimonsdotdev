@@ -16,9 +16,15 @@ const StyledHeader = styled.header`
 `;
 
 const Header = ({ siteTitle }) => (
-  <StyledHeader>
-    <HeaderLinks siteTitle={siteTitle} />
-  </StyledHeader>
+  <>
+    <StyledHeader>
+      <HeaderLinks siteTitle={siteTitle} />
+    </StyledHeader>
+    <div style={{ backgroundColor: '#d1ad70' }}>
+      <h3>This site is under construction</h3>
+      <p>For heaps of reasons I decided to move from MUI to styled-components and remark to MDX. This will be more fun for me personally, which is my primary motivation. I'm also sort of curious about trying out an Art Deco inspired aesthetic, which is what you should see a subtle smattering of thus far. While I'm making this switch please pardon the appearance of this here blog. Come back in like a month if you wanna see how it turns out.</p>
+    </div>
+  </>
 );
 
 Header.propTypes = {

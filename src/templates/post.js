@@ -1,24 +1,25 @@
-import React from "react"
-import { graphql } from "gatsby"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import React from 'react';
+import { graphql } from 'gatsby';
+import Layout from '../components/layout';
+import SEO from '../components/seo';
 
 export default ({ data }) => {
-  const post = data.markdownRemark
+  const post = data.markdownRemark;
   return (
     <Layout>
       <SEO
         title="Home"
         keywords={[
-          `ecommerce`,
-          `gatsby`,
-          `ecommerce tips`,
-          `ecommerce design and development`,
+          'ecommerce',
+          'gatsby',
+          'ecommerce tips',
+          'ecommerce design and development',
         ]}
       />
-      <div>
+      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <h1>{post.frontmatter.title}</h1>
-        <style>{`
+        <style>
+          {`
           pre {
             white-space: pre-wrap;
             word-wrap: break-word;
@@ -39,8 +40,8 @@ export default ({ data }) => {
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </div>
     </Layout>
-  )
-}
+  );
+};
 
 export const query = graphql`
   query($slug: String!) {
@@ -51,4 +52,4 @@ export const query = graphql`
         }
       }
     }
-  `
+  `;
