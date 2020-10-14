@@ -1,6 +1,6 @@
 ---
-date: "2020-2-16"
-updated: "2020-2-16"
+date: "2020-02-16"
+updated: "2020-02-16"
 title: "Some thoughts from #ecomChat"
 slug: "/some-thoughts-from-ecom-chat"
 hashtags: ["thoughts", "random", "ecommerce"]

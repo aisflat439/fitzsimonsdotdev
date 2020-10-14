@@ -182,6 +182,29 @@ const Footer = () => {
           by Devin Fitzsimons
         </div>
       </StyledFooter>
+      <form
+        style={{ display: 'none' }}
+        autoComplete="on"
+        name="contact"
+        method="post"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <label htmlFor="first_name">
+          First Name
+          <input type="first_name" name="first_name" placeholder="Prince" />
+        </label>
+        <label htmlFor="last_name">
+          Last Name
+          <input type="last_name" name="last_name" placeholder="Nelson" />
+        </label>
+        <label htmlFor="email">
+          Email Address
+          <input type="email" name="email" placeholder="email@mail.com" required />
+        </label>
+        <button type="submit">submit</button>
+      </form>
     </>
   );
 };
