@@ -3,7 +3,7 @@ date: "2020-10-13"
 updated: "2020-10-13"
 title: "How to run an async online meeting"
 slug: "/how-to-run-an-async-online-meeting"
-hashtags: ["productivity", "slack"]
+hashtags: ["productivity", "slack", "random", "thoughts"]
 ---
 
 I really love my job. That said, even great jobs have some peccadillos. At mine, we have an obsession with meetings. If three teams need to work together for an outcome, a meeting is scheduled, unnecessary people attend, and we all sit half focused, looking at someones screen. I assume that half the people in the meeting are checking email, which then let's me quickly check a PR comment on some issue that actually interests me. It's absurd. Meetings are important and necessary however, and when done well, I sometimes enjoy them. Nonetheless, it's probably wise to avoid meetings, especially remote ones, as much as possible. 

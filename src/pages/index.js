@@ -115,7 +115,7 @@ const IndexPage = () => (
         <InfoBox>
           <div>
             <div>
-              If I was any good at marketing, I'd put some content in here and people would sign up for something and I'd turn that into money.
+              If I was any good at marketing, I'd put some content in here and people would sign up for something and I'd turn that into money somehow.
             </div>
           </div>
         </InfoBox>

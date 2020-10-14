@@ -1,6 +1,6 @@
 ---
-date: "2020-1-08"
-updated: "2020-1-08"
+date: "2020-01-08"
+updated: "2020-01-08"
 title: "Create room for experiments"
 slug: "/create-room-for-experiments"
 hashtags: ["thoughts", "random", "experiments", "ecommerce", "no code"]

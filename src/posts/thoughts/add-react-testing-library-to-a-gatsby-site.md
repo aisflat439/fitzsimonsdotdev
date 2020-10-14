@@ -1,6 +1,6 @@
 ---
-date: "2020-3-12"
-updated: "2020-3-12"
+date: "2020-03-12"
+updated: "2020-03-12"
 title: "Add React Testing Library to a Gatsby site"
 slug: "/add-react-testing-library-to-a-gatsby-site"
 hashtags: ["tutorial", "testing", "react", "gatsby"]

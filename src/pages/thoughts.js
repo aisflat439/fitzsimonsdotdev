@@ -14,7 +14,7 @@ import Tag from '../components/Tag';
 
 const ThoughtsPage = ({ data }) => {
   const keywords = data.allMarkdownRemark.group.map((keyword) => keyword.tag);
-  const { postTitle } = data.allMarkdownRemark.edges[0].node.frontmatter;
+  const { title: postTitle } = data.allMarkdownRemark.edges[0].node.frontmatter;
   const { html: body, fields, timeToRead } = data.allMarkdownRemark.edges[0].node;
   const { postSlug } = fields;
 
