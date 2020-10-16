@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import HomePageCardContent from '../components/HomePageCardContent';
 import ContactMeDialog from '../components/ContactMeDialog';
 import SEO from '../components/seo';

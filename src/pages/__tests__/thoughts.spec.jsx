@@ -1,7 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
+import { ThemeProvider } from 'styled-components';
 import ThoughtsPage from '../thoughts';
+import theme from '../../theme';
 
 jest.mock('@material-ui/core/Link', () => ({ children }) => <div>{children}</div>);
 jest.mock('../../components/PostSnippet', () => () => <div data-testid="TEST-PostSnippet">PostSnippet</div>);
@@ -59,7 +61,11 @@ const renderWith = (overrides) => {
     },
   };
 
-  return render(<ThoughtsPage {...props} />);
+  return render(
+    <ThemeProvider theme={theme}>
+      <ThoughtsPage {...props} />
+    </ThemeProvider>
+  );
 };
 
 describe('Thoughts', () => {
