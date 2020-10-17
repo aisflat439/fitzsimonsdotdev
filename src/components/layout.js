@@ -12,7 +12,6 @@ import { useSelector } from 'react-redux';
 
 import styled, { ThemeProvider } from 'styled-components';
 import { createMuiTheme, ThemeProvider as MUITheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -27,7 +26,7 @@ const StyledPage = styled.div`
 `;
 
 const Layout = ({ children }) => {
-  let prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  let prefersDarkMode = false;
   const hasSelectedPreference = useSelector((state) => state.userPreferences.lightmode);
   if (hasSelectedPreference !== undefined) {
     prefersDarkMode = hasSelectedPreference;
@@ -51,7 +50,8 @@ const Layout = ({ children }) => {
         <>
           <ThemeProvider theme={theme}>
             <MUITheme theme={customTheme}>
-              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+              {/* CssBaseline kickstart an elegant, consistent, 
+              and simple baseline to build upon. */}
               <CssBaseline />
               <Header siteTitle={site.siteMetadata.title} />
               <StyledPage>{children}</StyledPage>
