@@ -4,30 +4,30 @@ import T from 'prop-types';
 
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 
 import Layout from '../components/layout';
 import PostSnippet from '../components/PostSnippet';
 import SEO from '../components/seo';
 import Link from '../components/Link';
 import Tag from '../components/Tag';
+import HeadingGroup from '../components/HeadingGroup';
 
 const ThoughtsPage = ({ data }) => {
   const keywords = data.allMarkdownRemark.group.map((keyword) => keyword.tag);
   const { title: postTitle } = data.allMarkdownRemark.edges[0].node.frontmatter;
   const { html: body, fields, timeToRead } = data.allMarkdownRemark.edges[0].node;
-  const { postSlug } = fields;
+  const { slug: postSlug } = fields;
 
   return (
     <Layout>
       <SEO title="Posts" keywords={keywords} />
       <Box style={{ maxWidth: '900px', margin: '0 auto' }}>
-        <Typography component="h3" variant="h5">Most recent post:</Typography>
+        <h5>Most recent post:</h5>
         <PostSnippet title={postTitle} timeToRead={timeToRead} content={body} slug={postSlug} />
       </Box>
       <Box style={{ maxWidth: '900px', margin: '0 auto' }}>
         <Box>
-          <Typography variant="h2">Related Posts</Typography>
+          <HeadingGroup title="Related Posts" />
           {data.allMarkdownRemark.group.length
             && (
               <Grid container spacing={3} data-testid="tags">
@@ -46,7 +46,7 @@ const ThoughtsPage = ({ data }) => {
             if (index === 0) return null;
             return (
               <Box key={slug}>
-                {index === 1 && <Typography variant="h2">Previous Posts</Typography>}
+                {index === 1 && <HeadingGroup title="Previous Posts" />}
                 <Box data-testid={`${slug}`}>
                   <Link to={slug}>{title}</Link>
                 </Box>
