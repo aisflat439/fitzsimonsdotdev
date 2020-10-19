@@ -1,19 +1,43 @@
 import React from 'react';
+import T from 'prop-types';
+import styled from 'styled-components';
 import { encode } from '../utils';
 
-const Contact = () => {
-  const [email, setEmail] = React.useState('');
-  const [domain, setDomain] = React.useState('');
+const StyledForm = styled.form`
+  input {
+    margin: 0 0 1rem 1rem;
+    height: 1.5rem;
+    border: none;
+    border-bottom: 1px solid; 
+
+    &:focus {
+      outline: none;
+      border: none;
+      border-bottom: 2px solid; 
+    }
+  }
+`;
+
+const Contact = ({ handleClose }) => {
+  const initialValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+  };
+  const [formValues, setFormValues] = React.useState(initialValues);
 
   const handleSubmit = (e) => {
+    const { firstName, lastName, email } = formValues;
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'contact', email, domain })
+      body: encode({
+        'form-name': 'contact', email, firstName, lastName
+      })
     })
       .then(() => {
-        console.log('blah blah blah');
-        alert("Success! I'm sorry, I just haven't had time to do this correctly yet.");
+        handleClose();
+        setFormValues(initialValues);
       })
       .catch((error) => alert(error));
 
@@ -21,12 +45,15 @@ const Contact = () => {
   };
 
   const handleChange = (e) => {
-    e.target.name === 'email' ? setEmail(e.target.value) : setDomain(e.target.value);
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value
+    });
   };
 
   return (
     <>
-      <form
+      <StyledForm
         style={{ display: 'flex', flexDirection: 'column' }}
         autoComplete="on"
         name="contact"
@@ -36,22 +63,26 @@ const Contact = () => {
         onSubmit={handleSubmit}
       >
         <input type="hidden" name="form-name" value="contact" />
-        <label htmlFor="first_name">
-          First Name
-          <input type="first_name" name="first_name" placeholder="Prince" onChange={handleChange} />
+        <label htmlFor="firstName">
+          First Name:
+          <input type="text" name="firstName" placeholder="Prince" onChange={handleChange} value={formValues.firstName} />
         </label>
-        <label htmlFor="last_name">
-          Last Name
-          <input type="last_name" name="last_name" placeholder="Nelson" onChange={handleChange} />
+        <label htmlFor="lastName">
+          Last Name:
+          <input type="text" name="lastName" placeholder="Nelson" onChange={handleChange} value={formValues.lastName} />
         </label>
         <label htmlFor="email">
-          Email Address
-          <input type="email" name="email" placeholder="email@mail.com" required onChange={handleChange} />
+          Email Address:
+          <input type="email" name="email" placeholder="email@mail.com" required onChange={handleChange} value={formValues.email} />
         </label>
         <button type="submit">submit</button>
-      </form>
+      </StyledForm>
     </>
   );
+};
+
+Contact.propTypes = {
+  handleClose: T.func.isRequired,
 };
 
 export default Contact;
