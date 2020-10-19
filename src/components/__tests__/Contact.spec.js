@@ -19,6 +19,11 @@ describe('<Contact />', () => {
     };
   };
 
+  beforeAll(() => {
+    // eslint-disable-next-line no-console
+    console.error = jest.fn();
+  });
+
   afterAll(() => {
     jest.resetAllMocks();
     jest.clearAllMocks();
