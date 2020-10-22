@@ -9,10 +9,10 @@ import HeadingGroup from '../components/HeadingGroup';
 
 const PostPage = ({ data }) => {
   const currentPost = data.markdownRemark;
-  const matchingTags = data.markdownRemark.frontmatter.hashtags;
+  const matchingTags = data.markdownRemark.frontmatter.hashtags ? data.markdownRemark.frontmatter.hashtags : [];
   const relevantTags = data.allMarkdownRemark.edges.filter(({ node }) => {
     const tags = node.frontmatter.hashtags;
-    const intersections = tags !== null ? tags.filter((tag) => matchingTags.includes(tag)) : null;
+    const intersections = tags !== null ? tags.filter((tag) => (matchingTags ? matchingTags.includes(tag) : null)) : null;
     return intersections?.length > 0 ? node : null;
   });
 

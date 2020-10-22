@@ -49,8 +49,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const posts = result.data.allMarkdownRemark.edges;
   const tags = result.data.tagsGroup.group;
+  const filteredPosts = posts.filter(({ node }) => !node.fields.slug.includes('deprecated'));
+  console.log('filteredPosts', filteredPosts);
 
-  posts.forEach(({ node }) => {
+  filteredPosts.forEach(({ node }) => {
     createPage({
       path: node.fields.slug,
       component: postTemplate,
