@@ -21,7 +21,7 @@ import Footer from './footer';
 
 const StyledPage = styled.div`
   max-width: 1440px;
-  margin: 1rem;
+  margin: 1rem auto;
   background-color: ${(props) => props.theme.palette.alternate.lowlight};
 `;
 

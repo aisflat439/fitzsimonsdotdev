@@ -1,23 +1,23 @@
-const _ = require('lodash')
-const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const _ = require('lodash');
+const path = require('path');
+const { createFilePath } = require('gatsby-source-filesystem');
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
-  const { createNodeField } = actions
-  if (node.internal.type === `MarkdownRemark`) {
-    const slug = createFilePath({ node, getNode, basePath: `pages` })
+  const { createNodeField } = actions;
+  if (node.internal.type === 'MarkdownRemark') {
+    const slug = createFilePath({ node, getNode, basePath: 'pages' });
     createNodeField({
       node,
-      name: `slug`,
+      name: 'slug',
       value: slug,
-    })
+    });
   }
-}
+};
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions
-  const tagTemplate = path.resolve("./src/templates/tags.js")
-  const postTemplate = path.resolve("./src/templates/post.js")
+  const { createPage } = actions;
+  const tagTemplate = path.resolve('./src/templates/tags.js');
+  const postTemplate = path.resolve('./src/templates/PostPage.js');
 
   const result = await graphql(`
     query {
@@ -39,18 +39,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         }
       }
     }
-  `)
+  `);
 
   // handle errors
   if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
-    return
+    reporter.panicOnBuild('Error while running GraphQL query.');
+    return;
   }
 
-  const posts = result.data.allMarkdownRemark.edges
-  const tags = result.data.tagsGroup.group
+  const posts = result.data.allMarkdownRemark.edges;
+  const tags = result.data.tagsGroup.group;
+  const filteredPosts = posts.filter(({ node }) => !node.fields.slug.includes('deprecated'));
+  console.log('filteredPosts', filteredPosts);
 
-  posts.forEach(({ node }) => {
+  filteredPosts.forEach(({ node }) => {
     createPage({
       path: node.fields.slug,
       component: postTemplate,
@@ -59,10 +61,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         // in page queries as GraphQL variables.
         slug: node.fields.slug,
       },
-    })
-  })
+    });
+  });
 
-  tags.forEach(tag => {
+  tags.forEach((tag) => {
     createPage({
       path: `/categories/${_.kebabCase(tag.fieldValue)}`,
       component: tagTemplate,
@@ -71,6 +73,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         // in page queries as GraphQL variables.
         tag: tag.fieldValue,
       },
-    })
-  })
-}
+    });
+  });
+};

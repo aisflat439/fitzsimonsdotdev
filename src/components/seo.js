@@ -112,7 +112,7 @@ function SEO({
   "sameAs": [
     ${site.siteMetadata.identityData.map((identity) => `"${identity.siteLink}"`)}
   ],
-  "jobTitle": "software engineer",  
+  "jobTitle": "software engineer"
 }
     `}
       </script>
