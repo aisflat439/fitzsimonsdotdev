@@ -1,11 +1,10 @@
 import React from 'react';
 import T from 'prop-types';
 import styled from 'styled-components';
-
 import Typography from '@material-ui/core/Typography';
+import HeadingGroup from './HeadingGroup';
 
 import SEO from './seo';
-import Markdown from './Markdown';
 
 const StyledPost = styled.div`
   p {
@@ -20,7 +19,7 @@ const PostSnippet = ({
     <>
       <SEO canonical={`https://www.fitzsimons.dev${slug}`} title={title} />
       <article>
-        <Typography component="h1" variant="h5" display="inline">{title}</Typography>
+        <HeadingGroup component="h1" title={title} />
         <Typography>
           ~
         {' '}
