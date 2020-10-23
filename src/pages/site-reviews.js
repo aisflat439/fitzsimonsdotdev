@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import T from 'prop-types';
 
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
@@ -8,9 +9,9 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import VideoListing from '../components/VideoListing';
 
-const IndexPage = ({ data }) => (
+const SiteReviews = ({ data }) => (
   <Layout>
-    <SEO title="Site Reviews" keywords={['ecommerce', 'ecommerce development', 'shopify', 'youtube']} />
+    <SEO title="Site Reviews" keywords={['eCommerce', 'eCommerce development', 'Shopify', 'youtube']} />
     <Typography variant="h3" component="h1">Site Reviews</Typography>
     <List>
       {data.allYoutubeVideo.edges.map(({ node: video }) => (
@@ -42,4 +43,8 @@ query {
 }
 `;
 
-export default IndexPage;
+SiteReviews.propTypes = {
+  data: T.shape().isRequired
+};
+
+export default SiteReviews;

@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react';
 
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
@@ -6,10 +6,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Typography from '@material-ui/core/Typography';
 import MuiLink from '@material-ui/core/Link';
-import { makeStyles } from "@material-ui/core"
-import Img from "gatsby-image"
+import { makeStyles } from '@material-ui/core';
+import Img from 'gatsby-image';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   image: {
     borderRadius: '50%',
   },
@@ -36,19 +36,19 @@ const useStyles = makeStyles(theme => ({
   recordingTime: {
     color: 'darkgrey'
   }
-}))
+}));
 
-const formatVideoDate = dateString => {
-  const date = new Date(dateString)
-  const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date)
-  const month = new Intl.DateTimeFormat('en', { month: 'long' }).format(date)
-  const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date)
+const formatVideoDate = (dateString) => {
+  const date = new Date(dateString);
+  const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
+  const month = new Intl.DateTimeFormat('en', { month: 'long' }).format(date);
+  const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
 
-  return `${month} ${day}, ${year}`
-}
+  return `${month} ${day}, ${year}`;
+};
 
 const VideoListing = ({ video }) => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <>
@@ -58,13 +58,13 @@ const VideoListing = ({ video }) => {
         </ListItemAvatar>
         <ListItemText
           className={classes.listItemText}
-          primary={
+          primary={(
             <>
               <Typography component="h2" className={classes.videoTitle}>{video.title}</Typography>
               <Typography component="small" className={classes.recordingTime}>{formatVideoDate(video.publishedAt)}</Typography>
             </>
-          }
-          secondary={
+          )}
+          secondary={(
             <>
               <Typography
                 component="span"
@@ -79,15 +79,15 @@ const VideoListing = ({ video }) => {
                   href={`https://www.youtube.com/watch?v=${video.videoId}`}
                 >
                   view on youtube
-                      </MuiLink>
+                </MuiLink>
               </Typography>
             </>
-          }
+          )}
         />
       </ListItem>
       <Divider component="li" />
     </>
-  )
-}
+  );
+};
 
-export default VideoListing
+export default VideoListing;
