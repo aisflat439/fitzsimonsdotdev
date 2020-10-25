@@ -10,7 +10,7 @@ import HeadingGroup from '../components/HeadingGroup';
 
 const StyledList = styled.ul`
   list-style: none;
-  margin: 0;
+  margin: 1rem 0;
   padding: 0;
 `;
 
@@ -37,7 +37,7 @@ query {
         videoId
         localThumbnail {
           childImageSharp {
-            fixed(height: 80, width: 80) {
+            fixed(height: 200, width: 200) {
               ...GatsbyImageSharpFixed
             }
           }

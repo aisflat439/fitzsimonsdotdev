@@ -1,42 +1,71 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Typography from '@material-ui/core/Typography';
 import MuiLink from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core';
 import Img from 'gatsby-image';
 
-const useStyles = makeStyles((theme) => ({
-  image: {
-    borderRadius: '50%',
-  },
-  listItemText: {
-    marginLeft: '1rem'
-  },
-  descriptionText: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    '& a': {
-      minWidth: '7rem'
-    },
-    [theme.breakpoints.up('sm')]: {
-      '& a': {
-        marginLeft: '.5rem',
-      },
-      flexDirection: 'row',
-    },
-  },
-  videoTitle: {
-    fontSize: '1.5rem',
-  },
-  recordingTime: {
-    color: 'darkgrey'
+export const StyledDivider = styled.div`
+  border-bottom: 3px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to right, 
+    ${({ theme }) => theme.palette.brand.base},
+    ${({ theme }) => theme.palette.brand.saturated},
+    ${({ theme }) => theme.palette.alternate.base},
+    ${({ theme }) => theme.palette.alternate.saturated}
+  );
+  margin: 3rem;
+`;
+
+const StyledImg = styled(Img)`
+`;
+
+const StyledListItem = styled.li`
+  background-color: ${({ theme }) => theme.palette.brand.lowlight};
+  padding: .5rem;
+
+  > div {
+    border: 2px solid ${({ theme }) => theme.palette.highlight.base};
+    position: relative;
+    padding: 0 2rem;
+
+    :before, :after {
+      width: 30px;
+      height: 25px;
+      background: ${({ theme }) => theme.palette.highlight.base};
+      content: "";
+      display: block;
+      position: absolute;
+      top: 45%;
+      z-index: 100;
+    }
+
+    :before {
+      left: -.5rem;
+    }
+
+    :after {
+      right: -.5rem;
+    }
+
+    > div {
+      display: flex;
+      margin-bottom: .5rem;
+
+      > div, p {
+        padding: 8px;
+      }
+    }
   }
-}));
+
+  h2 {
+    text-align: center;
+    margin: .5rem auto;
+  }
+`;
 
 const formatVideoDate = (dateString) => {
   const date = new Date(dateString);
@@ -47,47 +76,33 @@ const formatVideoDate = (dateString) => {
   return `${month} ${day}, ${year}`;
 };
 
-const VideoListing = ({ video }) => {
-  const classes = useStyles();
-
-  return (
+const VideoListing = ({
+  video: {
+    title, description, videoId, localThumbnail, publishedAt
+  }
+}) => (
     <>
-      <ListItem key={video.publishedAt} alignItems="flex-start">
-        <ListItemAvatar>
-          <Img className={classes.image} fixed={video.localThumbnail.childImageSharp.fixed} />
-        </ListItemAvatar>
-        <ListItemText
-          className={classes.listItemText}
-          primary={(
-            <>
-              <Typography component="h2" className={classes.videoTitle}>{video.title}</Typography>
-              <Typography data-testid="video-date" component="small" className={classes.recordingTime}>{formatVideoDate(video.publishedAt)}</Typography>
-            </>
-          )}
-          secondary={(
-            <>
-              <Typography
-                component="span"
-                className={classes.descriptionText}
-                variant="body2"
-                color="textPrimary"
+      <StyledListItem>
+        <div>
+          <h2>{title}</h2>
+          <div>
+            <p>{description}</p>
+            <div>
+              {formatVideoDate(publishedAt)}
+              <StyledImg fixed={localThumbnail.childImageSharp.fixed} />
+              <a
+                target="blank"
+                rel="noopener"
+                href={`https://www.youtube.com/watch?v=${videoId}`}
               >
-                {video.description}
-                <MuiLink
-                  target="blank"
-                  rel="noopener"
-                  href={`https://www.youtube.com/watch?v=${video.videoId}`}
-                >
-                  view on youtube
-                </MuiLink>
-              </Typography>
-            </>
-          )}
-        />
-      </ListItem>
-      <Divider component="li" />
+                View on YouTube
+            </a>
+            </div>
+          </div>
+        </div>
+      </StyledListItem>
+      <StyledDivider />
     </>
   );
-};
 
 export default VideoListing;
