@@ -88,7 +88,7 @@ const VideoListing = ({
           <div>
             <p>{description}</p>
             <div>
-              {formatVideoDate(publishedAt)}
+              <span data-testid="video-date">{formatVideoDate(publishedAt)}</span>
               <StyledImg fixed={localThumbnail.childImageSharp.fixed} />
               <a
                 target="blank"
