@@ -61,7 +61,7 @@ const VideoListing = ({ video }) => {
           primary={(
             <>
               <Typography component="h2" className={classes.videoTitle}>{video.title}</Typography>
-              <Typography component="small" className={classes.recordingTime}>{formatVideoDate(video.publishedAt)}</Typography>
+              <Typography data-testid="video-date" component="small" className={classes.recordingTime}>{formatVideoDate(video.publishedAt)}</Typography>
             </>
           )}
           secondary={(

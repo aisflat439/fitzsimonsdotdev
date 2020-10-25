@@ -16,21 +16,17 @@ const StyledPost = styled.div`
 const PostSnippet = ({
   title, timeToRead, content, slug
 }) => (
-    <>
-      <SEO canonical={`https://www.fitzsimons.dev${slug}`} title={title} />
-      <article>
-        <HeadingGroup component="h1" title={title} />
-        <Typography>
-          ~
-        {' '}
-          {timeToRead}
-          {' '}
-        read time
+  <>
+    <SEO canonical={`https://www.fitzsimons.dev${slug}`} title={title} />
+    <article>
+      <HeadingGroup component="h1" title={title} />
+      <Typography>
+        {`~${timeToRead} read time`}
       </Typography>
-        <StyledPost dangerouslySetInnerHTML={{ __html: content }} />
-      </article>
-    </>
-  );
+      <StyledPost dangerouslySetInnerHTML={{ __html: content }} />
+    </article>
+  </>
+);
 
 PostSnippet.propTypes = {
   title: T.string.isRequired,
