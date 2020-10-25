@@ -1,11 +1,10 @@
 import React from 'react';
 import T from 'prop-types';
 import styled from 'styled-components';
-
 import Typography from '@material-ui/core/Typography';
+import HeadingGroup from './HeadingGroup';
 
 import SEO from './seo';
-import Markdown from './Markdown';
 
 const StyledPost = styled.div`
   p {
@@ -17,21 +16,17 @@ const StyledPost = styled.div`
 const PostSnippet = ({
   title, timeToRead, content, slug
 }) => (
-    <>
-      <SEO canonical={`https://www.fitzsimons.dev${slug}`} title={title} />
-      <article>
-        <Typography component="h1" variant="h5" display="inline">{title}</Typography>
-        <Typography>
-          ~
-        {' '}
-          {timeToRead}
-          {' '}
-        read time
+  <>
+    <SEO canonical={`https://www.fitzsimons.dev${slug}`} title={title} />
+    <article>
+      <HeadingGroup component="h1" title={title} />
+      <Typography>
+        {`~${timeToRead} read time`}
       </Typography>
-        <StyledPost dangerouslySetInnerHTML={{ __html: content }} />
-      </article>
-    </>
-  );
+      <StyledPost dangerouslySetInnerHTML={{ __html: content }} />
+    </article>
+  </>
+);
 
 PostSnippet.propTypes = {
   title: T.string.isRequired,
