@@ -157,9 +157,9 @@ const Footer = () => {
               ) => (
                   // eslint-disable-next-line react/jsx-indent
                   <li key={siteLink}>
-                    <Link to={`/${siteLink}`}>
-                      {`${siteName}`}
-                    </Link>
+                    <a href={siteLink}>
+                      {siteName}
+                    </a>
                   </li>
                 ))}
             </ul>
@@ -182,6 +182,7 @@ const Footer = () => {
           by Devin Fitzsimons
         </div>
       </StyledFooter>
+      {/* This is a hidden form for Netlify */}
       <form
         style={{ display: 'none' }}
         autoComplete="on"

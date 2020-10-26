@@ -1,11 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Typography from '@material-ui/core/Typography';
-import MuiLink from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core';
 import Img from 'gatsby-image';
 
 export const StyledDivider = styled.div`
@@ -21,6 +16,13 @@ export const StyledDivider = styled.div`
 `;
 
 const StyledImg = styled(Img)`
+  border: 9px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(0.7turn,
+    ${({ theme }) => theme.palette.highlight.base},
+    ${({ theme }) => theme.palette.highlight.saturated},
+    ${({ theme }) => theme.palette.highlight.base}
+  ); 
 `;
 
 const StyledListItem = styled.li`
@@ -54,9 +56,24 @@ const StyledListItem = styled.li`
     > div {
       display: flex;
       margin-bottom: .5rem;
+      @media only screen and (max-width: 768px)  {
+        flex-direction: column-reverse;
+      }
 
       > div, p {
         padding: 8px;
+      }
+
+      > div {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      >p {
+        flex: 7;
       }
     }
   }
