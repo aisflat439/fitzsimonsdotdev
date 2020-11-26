@@ -7,6 +7,20 @@ import theme from '../../theme';
 
 import PostPage from '../PostPage';
 
+jest.mock('@mdx-js/react', () => ({
+  MDXProvider: ({ children }) => (
+    <div>
+      {children}
+    </div>
+  ),
+}));
+jest.mock('gatsby-plugin-mdx', () => ({
+  MDXRenderer: ({ children }) => (
+    <div>
+      {children}
+    </div>
+  ),
+}));
 jest.mock('../../components/layout', () => ({ children }) => <div>{children}</div>);
 jest.mock('../../components/Link', () => ({ children }) => <div>{children}</div>);
 jest.mock('../../components/seo', () => () => 'SEO');
@@ -33,9 +47,13 @@ describe('<PostPage />', () => {
             }
           ],
         },
-        markdownRemark: {
-          frontmatter: generateMarkdownFrontmatter({ title: 'markdownRemarkTitle' }),
-          html: '<div>Some dangerous HTML</div>'
+        mdx: {
+          slug: '/some/slug',
+          body: 'Some post content',
+          frontmatter: {
+            slug: '/some/slug',
+            ...generateMarkdownFrontmatter({ title: 'markdownRemarkTitle' }),
+          }
         },
         ...overrides
       }
@@ -61,18 +79,20 @@ describe('<PostPage />', () => {
 
   it('renders the matching articles', () => {
     const mockMarkdownRemark = {
+      slug: '/some/slug',
       frontmatter: generateMarkdownFrontmatter({ hashtags: ['matching'] })
     };
-    const { queryByText } = setup({ markdownRemark: mockMarkdownRemark });
+    const { queryByText } = setup({ mdx: mockMarkdownRemark });
 
     expect(queryByText(/allMarkdownTitle/)).not.toBeInTheDocument();
   });
 
   it('renders no similar posts when are no matching articles', () => {
     const mockMarkdownRemark = {
+      slug: '/some/slug',
       frontmatter: generateMarkdownFrontmatter({ hashtags: undefined })
     };
-    const { getByText, queryByText } = setup({ markdownRemark: mockMarkdownRemark });
+    const { getByText, queryByText } = setup({ mdx: mockMarkdownRemark });
 
     expect(getByText(/a title/i)).toBeInTheDocument();
     expect(queryByText(/similar posts/)).not.toBeInTheDocument();
@@ -100,12 +120,12 @@ describe('<PostPage />', () => {
       ],
     };
 
-    const markdownRemark = {
+    const mdx = {
       frontmatter: generateMarkdownFrontmatter({ title: 'this title is not rendered', hashtags: ['some match'] }),
-      html: '<div>Some dangerous HTML</div>'
+      slug: '/some/slug',
     };
 
-    const { getByText, queryByText } = setup({ allMarkdownRemark, markdownRemark });
+    const { getByText, queryByText } = setup({ allMarkdownRemark, mdx });
 
     expect(getByText(/some match/)).toBeInTheDocument();
     expect(queryByText(/no match/)).not.toBeInTheDocument();
