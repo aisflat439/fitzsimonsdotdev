@@ -4,7 +4,8 @@ const { createFilePath } = require('gatsby-source-filesystem');
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
-  if (node.internal.type === 'MarkdownRemark') {
+
+  if (node.internal.type === 'Mdx' || node.internal.type === 'MarkdownRemark') {
     const slug = createFilePath({ node, getNode, basePath: 'pages' });
     createNodeField({
       node,
@@ -17,25 +18,23 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
   const tagTemplate = path.resolve('./src/templates/tags.js');
-  const postTemplate = path.resolve('./src/templates/PostPage.js');
+  const postPage = path.resolve('./src/templates/PostPage.js');
 
   const result = await graphql(`
     query {
-      allMarkdownRemark {
-        edges {
-          node {
-            fields {
-              slug
-            }
-            frontmatter {
-              hashtags
-            }
-          }
-        }
-      }
       tagsGroup: allMarkdownRemark(limit: 2000) {
         group(field: frontmatter___hashtags) {
           fieldValue
+        }
+      }
+      allMdx {
+        edges {
+          node {
+            frontmatter {
+              hashtags
+            }
+            slug
+          }
         }
       }
     }
@@ -47,18 +46,18 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return;
   }
 
-  const posts = result.data.allMarkdownRemark.edges;
+  const mdx = result.data.allMdx.edges;
   const tags = result.data.tagsGroup.group;
-  const filteredPosts = posts.filter(({ node }) => !node.fields.slug.includes('deprecated'));
+  const filteredMdxPosts = mdx.filter(({ node }) => !node.slug.includes('deprecated'));
 
-  filteredPosts.forEach(({ node }) => {
+  filteredMdxPosts.forEach(({ node }) => {
     createPage({
-      path: node.fields.slug,
-      component: postTemplate,
+      path: node.slug,
+      component: postPage,
       context: {
         // Data passed to context is available
         // in page queries as GraphQL variables.
-        slug: node.fields.slug,
+        slug: node.slug,
       },
     });
   });
