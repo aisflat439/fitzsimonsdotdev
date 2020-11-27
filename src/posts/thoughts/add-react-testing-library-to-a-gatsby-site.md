@@ -4,6 +4,7 @@ updated: "2020-11-26"
 title: "Add React Testing Library to a Gatsby site"
 slug: "/add-react-testing-library-to-a-gatsby-site"
 hashtags: ["tutorial", "testing", "react", "gatsby"]
+description: "Take a plain gatsby site and add react testing library to it."
 ---
 
 ## Goal

@@ -4,6 +4,7 @@ updated: "2020-02-16"
 title: "Some thoughts from #ecomChat"
 slug: "/some-thoughts-from-ecom-chat"
 hashtags: ["thoughts", "random", "ecommerce"]
+description: "a brief discussion on the value that organized twitter chats bring to the table."
 ---
 
 ## Worthwhile thing to do on a Monday
@@ -17,11 +18,11 @@ This week was all about pricing. It was certainly a quieter week than most. Not 
 ## Things you can act on
 
 - Specific pricing location based on customer journey
-- Bundle pricing from refferer
+- Bundle pricing from referrer
 - Cart based discounts
 - Logged in customer pricing
 - Browser and device based pricing
 
 ## Who is doing this now
 
-You can see examples of this on airline sites and learning sites. I'm advocating that a company that sells commodity t-shirts should constanty be moving their pricing around to test if 16.49 converts the same as 16.99 on ios devices. Maybe your business is small and you don't have time to A/B test everything. That's okay. Most things are over tested. Most folks that advocate testing are just parroting what someone else else. Only test what you can act on and what will impact your buisness. There's a real value to having all your ios customers pay $.50 more for t-shirts if the data shows that they convert at the same rate. And the signal to noise ratio's here are very reasonable. 
+You can see examples of this on airline sites and learning sites. I'm advocating that a company that sells commodity t-shirts should constantly be moving their pricing around to test if 16.49 converts the same as 16.99 on ios devices. Maybe your business is small and you don't have time to A/B test everything. That's okay. Most things are over tested. Most folks that advocate testing are just parroting what someone else else. Only test what you can act on and what will impact your business. There's a real value to having all your ios customers pay $.50 more for t-shirts if the data shows that they convert at the same rate. And the signal to noise ratio's here are very reasonable. 
