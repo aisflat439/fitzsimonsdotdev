@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import T from 'prop-types';
 
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 
 import Layout from '../components/layout';
@@ -13,55 +12,57 @@ import Tag from '../components/Tag';
 import HeadingGroup from '../components/HeadingGroup';
 
 const ThoughtsPage = ({ data }) => {
-  const keywords = data.allMarkdownRemark.group.map((keyword) => keyword.tag);
-  const { title: postTitle } = data.allMarkdownRemark.edges[0].node.frontmatter;
-  const { html: body, fields, timeToRead } = data.allMarkdownRemark.edges[0].node;
+  const keywords = data.allMdx.group.map((keyword) => keyword.tag);
+  const { title: postTitle, hashtags } = data.allMdx.edges[0].node.frontmatter;
+  const { body, fields, timeToRead } = data.allMdx.edges[0].node;
   const { slug: postSlug } = fields;
 
   return (
     <Layout>
       <SEO title="Posts" keywords={keywords} />
-      <Box style={{ maxWidth: '900px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <h5>Most recent post:</h5>
         <PostSnippet title={postTitle} timeToRead={timeToRead} content={body} slug={postSlug} />
-      </Box>
-      <Box style={{ maxWidth: '900px', margin: '0 auto' }}>
-        <Box>
+      </div>
+      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+        <div>
           <HeadingGroup title="Related Posts" />
-          {data.allMarkdownRemark.group.length
-            && (
-              <Grid container spacing={3} data-testid="tags">
-                {data.allMarkdownRemark.group.map(({ tag, totalCount }) => (
-                  <Grid key={`${tag}-${totalCount}`} item xs={6} sm={3} md={2}>
-                    <Tag title={tag} count={totalCount} />
-                  </Grid>
-                ))}
-              </Grid>
-            )}
-        </Box>
+          <Grid container spacing={3}>
+            {data.allMdx.group.map(({ tag, totalCount }) => {
+              if (!hashtags.includes(tag)) {
+                return null;
+              }
+              return (
+                <Grid key={`${tag}-${totalCount}`} item xs={6} sm={3} md={2} data-testid="tags">
+                  <Tag title={tag} count={totalCount} />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </div>
         {
-          data.allMarkdownRemark.edges.map(({ node }, index) => {
+          data.allMdx.edges.map(({ node }, index) => {
             const { title } = node.frontmatter;
             const { slug } = node.fields;
             if (index === 0) return null;
             return (
-              <Box key={slug}>
+              <div key={slug}>
                 {index === 1 && <HeadingGroup title="Previous Posts" />}
-                <Box data-testid={`${slug}`}>
+                <div data-testid={`${slug}`}>
                   <Link to={slug}>{title}</Link>
-                </Box>
-              </Box>
+                </div>
+              </div>
             );
           })
         }
-      </Box>
+      </div>
     </Layout>
   );
 };
 
 export const query = graphql`
   query {
-    allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}, filter: {fileAbsolutePath: {regex: "/thoughts/"}}) {
+    allMdx(sort: {fields: [frontmatter___date], order: DESC}, filter: {fileAbsolutePath: {regex: "/thoughts/"}}) {
       group(field: frontmatter___hashtags) {
         tag: fieldValue
         totalCount
@@ -73,11 +74,11 @@ export const query = graphql`
             title
             hashtags
           }
-                  fields {
+        fields {
           slug
         }
         timeToRead
-        html
+        body
         }
       }
     }

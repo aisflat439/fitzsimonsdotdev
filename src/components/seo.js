@@ -18,6 +18,7 @@ function SEO({
   title,
   canonical,
   publisher,
+  schema,
 }) {
   const { site } = useStaticQuery(
     graphql`
@@ -109,9 +110,11 @@ function SEO({
   "alternateName": "aisflat439",
   "url": "http://www.fitzsimons.dev",
   "image": "",
+  "inLanguage": "en-US",
   "sameAs": [
     ${site.siteMetadata.identityData.map((identity) => `"${identity.siteLink}"`)}
   ],
+  ${schema || ''}
   "jobTitle": "software engineer"
 }
     `}
@@ -126,7 +129,8 @@ SEO.defaultProps = {
   keywords: [],
   lang: 'en',
   meta: [],
-  publisher: 'Devin Fitzsimons'
+  publisher: 'Devin Fitzsimons',
+  schema: '',
 };
 
 SEO.propTypes = {
@@ -136,6 +140,7 @@ SEO.propTypes = {
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   publisher: PropTypes.string,
+  schema: PropTypes.string,
   title: PropTypes.string.isRequired,
 };
 

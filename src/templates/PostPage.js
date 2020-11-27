@@ -7,12 +7,21 @@ import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import Link from '../components/Link';
+import CodeBlock from '../components/CodeBlock';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import HeadingGroup from '../components/HeadingGroup';
 
+const components = {
+  pre: CodeBlock,
+  code: CodeBlock
+};
+
 const PostPage = ({ data }) => {
   const currentPost = data.mdx;
+  const {
+    date, updated, title, description
+  } = currentPost.frontmatter;
   const matchingTags = currentPost.frontmatter.hashtags || [];
   const relevantTags = data.allMarkdownRemark.edges.filter(({ node }) => {
     const tags = node.frontmatter.hashtags || [];
@@ -21,6 +30,7 @@ const PostPage = ({ data }) => {
     return !!intersections.length && node;
   });
 
+  const schema = `"@type": "Article","headline": "${title}","description": "${description}","articleSection": "${matchingTags.toString()}","datePublished": "${date}T08:08:40+00:00","dateModified": "${updated}T08:43:03+00:00",`;
   const hasSimilarPosts = !!relevantTags.length;
 
   return (
@@ -35,10 +45,12 @@ const PostPage = ({ data }) => {
           ],
           ...matchingTags
         ]}
+        description={description}
+        schema={schema}
       />
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <HeadingGroup title={currentPost.frontmatter.title} component="h1" />
-        <MDXProvider>
+        <MDXProvider components={components}>
           <MDXRenderer>{currentPost.body}</MDXRenderer>
         </MDXProvider>
         {hasSimilarPosts
@@ -90,6 +102,9 @@ export const query = graphql`
         slug
         hashtags
         title
+        date
+        description
+        updated
       }
       body
     }

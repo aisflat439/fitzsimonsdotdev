@@ -1,9 +1,10 @@
 ---
 date: "2020-10-13"
-updated: "2020-10-13"
+updated: "2020-11-13"
 title: "How to run an async online meeting"
 slug: "/how-to-run-an-async-online-meeting"
 hashtags: ["productivity", "slack", "random", "thoughts"]
+description: "Musings about potential frameworks for holding asynchronous meetings"
 ---
 
 I really love my job. That said, even great jobs have some peccadillos. At mine, we have an obsession with meetings. If three teams need to work together for an outcome, a meeting is scheduled, unnecessary people attend, and we all sit half focused, looking at someones screen. I assume that half the people in the meeting are checking email, which then let's me quickly check a PR comment on some issue that actually interests me. It's absurd. Meetings are important and necessary however, and when done well, I sometimes enjoy them. Nonetheless, it's probably wise to avoid meetings, especially remote ones, as much as possible. 
@@ -22,10 +23,13 @@ The best way to do this is to ask in a relevant channel for people to sign up fo
 A channel is better than a group chat for 2 reasons, it can be archived, you can add people later without interrupting flow. Also, because the word meeting is a loaded term, I called the meeting a working group. Sneaky right? My opening message ways effectively:
 
 ---
+
 Hello! You’ve all expressed interest in [MEETING TOPIC]. As a clarification, this discussion is not about [OFF TOPIC] but instead [ON TOPIC]. The goal of the working group is to [MEETING GOAL] by [MEETING TIMELINE].
 
 About the working group:
+
 Slack is actually terrible, despite having won the market, but we’ll use it anyway. Try to keep discussion in threads, I’ll try to post questions posed to the group in a way that is conducive to threads. I’ll attempt to work through one topic at a time, as best I can. A topic will “open” then “close”. At the end, we’ll have something to present to the [THE PEOPLE WHO CARE] to [ACHIEVE BUSINESS GOAL]. We’ll use anonymous polls to complete a topic which will hopefully have a minimum of 3 choices. Yes, No, and Continued discussion needed. This group doesn’t preclude meetings, or mean that if you need to hash something out with someone over a call that you shouldn’t do so, but this orients the entire working group towards this chat, and an async workflow.
+
 ---
 
 Clearly stating what we are and aren't talking about in a meeting should be part of every meeting for the rest of your life. Thanks for coming to my Ted Talk.
