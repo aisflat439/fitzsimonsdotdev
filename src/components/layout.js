@@ -14,6 +14,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { createMuiTheme, ThemeProvider as MUITheme } from '@material-ui/core/styles';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
+import GlobalStyle from '../globalStyles';
 
 import theme from '../theme';
 import Header from './header';
@@ -51,6 +52,7 @@ const Layout = ({ children }) => {
         <>
           <ThemeProvider theme={theme}>
             <MUITheme theme={customTheme}>
+              <GlobalStyle />
               {/* CssBaseline kickstart an elegant, consistent, 
               and simple baseline to build upon. */}
               <CssBaseline />

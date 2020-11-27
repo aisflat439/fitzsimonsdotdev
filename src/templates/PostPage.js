@@ -2,14 +2,17 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import T from 'prop-types';
 import Box from '@material-ui/core/Box';
-import Link from '../components/Link';
 
+import { MDXProvider } from '@mdx-js/react';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+
+import Link from '../components/Link';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import HeadingGroup from '../components/HeadingGroup';
 
 const PostPage = ({ data }) => {
-  const currentPost = data.markdownRemark;
+  const currentPost = data.mdx;
   const matchingTags = currentPost.frontmatter.hashtags || [];
   const relevantTags = data.allMarkdownRemark.edges.filter(({ node }) => {
     const tags = node.frontmatter.hashtags || [];
@@ -35,8 +38,9 @@ const PostPage = ({ data }) => {
       />
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <HeadingGroup title={currentPost.frontmatter.title} component="h1" />
-        {/* eslint-disable-next-line react/no-danger */}
-        <div dangerouslySetInnerHTML={{ __html: currentPost.html }} />
+        <MDXProvider>
+          <MDXRenderer>{currentPost.body}</MDXRenderer>
+        </MDXProvider>
         {hasSimilarPosts
           && relevantTags.map(({ node }, index) => {
             const { frontmatter: { title }, fields: { slug } } = node;
@@ -68,9 +72,10 @@ PostPage.propTypes = {
         })
       )
     }),
-    markdownRemark: T.shape({
+    mdx: T.shape({
       frontmatter: T.shape(),
-      html: T.string
+      body: T.string,
+      slug: T.string.isRequired
     }).isRequired,
   }).isRequired,
 };
@@ -79,14 +84,16 @@ export default PostPage;
 
 export const query = graphql`
   query($slug: String!) {
-      markdownRemark(fields: {slug: {eq: $slug } }) {
-        html
-        frontmatter {
-          title
-          hashtags
-        }
+    mdx(slug: {eq: $slug}) {
+      slug
+      frontmatter {
+        slug
+        hashtags
+        title
       }
-      allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
+      body
+    }
+    allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
       edges {
         node {
           id

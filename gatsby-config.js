@@ -45,6 +45,16 @@ module.exports = {
       resolve: 'gatsby-plugin-mdx',
       options: {
         extensions: ['.mdx', '.md'],
+        root: __dirname,
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 500,
+              linkImagesToOriginal: false,
+            },
+          },
+        ],
       },
     },
     'gatsby-plugin-react-helmet',
