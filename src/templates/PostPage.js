@@ -7,9 +7,15 @@ import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import Link from '../components/Link';
+import CodeBlock from '../components/CodeBlock';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import HeadingGroup from '../components/HeadingGroup';
+
+const components = {
+  pre: CodeBlock,
+  code: CodeBlock
+};
 
 const PostPage = ({ data }) => {
   const currentPost = data.mdx;
@@ -38,7 +44,7 @@ const PostPage = ({ data }) => {
       />
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <HeadingGroup title={currentPost.frontmatter.title} component="h1" />
-        <MDXProvider>
+        <MDXProvider components={components}>
           <MDXRenderer>{currentPost.body}</MDXRenderer>
         </MDXProvider>
         {hasSimilarPosts
