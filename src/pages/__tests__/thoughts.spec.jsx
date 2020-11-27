@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { render } from '@testing-library/react';
 
@@ -13,12 +14,13 @@ jest.mock('../../components/seo', () => () => 'SEO');
 const renderWith = (overrides) => {
   const props = {
     data: {
-      allMarkdownRemark: {
+      allMdx: {
         edges: [
           {
             node: {
               frontmatter: {
-                title: 'The title'
+                title: 'The title',
+                hashtags: ['One']
               },
               fields: {
                 slug: '/the-path'
@@ -82,6 +84,7 @@ describe('Thoughts', () => {
           node: {
             frontmatter: {
               title: "I don't get rendered",
+              hashtags: ['One']
             },
             html: 'something about an excerpt',
             fields: {
@@ -93,6 +96,7 @@ describe('Thoughts', () => {
           node: {
             frontmatter: {
               title: 'I get rendered',
+              hashtags: ['One']
             },
             html: 'something about an excerpt',
             fields: {
@@ -119,11 +123,11 @@ describe('Thoughts', () => {
     const relatedPosts = {
       group: [
         {
-          tag: 'OMG',
+          tag: 'Some tag that does not match',
           totalCount: 1
         },
         {
-          tag: 'GMO',
+          tag: 'One',
           totalCount: 4
         }
       ],
