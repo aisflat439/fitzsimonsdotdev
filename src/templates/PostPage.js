@@ -5,8 +5,8 @@ import Box from '@material-ui/core/Box';
 
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import Link from '../components/Link';
 
+import Link from '../components/Link';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import HeadingGroup from '../components/HeadingGroup';
