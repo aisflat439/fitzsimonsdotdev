@@ -4,6 +4,7 @@ updated: "2020-03-12"
 title: "Always check responsive sizing"
 slug: "/always-check-responsive-sizing"
 hashtags: ["tips", "images", "responsive", "agencies"]
+description: ""
 ---
 
 # Evaluate all your plugins
