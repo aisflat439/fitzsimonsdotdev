@@ -7,9 +7,13 @@ hashtags: ["tutorial", "testing", "react", "gatsby"]
 description: "Take a plain gatsby site and add react testing library to it."
 ---
 
+import ExternalLink from '../../components/ExternalLink'
+
 ## Goal
 
 Take a plain gatsby site and add react testing library to it.
+
+<ExternalLink site='https://github.com/aisflat439/reactTestingGatsby' title='Just take me to the repo' />
 
 ## Prerequisites
 

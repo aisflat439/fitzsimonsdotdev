@@ -8,6 +8,7 @@ const StyledHeader = styled.header`
   background: linear-gradient(to right, ${({ theme }) => theme.palette.main.base} 50%, ${({ theme }) => theme.palette.main.saturated} );
   border-bottom: 5px solid #d1ad70;
   border-top: 5px solid #d1ad70;
+  text-align: center;
   
    div {
     margin: 0 auto;
