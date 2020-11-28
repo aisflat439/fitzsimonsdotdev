@@ -31,10 +31,6 @@ const Header = ({ siteTitle }) => (
     <StyledHeader>
       <HeaderLinks siteTitle={siteTitle} />
     </StyledHeader>
-    <div style={{ marginTop: '1rem', backgroundColor: '#d1ad70', padding: '.25rem 1.5rem' }}>
-      <h3 style={{ maxWidth: '1440px', margin: 'auto' }}>This site is under construction</h3>
-      <p style={{ maxWidth: '1440px', margin: 'auto' }}>For heaps of reasons I decided to move from MUI to styled-components and remark to MDX. This will be more fun for me personally, which is my primary motivation. I'm also sort of curious about trying out an Art Deco inspired aesthetic, which is what you should see a subtle smattering of thus far. While I'm making this switch please pardon the appearance of the blog. Come back in like a month if you wanna see how it turns out.</p>
-    </div>
   </>
 );
 
