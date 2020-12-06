@@ -14,7 +14,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Tips" keywords={keywords} />
-      <h1>Ecommerce from a developers perspective</h1>
+      <h1>Ecommerce and development tips from a developers perspective</h1>
       <main>
         <h2>Most Recent Tip</h2>
         <PostSnippet title={title} content={body} slug={slug} timeToRead={timeToRead} />
@@ -22,7 +22,7 @@ const IndexPage = ({ data }) => {
       <aside>
         <h2>Tips Listing</h2>
         <ul>
-          <li>List of tips here</li>
+          <li>List of tips goes here once I get around to making a tips list!</li>
         </ul>
       </aside>
     </Layout>

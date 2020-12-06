@@ -104,7 +104,7 @@ function SEO({
         {`
 {
   "@context": "https://schema.org/",
-  "@type": "Person",
+  ${schema.includes('Article') ? '' : '"@type": "Person",'}
   "name": "Devin Fitzsimons",
   "givenName": "Devin Fitzsimons",
   "alternateName": "aisflat439",
