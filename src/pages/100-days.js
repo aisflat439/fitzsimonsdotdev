@@ -4,7 +4,7 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import PostSnippet from '../components/PostSnippet';
 
-const NotFoundPage = ({ data }) => {
+const OneHundredDaysPage = ({ data }) => {
   const { title: postTitle, hashtags } = data.allMdx.edges[0].node.frontmatter;
   const { body, fields, timeToRead } = data.allMdx.edges[0].node;
   const { slug: postSlug } = fields;
@@ -39,4 +39,4 @@ export const query = graphql`
   }
 `;
 
-export default NotFoundPage;
+export default OneHundredDaysPage;
