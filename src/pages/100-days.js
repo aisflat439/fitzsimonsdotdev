@@ -1,11 +1,12 @@
 import React from 'react';
+import T from 'prop-types';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import PostSnippet from '../components/PostSnippet';
 
 const OneHundredDaysPage = ({ data }) => {
-  const { title: postTitle, hashtags } = data.allMdx.edges[0].node.frontmatter;
+  const { title: postTitle } = data.allMdx.edges[0].node.frontmatter;
   const { body, fields, timeToRead } = data.allMdx.edges[0].node;
   const { slug: postSlug } = fields;
 
@@ -40,3 +41,7 @@ export const query = graphql`
 `;
 
 export default OneHundredDaysPage;
+
+OneHundredDaysPage.propTypes = {
+  data: T.shape().isRequired
+};
