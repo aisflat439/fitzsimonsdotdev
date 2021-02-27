@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import T from 'prop-types';
-import Box from '@material-ui/core/Box';
 
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
@@ -20,7 +19,7 @@ const components = {
 const PostPage = ({ data }) => {
   const currentPost = data.mdx;
   const {
-    date, updated, title, description
+    date, updated, title: postTitle, description
   } = currentPost.frontmatter;
   const matchingTags = currentPost.frontmatter.hashtags || [];
   const relevantTags = data.allMarkdownRemark.edges.filter(({ node }) => {
@@ -30,7 +29,7 @@ const PostPage = ({ data }) => {
     return !!intersections.length && node;
   });
 
-  const schema = `"@type": "Article","headline": "${title}","description": "${description}","articleSection": "${matchingTags.toString()}","datePublished": "${date}T08:08:40+00:00","dateModified": "${updated}T08:43:03+00:00",`;
+  const schema = `"@type": "Article","headline": "${postTitle}","description": "${description}","articleSection": "${matchingTags.toString()}","datePublished": "${date}T08:08:40+00:00","dateModified": "${updated}T08:43:03+00:00",`;
   const hasSimilarPosts = !!relevantTags.length;
 
   return (
@@ -59,12 +58,12 @@ const PostPage = ({ data }) => {
 
             if (title === currentPost.frontmatter.title) return null;
             return (
-              <Box key={slug}>
+              <div key={slug}>
                 {index === 0 && <HeadingGroup title="Similar Posts" />}
-                <Box data-testid={`${slug}`}>
+                <div data-testid={`${slug}`}>
                   <Link to={slug}>{title}</Link>
-                </Box>
-              </Box>
+                </div>
+              </div>
             );
           })}
       </div>

@@ -1,15 +1,20 @@
 import React from 'react';
-import { graphql } from 'gatsby';
 import T from 'prop-types';
-
-import Grid from '@material-ui/core/Grid';
+import { graphql, Link } from 'gatsby';
+import styled from 'styled-components';
 
 import Layout from '../components/layout';
 import PostSnippet from '../components/PostSnippet';
 import SEO from '../components/seo';
-import Link from '../components/Link';
 import Tag from '../components/Tag';
 import HeadingGroup from '../components/HeadingGroup';
+
+const Grid = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
 
 const ThoughtsPage = ({ data }) => {
   const keywords = data.allMdx.group.map((keyword) => keyword.tag);
@@ -27,15 +32,15 @@ const ThoughtsPage = ({ data }) => {
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <div>
           <HeadingGroup title="Related Posts" />
-          <Grid container spacing={3}>
+          <Grid>
             {data.allMdx.group.map(({ tag, totalCount }) => {
               if (!hashtags.includes(tag)) {
                 return null;
               }
               return (
-                <Grid key={`${tag}-${totalCount}`} item xs={6} sm={3} md={2} data-testid="tags">
+                <div key={`${tag}-${totalCount}`} data-testid="tags">
                   <Tag title={tag} count={totalCount} />
-                </Grid>
+                </div>
               );
             })}
           </Grid>

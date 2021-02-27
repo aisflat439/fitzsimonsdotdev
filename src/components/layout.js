@@ -21,10 +21,13 @@ import Header from './header';
 import Footer from './footer';
 
 const StyledPage = styled.div`
+  background-color: ${(props) => props.theme.palette.alternate.lowlight};
+`;
+
+const StyledContent = styled.div`
   max-width: 1440px;
   margin: 1rem auto;
   padding: 1rem;
-  background-color: ${(props) => props.theme.palette.alternate.lowlight};
 `;
 
 const Layout = ({ children }) => {
@@ -51,15 +54,19 @@ const Layout = ({ children }) => {
       render={({ site }) => (
         <>
           <ThemeProvider theme={theme}>
-            <MUITheme theme={customTheme}>
-              <GlobalStyle />
-              {/* CssBaseline kickstart an elegant, consistent, 
+            <GlobalStyle />
+            <StyledPage>
+              <MUITheme theme={customTheme}>
+                {/* CssBaseline kickstart an elegant, consistent, 
               and simple baseline to build upon. */}
-              <CssBaseline />
-              <Header siteTitle={site.siteMetadata.title} />
-              <StyledPage>{children}</StyledPage>
-              <Footer />
-            </MUITheme>
+                <CssBaseline />
+                <Header siteTitle={site.siteMetadata.title} />
+                <StyledContent>
+                  {children}
+                </StyledContent>
+                <Footer />
+              </MUITheme>
+            </StyledPage>
           </ThemeProvider>
         </>
       )}

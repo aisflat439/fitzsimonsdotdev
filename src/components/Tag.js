@@ -10,10 +10,14 @@ const TagContainer = styled.div`
   background: linear-gradient(to bottom, ${({ theme }) => theme.palette.alternate.base} 0 4px, ${({ theme }) => theme.palette.main.saturated} 4px);
   height: 70px;
   position: relative;
-  margin: 1rem;
+  margin: 1rem 2rem;
   text-transform: capitalize;
   border-bottom: 4px solid ${({ theme }) => theme.palette.alternate.base};
   box-shadow: 14px 5px 8px 0px rgba(2, 6, 80, .3);
+
+  &:hover {
+    opacity: .9;
+  }
 
   a {
     height: 70px;

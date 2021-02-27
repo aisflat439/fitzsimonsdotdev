@@ -1,7 +1,6 @@
 import React from 'react';
 import T from 'prop-types';
 import styled from 'styled-components';
-import Typography from '@material-ui/core/Typography';
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
@@ -26,21 +25,19 @@ const StyledPost = styled.div`
 const PostSnippet = ({
   title, timeToRead, slug, content
 }) => (
-    <>
-      <SEO canonical={`https://www.fitzsimons.dev${slug}`} title={title} />
-      <article>
-        <HeadingGroup component="h1" title={title} />
-        <Typography>
-          {`~${timeToRead} read time`}
-        </Typography>
-        <StyledPost>
-          <MDXProvider components={components}>
-            <MDXRenderer>{content}</MDXRenderer>
-          </MDXProvider>
-        </StyledPost>
-      </article>
-    </>
-  );
+  <>
+    <SEO canonical={`https://www.fitzsimons.dev${slug}`} title={title} />
+    <article>
+      <HeadingGroup component="h1" title={title} />
+      {`Read time estimate: ${timeToRead} minutes`}
+      <StyledPost>
+        <MDXProvider components={components}>
+          <MDXRenderer>{content}</MDXRenderer>
+        </MDXProvider>
+      </StyledPost>
+    </article>
+  </>
+);
 
 PostSnippet.propTypes = {
   title: T.string.isRequired,

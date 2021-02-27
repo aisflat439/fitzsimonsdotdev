@@ -6,7 +6,6 @@ import { ThemeProvider } from 'styled-components';
 import ThoughtsPage from '../thoughts';
 import theme from '../../theme';
 
-jest.mock('@material-ui/core/Link', () => ({ children }) => <div>{children}</div>);
 jest.mock('../../components/PostSnippet', () => () => <div data-testid="TEST-PostSnippet">PostSnippet</div>);
 jest.mock('../../components/layout', () => ({ children }) => <div>{children}</div>);
 jest.mock('../../components/seo', () => () => 'SEO');
