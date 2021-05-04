@@ -71,7 +71,7 @@ const TagContainer = styled.div`
 `;
 
 const Tag = ({ title, count }) => {
-  const linkLocation = title.replace(' ', '-').toLowerCase();
+  const linkLocation = title.replace(/\s+/g, '-').toLowerCase();
 
   return (
     <TagContainer>
