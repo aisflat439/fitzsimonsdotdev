@@ -8,10 +8,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
-import { useSelector } from 'react-redux';
 
 import styled, { ThemeProvider } from 'styled-components';
-import { createMuiTheme, ThemeProvider as MUITheme } from '@material-ui/core/styles';
+import {
+  createMuiTheme,
+  ThemeProvider as MUITheme,
+} from '@material-ui/core/styles';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import GlobalStyle from '../globalStyles';
@@ -32,25 +34,27 @@ const StyledContent = styled.div`
 
 const Layout = ({ children }) => {
   let prefersDarkMode = false;
-  const hasSelectedPreference = useSelector((state) => state.userPreferences.lightmode);
+  const hasSelectedPreference = undefined;
   if (hasSelectedPreference !== undefined) {
     prefersDarkMode = hasSelectedPreference;
   }
 
   theme.palette.type = prefersDarkMode ? 'dark' : 'light';
-  const customTheme = React.useMemo(() => createMuiTheme(theme), [prefersDarkMode]);
+  const customTheme = React.useMemo(() => createMuiTheme(theme), [
+    prefersDarkMode,
+  ]);
 
   return (
     <StaticQuery
       query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
+        query SiteTitleQuery {
+          site {
+            siteMetadata {
+              title
+            }
           }
         }
-      }
-    `}
+      `}
       render={({ site }) => (
         <>
           <ThemeProvider theme={theme}>
@@ -61,9 +65,7 @@ const Layout = ({ children }) => {
               and simple baseline to build upon. */}
                 <CssBaseline />
                 <Header siteTitle={site.siteMetadata.title} />
-                <StyledContent>
-                  {children}
-                </StyledContent>
+                <StyledContent>{children}</StyledContent>
                 <Footer />
               </MUITheme>
             </StyledPage>

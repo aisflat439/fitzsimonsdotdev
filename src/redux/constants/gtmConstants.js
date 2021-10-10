@@ -1,1 +1,0 @@
-export const EVENT_TRACK = 'event_track'
