@@ -1,7 +1,9 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable max-len */
 import React from 'react';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { lighten, saturate } from 'polished';
 
 import HomePageCardContent from '../components/HomePageCardContent';
 import SEO from '../components/seo';
@@ -26,18 +28,11 @@ const HeaderWordHighlight = styled.span`
 `;
 
 const CardLayout = styled.div`
-  background-color: ${({ theme }) => theme.palette.alternate.base};
+  margin: auto;
+  max-width: 80vw;
 `;
-const Container = styled.div`
-  display: flex;
-  padding: 0.5rem;
-  flex-wrap: wrap;
-`;
-const GridItem = styled.div`
-  display: block;
-  margin: 0.5rem;
-  width: 45%;
-`;
+const Container = styled.div``;
+
 const CardActions = styled.div`
   display: flex;
 `;
@@ -153,12 +148,12 @@ const IndexPage = () => (
           <CardLayout>
             <HomePageCardContent
               avatar="tips"
-              title="Ecommerce tips from a developer"
-              subheader="Straightforward choices a site can make to delight it's customers"
+              title="Tips from a developer"
+              subheader="Who knows what the difference between a tip and thought is, it could be anything."
               content="Development is difficult work that requires focus, understanding and great attention to detail. An ecommerce site is easy to get started but extremely challenging to grow. While there are ample resources for shop owners to get started there are very few that communicate what a shop owner can do to get the most out of their site from a developers perspective."
             />
             <CardActions>
-              <Button component={Link} color="secondary" to="/tips">
+              <Button component={Link} to="/tips">
                 Most recent tip
               </Button>
               <Link to="/tips">all tips</Link>
@@ -166,7 +161,7 @@ const IndexPage = () => (
           </CardLayout>
         </GridItem>
 
-        <GridItem>
+        <GridItem main>
           <CardLayout>
             <HomePageCardContent
               avatar="reviews"
@@ -175,14 +170,14 @@ const IndexPage = () => (
               content="I do brief site reviews from time to time and post them on the internet. If you'd like me to review your site let me know!"
             />
             <CardActions>
-              <Button component={Link} color="secondary" to="/site-reviews">
+              <Button component={Link} to="/site-reviews">
                 Reviews
               </Button>
             </CardActions>
           </CardLayout>
         </GridItem>
 
-        <GridItem>
+        <GridItem highlight>
           <CardLayout>
             <HomePageCardContent
               avatar="Thoughts"
@@ -205,7 +200,7 @@ const IndexPage = () => (
               content="I have several tools to help you have more productive hours. None are publicy for sale today and all are in various stages of development. If you have a problem or would like information, sign up on the list!"
             />
             <CardActions>
-              <Button component={Link} color="secondary" to="/products">
+              <Button component={Link} to="/products">
                 Learn about andybuilt
               </Button>
             </CardActions>
@@ -217,3 +212,76 @@ const IndexPage = () => (
 );
 
 export default IndexPage;
+
+const GridItem = styled.div`
+  margin: 2rem auto;
+  padding: 1.5rem 0 1.5rem;
+  border-width: 5px;
+  border-style: solid;
+  border-right: none;
+  border-left: none;
+  border-color: ${({ theme }) => theme.palette.highlight.base};
+  background: linear-gradient(
+    to right,
+    ${({ theme }) => saturate(0.2, lighten(0.1, theme.palette.alternate.base))}
+      4%,
+    ${({ theme }) => saturate(0.1, lighten(0.1, theme.palette.alternate.base))}
+      12%,
+    ${({ theme }) => lighten(0.08, theme.palette.alternate.base)} 24%,
+    ${({ theme }) => lighten(0.06, theme.palette.alternate.base)} 36%,
+    ${({ theme }) => lighten(0.04, theme.palette.alternate.base)} 48%,
+    ${({ theme }) => theme.palette.alternate.base}
+  );
+
+  ${(props) =>
+    props.main &&
+    css`
+      border-color: ${({ theme }) => theme.palette.alternate.base};
+      background: linear-gradient(
+        to right,
+        ${({ theme }) => saturate(0.2, lighten(0.1, theme.palette.main.base))}
+          4%,
+        ${({ theme }) => saturate(0.1, lighten(0.1, theme.palette.main.base))}
+          12%,
+        ${({ theme }) => lighten(0.08, theme.palette.main.base)} 24%,
+        ${({ theme }) => lighten(0.06, theme.palette.main.base)} 36%,
+        ${({ theme }) => lighten(0.04, theme.palette.main.base)} 48%,
+        ${({ theme }) => theme.palette.main.base}
+      );
+    `}
+
+  ${(props) =>
+    props.highlight &&
+    css`
+      border-color: ${({ theme }) => theme.palette.main.saturated};
+      background: linear-gradient(
+        to right,
+        ${({ theme }) =>
+            saturate(0.2, lighten(0.1, theme.palette.highlight.base))}
+          4%,
+        ${({ theme }) =>
+            saturate(0.1, lighten(0.1, theme.palette.highlight.base))}
+          12%,
+        ${({ theme }) => lighten(0.08, theme.palette.highlight.base)} 24%,
+        ${({ theme }) => lighten(0.06, theme.palette.highlight.base)} 36%,
+        ${({ theme }) => lighten(0.04, theme.palette.highlight.base)} 48%,
+        ${({ theme }) => theme.palette.highlight.base}
+      );
+    `}
+
+  .avatar {
+    margin-top: -1.5rem;
+    margin-bottom: 2rem;
+    font-size: 24px;
+
+    span {
+      border: 5px solid ${({ theme }) => theme.palette.main.saturated};
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 25px;
+      min-height: 25px;
+      background-color: red;
+    }
+  }
+`;

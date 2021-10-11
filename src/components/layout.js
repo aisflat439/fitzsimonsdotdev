@@ -8,6 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
+import { Normalize } from 'styled-normalize';
 
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -22,9 +23,7 @@ const StyledPage = styled.div`
 `;
 
 const StyledContent = styled.div`
-  max-width: 1440px;
-  margin: 1rem auto;
-  padding: 1rem;
+  margin: 2rem auto;
 `;
 
 const Layout = ({ children }) => {
@@ -50,10 +49,11 @@ const Layout = ({ children }) => {
       render={({ site }) => (
         <>
           <ThemeProvider theme={theme}>
+            <Normalize />
             <GlobalStyle />
             <StyledPage>
               <div>
-                <h3>
+                <h3 style={{ textAlign: 'center' }}>
                   Hopefully this is obvious but I'm doing a redesign, more just
                   a tidying up, but whatever. Sorry for the appearance
                 </h3>
