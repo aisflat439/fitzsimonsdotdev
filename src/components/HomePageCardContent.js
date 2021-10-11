@@ -3,8 +3,10 @@ import React from 'react';
 const HomePageCardContent = ({ avatar, title, subheader, content }) => (
   <>
     <div>
-      <div>
-        <span>{avatar}</span>
+      <div className="avatar">
+        {avatar.split('').map((letter) => (
+          <span>{letter}</span>
+        ))}
       </div>
       <h2>{title}</h2>
       <p>{subheader}</p>

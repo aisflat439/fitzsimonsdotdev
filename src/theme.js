@@ -47,20 +47,6 @@ const theme = {
       main: '#e0f7fa',
     },
   },
-  overrides: {
-    MuiLink: {
-      root: {
-        '&:hover': {
-          opacity: '.75',
-        },
-      },
-    },
-    MuiPaper: {
-      elevation4: {
-        boxShadow: 'none',
-      },
-    },
-  },
   typography,
 };
 
