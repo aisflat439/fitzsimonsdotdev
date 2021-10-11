@@ -1,9 +1,9 @@
 import React from 'react';
-import MuiLink from '@material-ui/core/Link';
+import styled from 'styled-components';
 import { Link as GatsbyLink } from 'gatsby';
 
-const Link = React.forwardRef(function Link(props, ref) {
-    return <MuiLink underline="none" component={GatsbyLink} ref={ref} {...props} />;
-});
+const Link = styled((props) => <GatsbyLink {...props} />)`
+  text-decoration: none;
+`;
 
 export default Link;

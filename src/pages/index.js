@@ -3,40 +3,57 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import Grid from '@material-ui/core/Grid';
 import HomePageCardContent from '../components/HomePageCardContent';
-import ContactMeDialog from '../components/ContactMeDialog';
 import SEO from '../components/seo';
 import Link from '../components/Link';
 import Layout from '../components/layout';
 
+const Button = styled.button`
+  background-color: ${({ theme }) => theme.palette.alternate.base};
+`;
+
 const HeaderWordHighlight = styled.span`
   display: block;
   text-align: center;
-  background: linear-gradient(to top, 
-    transparent 0% 40%, 
-    ${({ theme }) => theme.palette.main.saturated} 40% 45%, 
-    transparent 45% 55%, 
-    ${({ theme }) => theme.palette.main.saturated} 55% 60%, 
-    transparent 60%)
+  background: linear-gradient(
+    to top,
+    transparent 0% 40%,
+    ${({ theme }) => theme.palette.main.saturated} 40% 45%,
+    transparent 45% 55%,
+    ${({ theme }) => theme.palette.main.saturated} 55% 60%,
+    transparent 60%
+  );
+`;
+
+const CardLayout = styled.div`
+  background-color: ${({ theme }) => theme.palette.alternate.base};
+`;
+const Container = styled.div`
+  display: flex;
+  padding: 0.5rem;
+  flex-wrap: wrap;
+`;
+const GridItem = styled.div`
+  display: block;
+  margin: 0.5rem;
+  width: 45%;
+`;
+const CardActions = styled.div`
+  display: flex;
 `;
 
 const InfoBox = styled.div`
   background-color: ${({ theme }) => theme.palette.alternate.base};
   flex: 2;
   display: flex;
-  padding: .5rem;
+  padding: 0.5rem;
 
   > div {
     display: flex;
-    padding: .5rem;
+    padding: 0.5rem;
     flex: 1;
     background-color: ${({ theme }) => theme.palette.highlight.base};
-    
+
     > div {
       display: flex;
       justify-content: center;
@@ -45,7 +62,7 @@ const InfoBox = styled.div`
       font-size: 1.125rem;
       line-height: 125%;
       color: ${({ theme }) => theme.palette.main.saturated};
-      padding: .5rem;
+      padding: 0.5rem;
       flex: 1;
       background-color: ${({ theme }) => theme.palette.alternate.base};
     }
@@ -78,20 +95,26 @@ const IndexPage = () => (
     />
     <main>
       <h1 style={{ textAlign: 'center' }}>
-        <HeaderWordHighlight><HeaderWord>eCommerce</HeaderWord></HeaderWordHighlight>
-        {' '}
+        <HeaderWordHighlight>
+          <HeaderWord>eCommerce</HeaderWord>
+        </HeaderWordHighlight>
         design and development tips, reviews, opinions and
-        {' '}
-        <HeaderWordHighlight><HeaderWord>ideas</HeaderWord></HeaderWordHighlight>
+        <HeaderWordHighlight>
+          <HeaderWord>ideas</HeaderWord>
+        </HeaderWordHighlight>
       </h1>
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 5 }}>
           <StartParagraph>
-            Hello! The goal of this site is to be a useful place to keep my general thoughts about web development on the internet. This is not a professional blog. I don't really know anything about blogging. Think of this more as a location for me to keep the useful information I have, perhaps let people know about the things that I make, and experiment with discussing the things about web development.
+            Hello! The goal of this site is to be a useful place to keep my
+            general thoughts about web development on the internet. This is not
+            a professional blog. I don't really know anything about blogging.
+            Think of this more as a location for me to keep the useful
+            information I have, perhaps let people know about the things that I
+            make, and experiment with discussing the things about web
+            development.
           </StartParagraph>
-          <p>
-            Things you can expect to find here relate to:
-          </p>
+          <p>Things you can expect to find here relate to:</p>
           <ul>
             <li>ecommerce</li>
             <li>agencies</li>
@@ -100,33 +123,34 @@ const IndexPage = () => (
             <li>projects and things I've made</li>
             <li>rants and raves about websites</li>
           </ul>
-          <p>
-            Things you wont find:
-          </p>
+          <p>Things you wont find:</p>
           <ul>
             <li>news related stuff</li>
             <li>stuff about how I feel</li>
-            <li>regular updates, expect more when I have time and something to say</li>
+            <li>
+              regular updates, expect more when I have time and something to say
+            </li>
           </ul>
           <p>
-            I'll do my best to keep this useful, or at least useful adjacent. Thanks for coming by!
+            I'll do my best to keep this useful, or at least useful adjacent.
+            Thanks for coming by!
           </p>
         </div>
         <InfoBox>
           <div>
             <div>
-              If I was any good at marketing, I'd put some content in here and people would sign up for something and I'd turn that into money somehow.
+              If I was any good at marketing, I'd put some content in here and
+              people would sign up for something and I'd turn that into money
+              somehow.
             </div>
           </div>
         </InfoBox>
       </div>
     </main>
-    <Box component="main">
-
-      <Grid container spacing={2}>
-
-        <Grid item md={6}>
-          <Box component={Card} height="100%">
+    <main>
+      <Container>
+        <GridItem>
+          <CardLayout>
             <HomePageCardContent
               avatar="tips"
               title="Ecommerce tips from a developer"
@@ -134,14 +158,16 @@ const IndexPage = () => (
               content="Development is difficult work that requires focus, understanding and great attention to detail. An ecommerce site is easy to get started but extremely challenging to grow. While there are ample resources for shop owners to get started there are very few that communicate what a shop owner can do to get the most out of their site from a developers perspective."
             />
             <CardActions>
-              <Button component={Link} color="secondary" to="/tips">Most recent tip</Button>
+              <Button component={Link} color="secondary" to="/tips">
+                Most recent tip
+              </Button>
               <Link to="/tips">all tips</Link>
             </CardActions>
-          </Box>
-        </Grid>
+          </CardLayout>
+        </GridItem>
 
-        <Grid item md={6}>
-          <Box component={Card} height="100%">
+        <GridItem>
+          <CardLayout>
             <HomePageCardContent
               avatar="reviews"
               title="Site Reviews"
@@ -149,14 +175,15 @@ const IndexPage = () => (
               content="I do brief site reviews from time to time and post them on the internet. If you'd like me to review your site let me know!"
             />
             <CardActions>
-              <Button component={Link} color="secondary" to="/site-reviews">Reviews</Button>
-              <ContactMeDialog title="Request a review" form="contact" />
+              <Button component={Link} color="secondary" to="/site-reviews">
+                Reviews
+              </Button>
             </CardActions>
-          </Box>
-        </Grid>
+          </CardLayout>
+        </GridItem>
 
-        <Grid item md={6}>
-          <Box component={Card} height="100%">
+        <GridItem>
+          <CardLayout>
             <HomePageCardContent
               avatar="Thoughts"
               title="General Ecommerce Thoughts"
@@ -166,11 +193,11 @@ const IndexPage = () => (
             <CardActions>
               <Link to="/thoughts">Thoughts</Link>
             </CardActions>
-          </Box>
-        </Grid>
+          </CardLayout>
+        </GridItem>
 
-        <Grid item md={6}>
-          <Box component={Card} height="100%">
+        <GridItem>
+          <CardLayout>
             <HomePageCardContent
               avatar="Products and Tools"
               title="Products and Tools"
@@ -178,14 +205,14 @@ const IndexPage = () => (
               content="I have several tools to help you have more productive hours. None are publicy for sale today and all are in various stages of development. If you have a problem or would like information, sign up on the list!"
             />
             <CardActions>
-              <Button component={Link} color="secondary" to="/products">Learn about andybuilt</Button>
-              <ContactMeDialog title="Get on the list" form="newsletter" />
+              <Button component={Link} color="secondary" to="/products">
+                Learn about andybuilt
+              </Button>
             </CardActions>
-          </Box>
-        </Grid>
-
-      </Grid>
-    </Box>
+          </CardLayout>
+        </GridItem>
+      </Container>
+    </main>
   </Layout>
 );
 

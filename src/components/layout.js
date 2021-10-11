@@ -10,12 +10,7 @@ import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 
 import styled, { ThemeProvider } from 'styled-components';
-import {
-  createMuiTheme,
-  ThemeProvider as MUITheme,
-} from '@material-ui/core/styles';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
 import GlobalStyle from '../globalStyles';
 
 import theme from '../theme';
@@ -40,9 +35,6 @@ const Layout = ({ children }) => {
   }
 
   theme.palette.type = prefersDarkMode ? 'dark' : 'light';
-  const customTheme = React.useMemo(() => createMuiTheme(theme), [
-    prefersDarkMode,
-  ]);
 
   return (
     <StaticQuery
@@ -60,14 +52,15 @@ const Layout = ({ children }) => {
           <ThemeProvider theme={theme}>
             <GlobalStyle />
             <StyledPage>
-              <MUITheme theme={customTheme}>
-                {/* CssBaseline kickstart an elegant, consistent, 
-              and simple baseline to build upon. */}
-                <CssBaseline />
-                <Header siteTitle={site.siteMetadata.title} />
-                <StyledContent>{children}</StyledContent>
-                <Footer />
-              </MUITheme>
+              <div>
+                <h3>
+                  Hopefully this is obvious but I'm doing a redesign, more just
+                  a tidying up, but whatever. Sorry for the appearance
+                </h3>
+              </div>
+              <Header siteTitle={site.siteMetadata.title} />
+              <StyledContent>{children}</StyledContent>
+              <Footer />
             </StyledPage>
           </ThemeProvider>
         </>

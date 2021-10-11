@@ -39,9 +39,6 @@ module.exports = {
     'gatsby-plugin-styled-components',
     'gatsby-plugin-top-layout',
     {
-      resolve: 'gatsby-plugin-material-ui',
-    },
-    {
       resolve: 'gatsby-plugin-mdx',
       options: {
         extensions: ['.mdx', '.md'],
