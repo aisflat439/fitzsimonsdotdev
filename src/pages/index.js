@@ -164,7 +164,7 @@ const IndexPage = () => (
         <GridItem main>
           <CardLayout>
             <HomePageCardContent
-              avatar="reviews"
+              avatar="podcast"
               title="Site Reviews"
               subheader="Opportunities a developer sees when they look at your ecommerce site"
               content="I do brief site reviews from time to time and post them on the internet. If you'd like me to review your site let me know!"
@@ -180,7 +180,7 @@ const IndexPage = () => (
         <GridItem highlight>
           <CardLayout>
             <HomePageCardContent
-              avatar="Thoughts"
+              avatar="thoughts"
               title="General Ecommerce Thoughts"
               subheader="More broad thoughts around ecommerce and it's ecosystem"
               content="Whamboozles abound"
@@ -194,7 +194,7 @@ const IndexPage = () => (
         <GridItem>
           <CardLayout>
             <HomePageCardContent
-              avatar="Products and Tools"
+              avatar="products"
               title="Products and Tools"
               subheader="Check out the things I build"
               content="I have several tools to help you have more productive hours. None are publicy for sale today and all are in various stages of development. If you have a problem or would like information, sign up on the list!"
@@ -236,6 +236,7 @@ const GridItem = styled.div`
   ${(props) =>
     props.main &&
     css`
+      color: ${({ theme }) => theme.palette.main.lowlight};
       border-color: ${({ theme }) => theme.palette.alternate.base};
       background: linear-gradient(
         to right,
@@ -248,6 +249,10 @@ const GridItem = styled.div`
         ${({ theme }) => lighten(0.04, theme.palette.main.base)} 48%,
         ${({ theme }) => theme.palette.main.base}
       );
+
+      .avatar {
+        color: ${({ theme }) => theme.palette.main.base};
+      }
     `}
 
   ${(props) =>
@@ -270,18 +275,19 @@ const GridItem = styled.div`
     `}
 
   .avatar {
-    margin-top: -1.5rem;
+    margin-top: calc(-1.5rem + -5px);
     margin-bottom: 2rem;
     font-size: 24px;
 
     span {
+      margin: 0 8px;
       border: 5px solid ${({ theme }) => theme.palette.main.saturated};
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      min-width: 25px;
-      min-height: 25px;
-      background-color: red;
+      min-width: 50px;
+      min-height: 50px;
+      background-color: ${({ theme }) => theme.palette.alternate.lowlight};
     }
   }
 `;
