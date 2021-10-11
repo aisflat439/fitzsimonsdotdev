@@ -32,15 +32,12 @@ module.exports = {
         siteName: 'LinkedIn',
         siteLink: 'https://www.linkedin.com/in/fitzsimonsdevin/',
       },
-    ]
+    ],
   },
   plugins: [
     'gatsby-plugin-sitemap',
     'gatsby-plugin-styled-components',
     'gatsby-plugin-top-layout',
-    {
-      resolve: 'gatsby-plugin-material-ui',
-    },
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
@@ -96,11 +93,11 @@ module.exports = {
             options: {
               maxWidth: 500,
               linkImagesToOriginal: false,
-              showCaptions: true
-            }
+              showCaptions: true,
+            },
           },
-        ]
-      }
+        ],
+      },
     },
     'gatsby-plugin-netlify',
     {
@@ -148,26 +145,11 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-react-redux',
-      options: {
-        // [required] - path to your createStore module
-        pathToCreateStoreModule: './src/redux/createStore',
-        // [optional] - options passed to `serialize-javascript`
-        // info: https://github.com/yahoo/serialize-javascript#options
-        // will be merged with these defaults:
-        serialize: {
-          space: 0,
-          isJSON: true,
-          unsafe: false,
-        },
-      },
-    },
-    {
       resolve: 'gatsby-source-youtube-v2',
       options: {
         channelId: ['UC9PwbeLvbGiIxF_lFBvmN-A'],
         apiKey: process.env.YOUTUBE_API_KEY,
-        maxVideos: 50
+        maxVideos: 50,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

@@ -1,15 +1,10 @@
-import React from "react"
+import React from 'react';
 
-import { Helmet } from "react-helmet"
-import { Link, graphql } from "gatsby"
-import List from "@material-ui/core/List"
-import Typography from "@material-ui/core/Typography"
-import GridListTileBar from "@material-ui/core/GridListTileBar"
-import { Card, GridList, GridListTile, IconButton } from "@material-ui/core"
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Helmet } from 'react-helmet';
+import { Link, graphql } from 'gatsby';
 
-import Layout from '../components/layout'
-import { dashCase } from '../utils'
+import Layout from '../components/layout';
+import { dashCase } from '../utils';
 
 const TagsPage = ({
   data: {
@@ -19,32 +14,27 @@ const TagsPage = ({
     },
   },
 }) => (
-    <Layout>
-      <Helmet title={title} />
-      <div>
-        <Typography variant='h1'>Categories</Typography>
-        <List component="nav" aria-label="main category listing">
-          <GridList cols="4">
-            {group.map(tag => (
-              <GridListTile grid="item" component={Card} key={tag.fieldValue}>
-                <GridListTileBar
-                  title={<Link to={`/categories/${dashCase(tag.fieldValue)}/`}>
-                    {tag.fieldValue} ({tag.totalCount})
-                  </Link>}
-                  actionIcon={
-                    < IconButton >
-                      <ExpandMoreIcon />
-                    </IconButton>
-                  } />
-              </GridListTile>
-            ))}
-          </GridList>
-        </List>
-      </div>
-    </Layout>
-  )
+  <Layout>
+    <Helmet title={title} />
+    <div>
+      <h1>Categories</h1>
+      <nav aria-label="main category listing">
+        <ul cols="4">
+          {group.map(({ fieldValue, totalCount }) => (
+            <li key={fieldValue}>
+              <div />
+              <Link to={`/categories/${dashCase(fieldValue)}/`}>
+                {`${fieldValue} (${totalCount})`}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </Layout>
+);
 
-export default TagsPage
+export default TagsPage;
 
 export const pageQuery = graphql`
   query {
@@ -60,4 +50,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

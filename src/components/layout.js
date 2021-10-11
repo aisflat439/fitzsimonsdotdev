@@ -8,12 +8,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
-import { useSelector } from 'react-redux';
 
 import styled, { ThemeProvider } from 'styled-components';
-import { createMuiTheme, ThemeProvider as MUITheme } from '@material-ui/core/styles';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
 import GlobalStyle from '../globalStyles';
 
 import theme from '../theme';
@@ -32,40 +29,38 @@ const StyledContent = styled.div`
 
 const Layout = ({ children }) => {
   let prefersDarkMode = false;
-  const hasSelectedPreference = useSelector((state) => state.userPreferences.lightmode);
+  const hasSelectedPreference = undefined;
   if (hasSelectedPreference !== undefined) {
     prefersDarkMode = hasSelectedPreference;
   }
 
   theme.palette.type = prefersDarkMode ? 'dark' : 'light';
-  const customTheme = React.useMemo(() => createMuiTheme(theme), [prefersDarkMode]);
 
   return (
     <StaticQuery
       query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
+        query SiteTitleQuery {
+          site {
+            siteMetadata {
+              title
+            }
           }
         }
-      }
-    `}
+      `}
       render={({ site }) => (
         <>
           <ThemeProvider theme={theme}>
             <GlobalStyle />
             <StyledPage>
-              <MUITheme theme={customTheme}>
-                {/* CssBaseline kickstart an elegant, consistent, 
-              and simple baseline to build upon. */}
-                <CssBaseline />
-                <Header siteTitle={site.siteMetadata.title} />
-                <StyledContent>
-                  {children}
-                </StyledContent>
-                <Footer />
-              </MUITheme>
+              <div>
+                <h3>
+                  Hopefully this is obvious but I'm doing a redesign, more just
+                  a tidying up, but whatever. Sorry for the appearance
+                </h3>
+              </div>
+              <Header siteTitle={site.siteMetadata.title} />
+              <StyledContent>{children}</StyledContent>
+              <Footer />
             </StyledPage>
           </ThemeProvider>
         </>
