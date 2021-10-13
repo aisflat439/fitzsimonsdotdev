@@ -55,6 +55,7 @@ const Container = styled.div``;
 
 const CardActions = styled.div`
   display: flex;
+  margin-top: 2.5rem;
 `;
 
 const InfoBox = styled.div`
@@ -161,8 +162,6 @@ const IndexPage = () => (
           </div>
         </InfoBox>
       </div>
-    </main>
-    <main>
       <Container>
         <GridItem>
           <CardLayout>
@@ -170,12 +169,9 @@ const IndexPage = () => (
               avatar="tips"
               title="what one developer thinks"
               subheader="Who knows what the difference between a tip and thought is, it could be anything."
-              content="Development is difficult work that requires focus, understanding and great attention to detail. An ecommerce site is easy to get started but extremely challenging to grow. While there are ample resources for shop owners to get started there are very few that communicate what a shop owner can do to get the most out of their site from a developers perspective."
+              content="As I learn things, I trying to capture some tips that come up. I wouldn't really think of any of this as a well groomed, clear concept. More general ideas. I try to keep them reasonably grouped by tags. It may very well be that an idea that I have/had that I wrote as a tip is no longer how I see the world. These are more snapshots, in a moment in time, where I think there's something there."
             />
             <CardActions>
-              <Button component={Link} to="/tips">
-                Most recent tip
-              </Button>
               <Link to="/tips">all tips</Link>
             </CardActions>
           </CardLayout>
