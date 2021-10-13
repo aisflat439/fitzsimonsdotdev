@@ -112,41 +112,16 @@ const IndexPage = () => (
     <main>
       <h1 style={{ textAlign: 'center' }}>
         <HeaderWordHighlight>
-          <HeaderWord>eCommerce</HeaderWord>
-        </HeaderWordHighlight>
-        design and development tips, reviews, opinions and
-        <HeaderWordHighlight>
-          <HeaderWord>ideas</HeaderWord>
+          <HeaderWord>writings about things</HeaderWord>
         </HeaderWordHighlight>
       </h1>
-      <div style={{ display: 'flex', maxWidth: '1440px', margin: 'auto' }}>
+      <div style={{ display: 'flex', maxWidth: '1440px', margin: '3rem' }}>
         <div style={{ flex: 5 }}>
           <StartParagraph>
             Hello! The goal of this site is to be a useful place to keep my
             general thoughts about web development on the internet. This is not
             a professional blog. I don't really know anything about blogging.
-            Think of this more as a location for me to keep the useful
-            information I have, perhaps let people know about the things that I
-            make, and experiment with discussing the things about web
-            development.
           </StartParagraph>
-          <p>Things you can expect to find here relate to:</p>
-          <ul>
-            <li>ecommerce</li>
-            <li>agencies</li>
-            <li>Gatsby</li>
-            <li>working in public</li>
-            <li>projects and things I've made</li>
-            <li>rants and raves about websites</li>
-          </ul>
-          <p>Things you wont find:</p>
-          <ul>
-            <li>news related stuff</li>
-            <li>stuff about how I feel</li>
-            <li>
-              regular updates, expect more when I have time and something to say
-            </li>
-          </ul>
           <p>
             I'll do my best to keep this useful, or at least useful adjacent.
             Thanks for coming by!
