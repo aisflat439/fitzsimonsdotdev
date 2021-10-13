@@ -29,12 +29,33 @@ const HeaderWordHighlight = styled.span`
 
 const CardLayout = styled.div`
   margin: auto;
-  max-width: 80vw;
+  max-width: 1440px;
+  padding: 1rem;
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-top: 0;
+    line-height: 150%;
+    font-size: 1.55rem;
+  }
+
+  .subheader {
+    font-size: 1rem;
+  }
+
+  .content {
+    max-width: 75vw;
+  }
 `;
 const Container = styled.div``;
 
 const CardActions = styled.div`
   display: flex;
+  margin-top: 2.5rem;
 `;
 
 const InfoBox = styled.div`
@@ -91,41 +112,16 @@ const IndexPage = () => (
     <main>
       <h1 style={{ textAlign: 'center' }}>
         <HeaderWordHighlight>
-          <HeaderWord>eCommerce</HeaderWord>
-        </HeaderWordHighlight>
-        design and development tips, reviews, opinions and
-        <HeaderWordHighlight>
-          <HeaderWord>ideas</HeaderWord>
+          <HeaderWord>writings about things</HeaderWord>
         </HeaderWordHighlight>
       </h1>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', maxWidth: '1440px', margin: '3rem' }}>
         <div style={{ flex: 5 }}>
           <StartParagraph>
             Hello! The goal of this site is to be a useful place to keep my
             general thoughts about web development on the internet. This is not
             a professional blog. I don't really know anything about blogging.
-            Think of this more as a location for me to keep the useful
-            information I have, perhaps let people know about the things that I
-            make, and experiment with discussing the things about web
-            development.
           </StartParagraph>
-          <p>Things you can expect to find here relate to:</p>
-          <ul>
-            <li>ecommerce</li>
-            <li>agencies</li>
-            <li>Gatsby</li>
-            <li>working in public</li>
-            <li>projects and things I've made</li>
-            <li>rants and raves about websites</li>
-          </ul>
-          <p>Things you wont find:</p>
-          <ul>
-            <li>news related stuff</li>
-            <li>stuff about how I feel</li>
-            <li>
-              regular updates, expect more when I have time and something to say
-            </li>
-          </ul>
           <p>
             I'll do my best to keep this useful, or at least useful adjacent.
             Thanks for coming by!
@@ -141,21 +137,16 @@ const IndexPage = () => (
           </div>
         </InfoBox>
       </div>
-    </main>
-    <main>
       <Container>
         <GridItem>
           <CardLayout>
             <HomePageCardContent
               avatar="tips"
-              title="Tips from a developer"
+              title="what one developer thinks"
               subheader="Who knows what the difference between a tip and thought is, it could be anything."
-              content="Development is difficult work that requires focus, understanding and great attention to detail. An ecommerce site is easy to get started but extremely challenging to grow. While there are ample resources for shop owners to get started there are very few that communicate what a shop owner can do to get the most out of their site from a developers perspective."
+              content="As I learn things, I trying to capture some tips that come up. I wouldn't really think of any of this as a well groomed, clear concept. More general ideas. I try to keep them reasonably grouped by tags. It may very well be that an idea that I have/had that I wrote as a tip is no longer how I see the world. These are more snapshots, in a moment in time, where I think there's something there."
             />
             <CardActions>
-              <Button component={Link} to="/tips">
-                Most recent tip
-              </Button>
               <Link to="/tips">all tips</Link>
             </CardActions>
           </CardLayout>
@@ -165,14 +156,18 @@ const IndexPage = () => (
           <CardLayout>
             <HomePageCardContent
               avatar="podcast"
-              title="Site Reviews"
-              subheader="Opportunities a developer sees when they look at your ecommerce site"
-              content="I do brief site reviews from time to time and post them on the internet. If you'd like me to review your site let me know!"
+              title="The Process is Black and White"
+              subheader="Two friends do a public weekly check-in, as they journey from wantrepreneur to entrepreneur"
+              content="Vernon and I have been doing the podcast for over a year. Each week, we read a few chapters of a book, share our reflections and talk Philly Sports. We tend to ramble a bit and enjoy this time together. The conceit of the show, is that we can learn together, in public, and we'll be better people and businessmen in the end. We'd be thrilled if you checkout out an episode."
             />
             <CardActions>
-              <Button component={Link} to="/site-reviews">
-                Reviews
-              </Button>
+              <Link
+                to="https://theprocessisblackandwhite.com/"
+                rel="no-follow"
+                target="blank"
+              >
+                Listen to an episode
+              </Link>
             </CardActions>
           </CardLayout>
         </GridItem>
@@ -214,6 +209,7 @@ const IndexPage = () => (
 export default IndexPage;
 
 const GridItem = styled.div`
+  min-height: 60vh;
   margin: 2rem auto;
   padding: 1.5rem 0 1.5rem;
   border-width: 5px;
@@ -275,19 +271,46 @@ const GridItem = styled.div`
     `}
 
   .avatar {
-    margin-top: calc(-1.5rem + -5px);
+    margin-top: calc(-1.5rem + 16px);
     margin-bottom: 2rem;
     font-size: 24px;
 
-    span {
+    > span {
       margin: 0 8px;
-      border: 5px solid ${({ theme }) => theme.palette.main.saturated};
+      border: 5px solid ${({ theme }) => theme.palette.main.saturated}; 
+      border-radius: 50%;
       display: inline-flex;
       justify-content: center;
       align-items: center;
       min-width: 50px;
       min-height: 50px;
       background-color: ${({ theme }) => theme.palette.alternate.lowlight};
-    }
-  }
+
+      &.shadeOne {
+        background-color: ${({ theme }) => theme.palette.main.lowlight};
+      }
+
+      &.shadeTwo {
+        background-color: ${({ theme }) => theme.palette.brand.lowlight};
+      }
+
+      &.borderOne {
+        border-color: ${({ theme }) => theme.palette.brand.base};
+      }
+
+      &.borderTwo {
+        border-color: ${({ theme }) => theme.palette.highlight.base};
+      }
+
+      &.square {
+        border-radius: 0;
+      }
+
+      &.tilt {
+        transform: rotate(45deg);
+
+        span {
+          transform: rotate(-45deg);
+        }
+      }
 `;
