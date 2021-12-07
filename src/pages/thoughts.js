@@ -27,7 +27,12 @@ const ThoughtsPage = ({ data }) => {
       <SEO title="Posts" keywords={keywords} />
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <h5>Most recent post:</h5>
-        <PostSnippet title={postTitle} timeToRead={timeToRead} content={body} slug={postSlug} />
+        <PostSnippet
+          title={postTitle}
+          timeToRead={timeToRead}
+          content={body}
+          slug={postSlug}
+        />
       </div>
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <div>
@@ -45,21 +50,19 @@ const ThoughtsPage = ({ data }) => {
             })}
           </Grid>
         </div>
-        {
-          data.allMdx.edges.map(({ node }, index) => {
-            const { title } = node.frontmatter;
-            const { slug } = node.fields;
-            if (index === 0) return null;
-            return (
-              <div key={slug}>
-                {index === 1 && <HeadingGroup title="Previous Posts" />}
-                <div data-testid={`${slug}`}>
-                  <Link to={slug}>{title}</Link>
-                </div>
+        {data.allMdx.edges.map(({ node }, index) => {
+          const { title } = node.frontmatter;
+          const { slug } = node.fields;
+          if (index === 0) return null;
+          return (
+            <div key={slug}>
+              {index === 1 && <HeadingGroup title="Previous Posts" />}
+              <div data-testid={`${slug}`}>
+                <Link to={slug}>{title}</Link>
               </div>
-            );
-          })
-        }
+            </div>
+          );
+        })}
       </div>
     </Layout>
   );
@@ -67,7 +70,10 @@ const ThoughtsPage = ({ data }) => {
 
 export const query = graphql`
   query {
-    allMdx(sort: {fields: [frontmatter___date], order: DESC}, filter: {fileAbsolutePath: {regex: "/thoughts/"}}) {
+    allMdx(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { fileAbsolutePath: { regex: "/thoughts/" } }
+    ) {
       group(field: frontmatter___hashtags) {
         tag: fieldValue
         totalCount
@@ -79,11 +85,11 @@ export const query = graphql`
             title
             hashtags
           }
-        fields {
-          slug
-        }
-        timeToRead
-        body
+          fields {
+            slug
+          }
+          timeToRead
+          body
         }
       }
     }
@@ -91,7 +97,7 @@ export const query = graphql`
 `;
 
 ThoughtsPage.propTypes = {
-  data: T.shape().isRequired
+  data: T.shape().isRequired,
 };
 
 export default ThoughtsPage;

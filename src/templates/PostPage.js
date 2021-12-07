@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import styled from 'styled-components';
 import T from 'prop-types';
 
 import { MDXProvider } from '@mdx-js/react';
@@ -13,13 +14,16 @@ import HeadingGroup from '../components/HeadingGroup';
 
 const components = {
   pre: CodeBlock,
-  code: CodeBlock
+  code: CodeBlock,
 };
 
 const PostPage = ({ data }) => {
   const currentPost = data.mdx;
   const {
-    date, updated, title: postTitle, description
+    date,
+    updated,
+    title: postTitle,
+    description,
   } = currentPost.frontmatter;
   const matchingTags = currentPost.frontmatter.hashtags || [];
   const relevantTags = data.allMarkdownRemark.edges.filter(({ node }) => {
@@ -32,29 +36,42 @@ const PostPage = ({ data }) => {
   const schema = `"@type": "Article","headline": "${postTitle}","description": "${description}","articleSection": "${matchingTags.toString()}","datePublished": "${date}T08:08:40+00:00","dateModified": "${updated}T08:43:03+00:00",`;
   const hasSimilarPosts = !!relevantTags.length;
 
+  const StyledPost = styled.div`
+    p {
+      font-size: 1.35rem;
+      line-height: 145%;
+    }
+  `;
+
   return (
     <Layout>
       <SEO
         title={currentPost.frontmatter.title}
         keywords={[
-          ...['ecommerce',
+          ...[
+            'ecommerce',
             'gatsby',
             'ecommerce tips',
             'ecommerce design and development',
           ],
-          ...matchingTags
+          ...matchingTags,
         ]}
         description={description}
         schema={schema}
       />
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <HeadingGroup title={currentPost.frontmatter.title} component="h1" />
-        <MDXProvider components={components}>
-          <MDXRenderer>{currentPost.body}</MDXRenderer>
-        </MDXProvider>
-        {hasSimilarPosts
-          && relevantTags.map(({ node }, index) => {
-            const { frontmatter: { title }, fields: { slug } } = node;
+        <StyledPost>
+          <MDXProvider components={components}>
+            <MDXRenderer>{currentPost.body}</MDXRenderer>
+          </MDXProvider>
+        </StyledPost>
+        {hasSimilarPosts &&
+          relevantTags.map(({ node }, index) => {
+            const {
+              frontmatter: { title },
+              fields: { slug },
+            } = node;
 
             if (title === currentPost.frontmatter.title) return null;
             return (
@@ -81,12 +98,12 @@ PostPage.propTypes = {
             fields: T.shape(),
           }).isRequired,
         })
-      )
+      ),
     }),
     mdx: T.shape({
       frontmatter: T.shape(),
       body: T.string,
-      slug: T.string.isRequired
+      slug: T.string.isRequired,
     }).isRequired,
   }).isRequired,
 };
@@ -95,7 +112,7 @@ export default PostPage;
 
 export const query = graphql`
   query($slug: String!) {
-    mdx(slug: {eq: $slug}) {
+    mdx(slug: { eq: $slug }) {
       slug
       frontmatter {
         slug
@@ -107,7 +124,7 @@ export const query = graphql`
       }
       body
     }
-    allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           id
