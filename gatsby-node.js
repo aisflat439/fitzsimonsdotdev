@@ -22,7 +22,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const result = await graphql(`
     query {
-      tagsGroup: allMarkdownRemark(limit: 2000) {
+      tagsGroup: allMdx {
         group(field: frontmatter___hashtags) {
           fieldValue
         }
@@ -48,7 +48,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const mdx = result.data.allMdx.edges;
   const tags = result.data.tagsGroup.group;
-  const filteredMdxPosts = mdx.filter(({ node }) => !node.slug.includes('deprecated'));
+  const filteredMdxPosts = mdx.filter(
+    ({ node }) => !node.slug.includes('deprecated')
+  );
 
   filteredMdxPosts.forEach(({ node }) => {
     createPage({
