@@ -1,30 +1,46 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b6736b90-6dd4-4321-953a-bcaae445ab60/deploy-status)](https://app.netlify.com/sites/vigorous-darwin-afd2a3/deploys)
+# Welcome to [Astro](https://astro.build)
 
-## 🚀 Quick start
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
 
-0. **Ensure you have gatsby-cli installed**
-   [get it here](https://www.gatsbyjs.org/)
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-1. **Start developing.**
+## 🚀 Project Structure
 
-   Navigate into this site’s directory and start it up.
+Inside of your Astro project, you'll see the following folders and files:
 
-   ```sh
-   cd fitzsimonsdotdev/
-   npm i
-   gatsby develop
-   npm run test
-   ```
+```
+/
+├── public/
+│   └── favicon.svg
+├── src/
+│   ├── components/
+│   │   └── Card.astro
+│   ├── layouts/
+│   │   └── Layout.astro
+│   └── pages/
+│       └── index.astro
+└── package.json
+```
 
-2. **Open the source code and start editing!**
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-   Your site is now running at `http://localhost:8000`!
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-   _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+Any static assets, like images, can be placed in the `public/` directory.
 
-## 🧐 What's inside?
+## 🧞 Commands
 
-1. Gatsby
-2. Styled Components
-3. Jest
-4. @testing-library/react
+All commands are run from the root of the project, from a terminal:
+
+| Command                | Action                                             |
+| :--------------------- | :------------------------------------------------- |
+| `npm install`          | Installs dependencies                              |
+| `npm run dev`          | Starts local dev server at `localhost:3000`        |
+| `npm run build`        | Build your production site to `./dist/`            |
+| `npm run preview`      | Preview your build locally, before deploying       |
+| `npm run astro ...`    | Run CLI commands like `astro add`, `astro preview` |
+| `npm run astro --help` | Get help using the Astro CLI                       |
+
+## 👀 Want to learn more?
+
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
