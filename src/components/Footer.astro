@@ -1,0 +1,71 @@
+---
+---
+
+<section class="bg-sky-800 p-8">
+	<div class="sm:flex items-center justify-center">
+		<h3 class="text-2xl text-slate-50 mr-4 font-light mb-4 sm:mb-0">
+			Sign up for...
+		</h3>
+		<form netlify-honeypot name="signup" method="POST" action="/success">
+			<p class="hidden">
+				<label>
+					Don’t fill this out if you’re human: <input
+						name="bot-field"
+					/>
+				</label>
+			</p>
+			<input type="hidden" name="form-name" value="feedback" />
+			<label for="name">
+				<input
+					class="bg-transparent mb-4 sm:mb-0 text-slate-50 border-b border-slate-50"
+					id="name"
+					type="text"
+					name="name"
+					placeholder="Your name"
+				/>
+			</label>
+			<label for="email">
+				<input
+					class="bg-transparent mb-4 sm:mb-0 text-slate-50 border-b border-slate-50"
+					id="email"
+					type="email"
+					name="email"
+					placeholder="your@email.com"
+					required
+				/>
+			</label>
+			<button
+				type="submit"
+				class="sm:ml-8 py-2 px-4 border border-slate-50 rounded-md text-slate-50 hover:bg-slate-50 hover:text-sky-800 focus:bg-slate-50 focus:text-sky-800 transition-all"
+				>Submit</button
+			>
+		</form>
+	</div>
+</section>
+<footer class="bg-slate-600 border-t-amber-600 border-t-4">
+	<nav
+		class="sm:flex sm:justify-between max-w-7xl m-auto p-6 pb-4 text-slate-50"
+	>
+		<ul class="flex justify-center flex-col sm:flex-row">
+			<li class="sm:mx-4 text-sm">
+				<a
+					target="_blank"
+					class="/https://github.com/aisflat439/fitzsimonsdotdev"
+					>Github</a
+				>
+			</li>
+			<li class="sm:mx-4 text-sm">
+				<a target="_blank" class="https://twitter.com/fitzsimons_dev"
+					>Twitter</a
+				>
+			</li>
+			<li class="sm:mx-4 text-sm">
+				<a
+					target="_blank"
+					class="https://www.linkedin.com/in/fitzsimonsdevin/"
+					>LinkedIn</a
+				>
+			</li>
+		</ul>
+	</nav>
+</footer>
