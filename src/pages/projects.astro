@@ -1,0 +1,65 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const list = [
+    {
+        name: "Podcast",
+        title: "The Process is Black and White",
+        description: "Two friends read books and talk about them",
+    },
+    {
+        name: "SaaS",
+        title: "Comics Helper",
+        description:
+            "An unprofitable SaaS but a passion project. Hopefully, over time I can get better at this.",
+    },
+    {
+        name: "Project",
+        title: "Seven Single Tables",
+        description:
+            "A project for me to learn single table design, although slightly simpler.",
+    },
+    {
+        name: "VSCode Extension",
+        title: "RTL Quick Debug",
+        description:
+            "Mostly this is a little set of helpers that I use just for me.",
+    },
+];
+---
+
+<Layout title="Projects">
+    <section class="prose prose-slate mb-8">
+        <h1 class="text-3xl">I work on a variety of projects!</h1>
+        <p class="text-xl">
+            So far, I've been working on a few different things. Mostly, because
+            I find them interesting. In theory, because some day I want to make
+            money from the internet and not from a <span class="bg-white px-1"
+                >real job</span
+            >. For now I'm working on things that I get value out of, that can
+            maybe provide value for others.
+        </p>
+    </section>
+
+    <div class="grid sm:grid-cols-2 grid-flow-row gap-4">
+        {
+            list.map((item) => {
+                return (
+                    <article>
+                        <div class="bg-slate-50 p-4 h-full rounded-sm">
+                            <h2>{item.name}</h2>
+                            <h3>{item.title}</h3>
+                            <p>{item.description}</p>
+                        </div>
+                    </article>
+                );
+            })
+        }
+    </div>
+</Layout>
+
+<style>
+    :root {
+        --astro-gradient: linear-gradient(0deg, #4f39fa, #da62c4);
+    }
+</style>
