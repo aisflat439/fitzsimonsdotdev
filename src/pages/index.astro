@@ -6,32 +6,47 @@ import mountains from "../images/mountains.jpg";
 ---
 
 <Layout>
-    <main class="prose mt-6">
-        <div class="sm:flex">
-            <div class="flex-1">
-                <h1 class="text-2xl font-light">Devin Fitzsimons</h1>
-                <p>
-                    I don't know what to write here. But I'm working it out I
-                    guess. I'll get around to dooing some more I suppose.
-                    However, I've never successfully thought to myself, this
-                    blog is complete!
-                </p>
-            </div>
-            <div class="flex-1">
-                <Image
-                    class="m-0"
-                    src={mountains}
-                    alt="picture of me in the mountains"
-                    width={300}
-                    aspectRatio={1}
-                />
-            </div>
-        </div>
-    </main>
+  <section class="bg-sky-900">
+    <h2
+      class="pb-80 pt-48 text-center text-sky-900 text-4xl xs:text-5xl lg:text-6xl"
+    >
+      <div class="mx-4 sm:mx-20 md:mx-56 lg:mx-80 bg-amber-600 p-2 uppercase">
+        <span class="block bg-sky-900 text-amber-600">Devin</span>
+        <span class="block bg-amber-600">Fitzsimons</span>
+        <span class="block bg-sky-900 text-amber-600">Makes Stuff</span>
+      </div>
+    </h2>
+  </section>
+  <main class="max-w-7xl m-auto px-8 prose mt-6">
+    <div class="sm:flex">
+      <div class="flex-1">
+        <h1 class="text-2xl font-light">Bio:</h1>
+        <p>
+          I'm a software engineer. I mostly work on the front end, but I dabble
+          in serverless tech on AWS. I really like state machines because state
+          charts help us understand complexity. I'm also excited about React,
+          Typescript, Tailwind and DynamoDB.
+        </p>
+        <p>
+          In my personal life, I enjoy hiking, learning about SaaS, business
+          ideas and fitness.
+        </p>
+      </div>
+      <div class="flex-1 mb-6">
+        <Image
+          class="m-0"
+          src={mountains}
+          alt="picture of me in the mountains"
+          width={300}
+          aspectRatio={1}
+        />
+      </div>
+    </div>
+  </main>
 </Layout>
 
 <style>
-    :root {
-        --astro-gradient: linear-gradient(0deg, #4f39fa, #da62c4);
-    }
+  :root {
+    --astro-gradient: linear-gradient(0deg, #4f39fa, #da62c4);
+  }
 </style>
