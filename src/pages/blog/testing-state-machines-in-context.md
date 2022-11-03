@@ -1,6 +1,7 @@
 ---
 date: '2021-12-07'
 updated: '2021-12-07'
+layout: ../../layouts/BlogLayout.astro
 title: 'Testing state machines when loading from context'
 slug: '/testing-state-machines-in-context'
 hashtags: ['testing', 'intermediate', 'x-state', 'jest']

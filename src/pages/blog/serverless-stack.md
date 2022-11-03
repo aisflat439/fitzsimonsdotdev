@@ -1,10 +1,11 @@
 ---
-date: '2021-10-10'
-updated: '2021-10-10'
-title: 'Learning Serverless Stack'
-slug: '/learning-serverless-stack'
-hashtags: ['serverless stack', 'testing', 'beginner']
+date: "2021-10-10"
+updated: "2021-10-10"
+title: "Learning Serverless Stack"
+slug: "/learning-serverless-stack"
+hashtags: ["serverless stack", "testing", "beginner"]
 description: "I'm switching my workflow to serverless-stack."
+layout: ../../layouts/BlogLayout.astro
 ---
 
 ## Serverless Stack

@@ -3,39 +3,39 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 
 export interface Props {
-    title?: string;
+  title?: string;
+  classes?: string;
 }
 
-const { title = "Fitzsimons dot dev" } = Astro.props as Props;
+const { title = "Fitzsimons dot dev", classes = "" } = Astro.props as Props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
-    </head>
-    <body
-        class="bg-gradient-to-br from-sky-100 to-sky-50 h-screen w-screen flex flex-col text-slate-900 font-light"
-    >
-        <Header />
-        <main class="flex-1">
-            <slot />
-        </main>
-        <Footer />
-        <style>
-            body {
-                margin: 0;
-            }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body
+    class="bg-gradient-to-br from-sky-100 to-sky-50 min-h-screen w-screen flex flex-col text-slate-900 font-light"
+  >
+    <Header />
+    <main class={classes ? `flex-1 ${classes}` : "flex-1"}>
+      <slot />
+    </main>
+    <Footer />
+    <style>
+      body {
+        margin: 0;
+      }
 
-            :global(code) {
-                font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-                    DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New,
-                    monospace;
-            }
-        </style>
-    </body>
+      :global(code) {
+        font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+          DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+      }
+    </style>
+  </body>
 </html>

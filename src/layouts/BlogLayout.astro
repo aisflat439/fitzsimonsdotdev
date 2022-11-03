@@ -1,0 +1,20 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout classes={"flex-1 flex items-center flex-col"}>
+  <div class="prose py-16 px-6 sm:px-0">
+    <div>
+      <h1>{frontmatter.title}</h1>
+      <p class="text-right">Revision count: {frontmatter.revisions || 1}</p>
+      <p class="text-right">
+        Date: {frontmatter.date || "unknown"}{
+          frontmatter.revised && `, revised: ${frontmatter.updated}`
+        }
+      </p>
+    </div>
+    <slot />
+  </div>
+</Layout>

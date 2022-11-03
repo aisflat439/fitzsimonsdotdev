@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const posts = await Astro.glob("../pages/blog/*.md");
+---
+
+<Layout title="Blog" classes="p-8 flex-1 flex justify-center">
+  <div class="prose margin-auto">
+    <h1 class="prose-h2">If I was a person who writes...</h1>
+    <p class="prose-p">
+      I'd have a list of blogs. I'd write to sharpen how I think about things.
+      People who write well seem to be able to express themselves in a way that
+      I find super appealing.
+    </p>
+    <section>
+      {
+        posts.map((post) => (
+          <article>
+            <h2 class="prose-h3">{post.frontmatter.title}</h2>
+            <p>{post.frontmatter.description}</p>
+            <a href={post.url}>read</a>
+          </article>
+        ))
+      }
+    </section>
+  </div>
+</Layout>
