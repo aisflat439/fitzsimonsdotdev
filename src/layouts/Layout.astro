@@ -1,6 +1,6 @@
 ---
 import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
+import { Header } from "../components/Header";
 
 export interface Props {
   title?: string;
@@ -22,8 +22,8 @@ const { title = "Fitzsimons dot dev", classes = "" } = Astro.props as Props;
   <body
     class="bg-gradient-to-br from-sky-100 to-sky-50 min-h-screen w-screen flex flex-col text-slate-900 font-light"
   >
-    <Header />
-    <main class={classes ? `flex-1 ${classes}` : "flex-1"}>
+    <Header client:load />
+    <main class={classes ? `flex-1 ${classes} sm:pt-20` : "flex-1 sm:pt-20"}>
       <slot />
     </main>
     <Footer />

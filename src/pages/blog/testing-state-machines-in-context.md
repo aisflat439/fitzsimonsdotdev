@@ -3,7 +3,6 @@ date: '2021-12-07'
 updated: '2021-12-07'
 layout: ../../layouts/BlogLayout.astro
 title: 'Testing state machines when loading from context'
-slug: '/testing-state-machines-in-context'
 hashtags: ['testing', 'intermediate', 'x-state', 'jest']
 description: 'I was working with useActor for the first time and needed to force some state to write some tests.'
 ---
