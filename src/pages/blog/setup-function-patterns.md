@@ -1,4 +1,5 @@
 ---
+date: "2020-08-01"
 layout: ../../layouts/BlogLayout.astro
 title: "Helpful setup function patterns for testing"
 description: "My personal pattern for testing. I picked this up from some folks at work and use it all the time now"

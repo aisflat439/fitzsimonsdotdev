@@ -2,6 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 
 const posts = await Astro.glob("../pages/blog/*.md");
+const postsList = posts.sort((a, b) => {
+  return new Date(a.frontmatter.date) < new Date(b.frontmatter.date) ? 1 : -1;
+});
 ---
 
 <Layout title="Blog" classes="p-8 flex-1 flex justify-center">
@@ -14,7 +17,7 @@ const posts = await Astro.glob("../pages/blog/*.md");
     </p>
     <section>
       {
-        posts.map((post) => (
+        postsList.map((post) => (
           <article>
             <h2 class="prose-h3">{post.frontmatter.title}</h2>
             <p>{post.frontmatter.description}</p>

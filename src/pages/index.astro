@@ -3,6 +3,33 @@ import Layout from "../layouts/Layout.astro";
 import { Image } from "@astrojs/image/components";
 
 import mountains from "../images/mountains.jpg";
+
+const tools = [
+  {
+    name: "SST",
+    url: "https://sst.dev",
+    description:
+      "SST has a robust community, great docs, regular live streams and an awesome tool. SST is a wrapper for CDK. You can dive into CDK whenver you want. However, for common things, SST makes the API a little simpler and the developer experience awesome.",
+  },
+  {
+    name: "React",
+    url: "https://reactjs.org",
+    description:
+      "I love React. I really can't say enough good things about it. It has some quirks (I'm looking at you useEffect and Fragments), but it's so straightforward and the community has built everything you could possibly need. I prefer tools like TanStack Query to Redux where possible.",
+  },
+  {
+    name: "Tailwind",
+    url: "https://tailwindcss.com",
+    description:
+      "Tailwind is a design system based around utility classes. It's great because it provides a bunch of sensible defaults. It's also dead simple to learn, scales super well because it's just CSS. I've yet to find the downside. When possible, I'll default to Tailwind.",
+  },
+  {
+    name: "XState",
+    url: "https://xstate.js.org/docs/",
+    description:
+      "State get complex fast. Rather than underestimate the inevitable complexity explosion, I prefer tools that help. XState lets you visualize your state, transitions and actions, so you can understand, change and navigate updates to your application.",
+  },
+];
 ---
 
 <Layout>
@@ -16,6 +43,27 @@ import mountains from "../images/mountains.jpg";
         <span class="block bg-sky-900 text-amber-600">Makes Stuff</span>
       </div>
     </h2>
+  </section>
+  <section class="bg-amber-600 py-40 flex flex-col">
+    <h3 class="text-slate-900 text-2xl xs:text-3xl px-8 py-2">Tools I like</h3>
+    <div class="border border-sky-900 border-8 mx-8 p-6">
+      <div>
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-6 place-content-around">
+          {
+            tools.map((tool) => (
+              <li class="p-1 bg-slate-900">
+                <div class="text-sky-100">
+                  <h3 class="pl-2 py-4 text-2xl border-b border-sky-800">
+                    <a href={tool.url}>{tool.name}</a>
+                  </h3>
+                  <p class="p-2 prose text-sky-100">{tool.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
   </section>
   <main class="max-w-7xl m-auto px-8 prose mt-6">
     <div class="sm:flex">
