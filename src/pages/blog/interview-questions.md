@@ -5,7 +5,7 @@ layout: ../../layouts/BlogLayout.astro
 title: "Interview Questions"
 hashtags: ["hiring", "interviews"]
 description: "I'm pretty godawful at interviewing. One path to improvement is to write my answer to some common interview questions. In theory, this practice will help my answers in real time be a little more structured."
-revisions: 1
+revisions: 2
 ---
 
 ### Who would you credit for helping you get to where you are now?
@@ -14,7 +14,7 @@ revisions: 1
 
 ### Tell us about a recent time where you helped somebody at work without being asked?
 
-When I joined [MEGA_CORP], the React project was quite a few versions behind. The React team chose to deprecate Enzyme in favor of React Testing Library in React 16. Enzyme tests have a few disadvantages to RTL (React Testing Library). They're more verbose. It's easy to make a brittle test as they lend themselves to testing internals, rather than UI. Of course, they're also deprecated and will need to be re-written.
+When I joined [MEGA_CORP], the React project was quite a few versions behind. The React team chose to deprecate Enzyme in favor of React Testing Library in React 16. Enzyme tests have a few disadvantages to RTL (React Testing Library). They're more verbose. It's easy to make a brittle test as they lend themselves to testing internals, rather than UI. Of course, they're also deprecated and will need to be rewritten.
 
 It was in my first week when I found this out. I DM'd the lead and asked if I could install the needed libraries for RTL. He said sure, as long as I can get everything to work with the existing app. Luckily, That was extremely straightforward. I quickly wrote the tests and presented a draft PR to the team. In the PR, I highlighted a couple of the things that I'd done. I then offered via DM to host a quick walk-through of how RTL works if anyone wanted.
 
@@ -25,6 +25,18 @@ I left out my opinions about never writing deprecated code and how to evolve a c
 ### Can you tell us about a time you made a bad decision at work?
 
 ### What have you done to improve yourself in the past year?
+
+My most effective strategy for self-improvement is flashcard usage. I use Anki which is a spaced repetition flashcard application. I primarily use it for 3 kinds of flash cards.
+
+- Productivity
+- Code patterns
+- Concepts I want to recall
+
+Productivity is the most straightforward. When I encounter a shortcut, VSCode extension, or tool for a task, I'll make flashcards to learn it. The current one is actually from Emmet. When I want to wrap some text in HTML. Copy selection, access the command palette, type wrap, hit enter, then the tag you want (span, p, etc..). This comes in handy. The flash card was super quick to learn. But, spaced repetition will keep it top of mind until it's muscle memory.
+
+Code patterns are a little more nuanced. I pretty regularly do code puzzles, think LeetCode, but not the hard problems. Generally, those patterns aren't practical for my everyday work, but they come in handy. A recent one is to get all possible pairs from `[2,4,6,8]`. This is straightforward. When I solve that in the code puzzle (or look it up after stumbling over it), I'll drop it on a flash card. Sometimes, I'll remember the exact code snippet when I encounter that problem in real life. Usually, I'll only recall that what I want is to slice the array and use the index to make the pair. So I'll have a starting point. That fuzzy memory helps a lot.
+
+Concepts I want to recall can be pretty broad. A decent example of this would be studying for the AWS Cloud Certified Practitioner exam. I also have decks that are more philosophical or personal as well.
 
 ### Can you tell us about something you’ve taken on and improved at your work?
 
