@@ -8,6 +8,37 @@ description: "I'm pretty godawful at interviewing. One path to improvement is to
 revisions: 2
 ---
 
+What follows are a series of interview questions that I crowd sourced and my answers. I don't expect that these questions would be asked in 100% of interviews. Rather, I expect that thinking through my answers to these questions will allow me to have more useful answers over time. Additionally, if I feel like an answer performed poorly in an interview, I can reassess these answers and look to say something more meaningful. One hope is that I'll be able to use the structure of these answers to help me when I'm asked something that falls out of the bounds of what I've considered in advance.
+
+---
+
+#### List of questions:
+
+- [How did you get here](#who-would-you-credit-for-helping-you-get-to-where-you-are-now)
+- [Mediate a conflict](can-you-tell-us-about-a-time-you-ve-had-to-mediate-a-conflict-in-your-team)
+- [Helping without being asked](tell-us-about-a-recent-time-where-you-helped-somebody-at-work-without-being-asked)
+- [Personal ownership](can-you-talk-to-us-about-a-project-or-piece-of-work-where-you-feel-you-demonstrated-significant-personal-ownership)
+- [Bad decision](can-you-tell-us-about-a-time-you-made-a-bad-decision-at-work)
+- [Self improvement](what-have-you-done-to-improve-yourself-in-the-past-year)
+- [Work improvement](can-you-tell-us-about-something-you-ve-taken-on-and-improved-at-your-work)
+- [Constructive criticism](what-is-one-piece-of-really-valuable-constructive-feedback-you-have-received)
+- [Outside your comfort zone](can-you-tell-us-about-a-time-when-you-felt-you-were-working-outside-of-your-comfort-zone)
+- [Pushing yourself](can-you-tell-us-about-a-time-when-you-or-your-team-had-to-push-yourself-to-reach-a-goal)
+- [Stress](what-causes-you-stress-negative-feelings-at-work)
+- [Positivity](what-gives-you-positive-energy-at-work)
+- [Parking Spaces](you-ve-been-contracted-to-design-a-system-for-a-parking-garage-that-shows-how-many-spaces-are-available)
+- [Automation](is-there-a-process-or-workflow-you-wouldn-t-automate-why)
+- [Testing](talk-to-us-about-testing-in-software-or-ia-c)
+- [Pipelines](how-much-hands-on-work-have-you-done-working-on-pipelines-and-software-delivery-or-pipelines-for-infrastructure-creation)
+- [AWS Deployment](tell-me-about-a-project-where-you-had-to-automate-its-deployment-to-aws)
+- [Hard things to automate](tell-us-about-something-that-was-really-hard-to-automate-anywhere-not-just-aws)
+- [Branching](do-you-have-a-strong-opinion-about-code-branches-and-deployment-strategies)
+- [Learning a new skill](tell-me-about-a-time-when-you-had-to-learn-a-new-tool-language-or-skill)
+- [Resource creation](provide-some-examples-of-resources-that-you-ve-provided-for-others-in-the-development-community-and-or-within-companies-in-which-you-worked-e-g-blog-posts-articles-open-source-projects)
+- [Difficult customers](tell-me-about-a-time-when-you-ve-worked-with-a-difficult-customer-or-client)
+
+---
+
 ### Who would you credit for helping you get to where you are now?
 
 ### Can you tell us about a time you’ve had to mediate a conflict in your team?
