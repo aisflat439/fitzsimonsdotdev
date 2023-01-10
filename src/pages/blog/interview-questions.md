@@ -1,11 +1,11 @@
 ---
 date: "2022-12-29"
-updated: "2022-12-29"
+updated: "2023-01-09"
 layout: ../../layouts/BlogLayout.astro
 title: "Interview Questions"
 hashtags: ["hiring", "interviews"]
 description: "I'm pretty godawful at interviewing. One path to improvement is to write my answer to some common interview questions. In theory, this practice will help my answers in real time be a little more structured."
-revisions: 2
+revisions: 3
 ---
 
 What follows are a series of interview questions that I crowd sourced and my answers. I don't expect that these questions would be asked in 100% of interviews. Rather, I expect that thinking through my answers to these questions will allow me to have more useful answers over time. Additionally, if I feel like an answer performed poorly in an interview, I can reassess these answers and look to say something more meaningful. One hope is that I'll be able to use the structure of these answers to help me when I'm asked something that falls out of the bounds of what I've considered in advance.
@@ -54,6 +54,12 @@ I left out my opinions about never writing deprecated code and how to evolve a c
 ### Can you talk to us about a project or piece of work where you feel you demonstrated significant personal ownership?
 
 ### Can you tell us about a time you made a bad decision at work?
+
+I used dependency injection when copy paste would have been a superior solution. I try to use AHA ([Avoid Hasty Abstractions](https://kentcdodds.com/blog/aha-programming])) programming as a sensible default. For this project we had three different business domains that all shared a contract view. Once in that view, the logic got complex. To untangle it all, I picked a state machine library. This would allow the team to understand what was happening in the codebase a lot easier. More importantly, state machines are an excellent tool for communicating with business, design and product stakeholders. The team had received a lot of bugs in this area of the codebase. The majority of these bugs were because the communication around what domain used what rules needed more detail. My hope was that using state charts would solve the business -> developer communication along with helping the team understand a complex area in the codebase.
+
+What I did was write a function that spawned a state machine, injecting the rules for the current business domain in context. This was an acceptable solution. But it was clearly a second best solution in hindsight.
+
+What I failed to think through was that state machines are new to most engineers, especially on the front end. What I should have done was used three machines, one for each business domain and accepted the code duplication. This would have made machines that were easier to understand. Kept business rules isolated by domain and allowed for examples of state machines that were easy to understand. This would have allowed for state machines to spread more naturally throughout the organization.
 
 ### What have you done to improve yourself in the past year?
 
