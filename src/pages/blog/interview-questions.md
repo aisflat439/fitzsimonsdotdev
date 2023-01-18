@@ -87,7 +87,19 @@ Concepts I want to recall can be pretty broad. A decent example of this would be
 
 ### What gives you positive energy at work?
 
+For me, it's pair programming. I enjoy pairing with developers of all skill levels. Pairing with newer developers is fun. It teaches me how to communicate, think quickly and clearly explain why I like a solution or idea. Pairing with more seasoned developers frequently ends up in TDD or ping-pong-style pairing. Falling into a ping-pong rhythm with another developer is one of the best flow experiences. Often, pairing with more senior folks ends up with a Miro board or Excalidraw open so we can explore possible solutions or architectures.
+
+One of my favorite things about pairing is that it's the most natural way to teach each other tools and productivity tips. I liberally use multi-cursor which frequently blows a junior developer's mind. Just recently, from another senior engineer, I learned about Thunder Client as a Postman alternative. It's right in your editor. Delightful!
+
+Pairing also has the benefit of building strong relationships between developers and teams. It normalizes knowledge sharing. Especially with the expansion of remote work, I'm excited to see more companies and teams get comfortable pairing.
+
 ### You've been contracted to design a system for a parking garage that shows how many spaces are available.
+
+Before starting there are a few questions that I'd need to answer. The first thing I'd want to know is whether there are types of spaces. I'm familiar with garages that have long-term, resident, and short-term spaces. This would help me plan for future changes to my schema. Next, I'd want to know about expansion for the garage, as well as space type. It's important to understand how the number and space type may change over time. I'd also need to know how this information should be displayed and consumed. Do I have a visual interface like a light board, or do I have an API that I need to respond to, like SomeParkingApp.com? Finally, I'd want to know about the pricing for parking spaces. Do I need to consider parking rates, free days, size of vehicle hours, and so on?
+
+I like a queue or event bus for this application. Mostly, nothing is happening in a parking garage, but we can't miss any parking events so serverless makes a lot of sense here. No need to run a server constantly when it's only used when parking starts or ends. If we're using a queue or event bus we can easily add subscribers to events like PARKING_START and PARKING_END. That way if in the future we want an analytics service to determine the most popular parking times, it's straightforward.
+
+For a quick solution to the problem, parking spots are essentially a fixed-size array. Each slot might hold an object including vehicle type, license plate, and time parking started for example. For a query like, how many spots are available, we can just find empty slots in the array. Something else we might need is the total price for a parking event. We can look up the vehicle by its UUID (license plate) and then send the information to the payment service. In this case, I'm considering type (maybe a large pickup truck costs more) and start time. The service can calculate pricing based on the rules it has and return that to the checkout. Once payment is complete, we'd fire an event back to the parking spot service to remove that vehicle from the array.
 
 ### Is there a process or workflow you wouldn’t automate? Why?
 
