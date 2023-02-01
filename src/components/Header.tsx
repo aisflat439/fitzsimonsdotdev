@@ -20,7 +20,7 @@ const useBoundedScroll = (bounds: number) => {
   );
 
   React.useEffect(() => {
-    return scrollY.onChange((current) => {
+    return scrollY.on("change", (current) => {
       const previous = scrollY.getPrevious();
       const difference = current - previous;
       const newScrollYBounded = scrollYBounded.get() + difference;
