@@ -10,19 +10,19 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "@astrojs/image": "0.13.1",
-    "@astrojs/mdx": "0.15.2",
+    "@astrojs/image": "0.14.1",
+    "@astrojs/mdx": "0.16.0",
     "@astrojs/tailwind": "3.0.1",
     "@tailwindcss/typography": "0.5.9",
-    "astro": "2.0.4",
-    "prettier": "2.8.3",
+    "astro": "2.0.9",
+    "prettier": "2.8.4",
     "prettier-plugin-astro": "0.8.0"
   },
   "dependencies": {
     "@astrojs/react": "2.0.2",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
-    "framer-motion": "8.5.5",
+    "framer-motion": "9.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   }
