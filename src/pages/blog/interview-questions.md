@@ -87,9 +87,13 @@ Every developer wants to move to the latest and greatest platform. I'm certainly
 
 ### Can you tell us about a time when you felt you were working outside of your comfort zone?
 
+Learning Data Structures and Algorithms. I'm not a traditional computer science student. Nonetheless, I think there's a lot of value
+
 ### Can you tell us about a time when you or your team had to push yourself to reach a goal?
 
 ### What causes you stress/negative feelings at work?
+
+Lack of autonomy and lack of clarity.
 
 ### What gives you positive energy at work?
 
