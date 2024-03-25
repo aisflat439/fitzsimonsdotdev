@@ -49,7 +49,7 @@ export const Header = () => {
           ${useTransform(scrollYBoundedProgress, [0, 1], [119, 59])} 
           ${useTransform(scrollYBoundedProgress, [0, 1], [6, 59])})`,
       }}
-      className="bg-sky-800 border-b-amber-600 border-b-4 font-light sm:fixed inset-x-0 h-20 flex backdrop-blur-sm"
+      className="bg-sky-800 border-b-amber-600 border-b-4 font-light sm:fixed inset-x-0 h-20 flex backdrop-blur-sm z-10"
     >
       <nav className="sm:flex flex-1 sm:justify-between items-center max-w-7xl m-auto px-6 text-slate-50">
         <motion.div
