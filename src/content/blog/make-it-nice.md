@@ -1,7 +1,6 @@
 ---
 date: "2023-02-08"
 description: "What if we're all just wrong about how to build software?"
-layout: ../../layouts/BlogLayout.astro
 revisions: 1
 title: "What if instead of Agile, we made it nice?"
 updated: "2023-02-08"

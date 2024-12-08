@@ -13,13 +13,17 @@
         "date": {
           "type": "string"
         },
+        "revisions": {
+          "type": "number"
+        },
         "$schema": {
           "type": "string"
         }
       },
       "required": [
         "title",
-        "date"
+        "date",
+        "revisions"
       ],
       "additionalProperties": false
     }

@@ -1,7 +1,6 @@
 ---
 date: "2022-12-29"
 updated: "2023-02-21"
-layout: ../../layouts/BlogLayout.astro
 title: "Interview Questions"
 hashtags: ["hiring", "interviews"]
 description: "I'm pretty godawful at interviewing. One path to improvement is to write my answer to some common interview questions. In theory, this practice will help my answers in real time be a little more structured."

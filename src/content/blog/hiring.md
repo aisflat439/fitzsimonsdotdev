@@ -1,7 +1,6 @@
 ---
 date: "2022-09-29"
 updated: "2022-10-29"
-layout: ../../layouts/BlogLayout.astro
 title: "On hiring"
 hashtags: ["hiring"]
 description: "I've been thinking about hiring. I struggle with interviews but typically perform at a high level. What's the disconnect?"

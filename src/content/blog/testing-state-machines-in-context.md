@@ -1,10 +1,10 @@
 ---
-date: '2021-12-07'
-updated: '2021-12-07'
-layout: ../../layouts/BlogLayout.astro
-title: 'Testing state machines when loading from context'
-hashtags: ['testing', 'intermediate', 'x-state', 'jest']
-description: 'I was working with useActor for the first time and needed to force some state to write some tests.'
+date: "2021-12-07"
+updated: "2021-12-07"
+title: "Testing state machines when loading from context"
+hashtags: ["testing", "intermediate", "x-state", "jest"]
+description: "I was working with useActor for the first time and needed to force some state to write some tests."
+revisions: 3
 ---
 
 ## Testing services from context in XState
@@ -56,9 +56,9 @@ All the trickly complex stuff about the `draggableCustomerMachine` is wrapped up
 For the context related portion of this, we really only want two tests.
 
 ```js
-it('renders the loading message when the CustomersContext is loading', () => {});
+it("renders the loading message when the CustomersContext is loading", () => {});
 
-it('renders customer cards when the CustomersContext is loaded', () => {});
+it("renders customer cards when the CustomersContext is loaded", () => {});
 ```
 
 We'll make <a href="/tips/setup-function-patterns/">a setup function</a> because that's my preferred pattern. Our setup function will have a default object that covers the only two things that we "actually" need for this test.
@@ -120,18 +120,18 @@ Now we can update the state returned from the provider any time we need to for a
 ## Complete example
 
 ```js
-import { render } from '@testing-library/react';
+import { render } from "@testing-library/react";
 import {
   CustomersContext,
   customersMachine,
-} from '../context/customersContext';
-import { State, interpret } from 'xstate';
+} from "../context/customersContext";
+import { State, interpret } from "xstate";
 
-import Customers from './customers'; // the page we're testing
+import Customers from "./customers"; // the page we're testing
 
-describe('<Customers />', () => {
+describe("<Customers />", () => {
   const setup = (
-    customerMachineState = { loadingState: 'loading', customers: [] }
+    customerMachineState = { loadingState: "loading", customers: [] }
   ) => {
     const testState = customersMachine.resolveState(
       State.from(customerMachineState.loadingState, {
@@ -149,18 +149,18 @@ describe('<Customers />', () => {
     return R;
   };
 
-  it('renders the loading message when the CustomersContext is loading', () => {
-    const customerMachineState = { loadingState: 'loading', customers: [] };
+  it("renders the loading message when the CustomersContext is loading", () => {
+    const customerMachineState = { loadingState: "loading", customers: [] };
 
     const { getByText } = setup(customerMachineState);
 
     expect(getByText(/Loading/i)).toBeInTheDocument();
   });
 
-  it('renders customer cards when the CustomersContext is loaded', () => {
+  it("renders customer cards when the CustomersContext is loaded", () => {
     const customerMachineState = {
-      loadingState: 'loaded',
-      customers: [{ fName: 'David', lName: 'Khourshid' }],
+      loadingState: "loaded",
+      customers: [{ fName: "David", lName: "Khourshid" }],
     };
 
     const { getByText } = setup(customerMachineState);

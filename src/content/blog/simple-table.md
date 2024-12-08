@@ -1,7 +1,6 @@
 ---
 date: "2023-01-31"
 description: "A bunch of examples of tables with React and Tailwind"
-layout: ../../layouts/BlogLayout.astro
 revisions: 1
 title: "Tables are hard in lots of ways"
 updated: "2023-01-31"
