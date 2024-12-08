@@ -1,7 +1,6 @@
 ---
 date: "2023-03-28"
 updated: "2023-03-28"
-layout: ../../layouts/BlogLayout.astro
 title: "AI won't take your job"
 hashtags: ["AI", "Employment"]
 description: "Why I'm not at all concerned about AI taking my programming job."

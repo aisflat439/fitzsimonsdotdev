@@ -1,23 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const { frontmatter } = Astro.props;
+const { title } = Astro.props;
+console.log('title: ', title);
 ---
 
-<Layout classes={"flex-1 flex items-center flex-col"}>
+<Layout classes={"flex-1 flex items-center flex-col"} title={title}>
   <div class="prose py-16 px-6 sm:px-0">
     <div>
-      <h1 class="text-slate-900 mb-2 underline">{frontmatter.title}</h1>
-      <p class="text-sky-900 mt-0">{frontmatter.description}</p>
-      <p class="text-right m-0 font-medium">
+      <!-- <h1 class="text-slate-900 mb-2 underline">{frontmatter.title}</h1>
+      <p class="text-sky-900 mt-0">{frontmatter.description}</p> -->
+      <!-- <p class="text-right m-0 font-medium">
         <span class="text-slate-500 font-light">Revision count:</span>
         {frontmatter.revisions || 1}
-      </p>
+      </p> -->
       <p class="text-right m-0 font-medium">
-        <span class="text-slate-500 font-light">Published:</span>
+        <!-- <span class="text-slate-500 font-light">Published:</span>
         {frontmatter.date || "unknown"}{
           frontmatter.revised && `, revised: ${frontmatter.updated}`
-        }
+        } -->
       </p>
     </div>
     <slot />

@@ -67,7 +67,7 @@ export const Header = () => {
           className="flex justify-center"
         >
           <li className="mx-4 text-xl sm:text-3xl">
-            <a href="/projects">Projects</a>
+            <a href="/projects">Work</a>
           </li>
           <li className="mx-4 text-xl sm:text-3xl">
             <a href="/blog">Blog</a>
