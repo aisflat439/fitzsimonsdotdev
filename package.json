@@ -23,5 +23,8 @@
     "framer-motion": "11.13.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.28.1"
   }
 }
