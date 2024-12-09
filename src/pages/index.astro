@@ -1,8 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
 
-import mountains from "../images/mountains.jpg";
 import { Card } from "../components/Card";
 
 const tools = [
@@ -77,9 +75,9 @@ const tools = [
         </p>
       </div>
       <div class="flex-1 mb-6 flex items-center justify-center">
-        <Image
+        <img
           class="m-0"
-          src={mountains}
+          src="../../public/mountains.jpg"
           alt="picture of me in the mountains"
           width={300}
         />
