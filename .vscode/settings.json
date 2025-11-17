@@ -3,10 +3,4 @@
     "titleBar.activeBackground": "#075985",
     "titleBar.inactiveBackground": "#075985"
   },
-  "grammarly.selectors": [
-    {
-      "language": "markdown",
-      "scheme": "file"
-    }
-  ]
 }
