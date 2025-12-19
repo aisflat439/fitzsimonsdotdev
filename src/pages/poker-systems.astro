@@ -1,0 +1,332 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const positions6Max = ['UTG', 'MP', 'CO', 'BTN', 'SB', 'BB'];
+const positions9Max = ['UTG', 'UTG+1', 'MP', 'MP+1', 'LJ', 'HJ', 'CO', 'BTN', 'SB', 'BB'];
+---
+
+<Layout title="Poker Systems">
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8">Poker Monte Carlo Simulation</h1>
+    
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4">Simulation Parameters</h2>
+      
+      <div class="flex flex-row gap-4 mb-8 w-full">
+        <!-- Preflop -->
+        <div class="border rounded p-4 flex-1">
+          <h3 class="text-xl font-semibold mb-4">Preflop</h3>
+          
+          <div class="space-y-4">
+            <div class="flex gap-2">
+              <div class="flex-1">
+                <label class="block text-sm font-medium mb-1 whitespace-nowrap">Players</label>
+                <select id="players" class="w-full border rounded px-3 py-2">
+                  <option value="6">6</option>
+                  <option value="9" selected>9</option>
+                </select>
+              </div>
+              
+              <div class="flex-1">
+                <label class="block text-sm font-medium mb-1 whitespace-nowrap">Position</label>
+                <select id="position" class="w-full border rounded px-3 py-2">
+                </select>
+              </div>
+              
+              <div class="flex-1">
+                <label class="block text-sm font-medium mb-1 whitespace-nowrap">Villain</label>
+                <select id="villain" class="w-full border rounded px-3 py-2">
+                </select>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium mb-1">Your Card 1</label>
+              <div class="flex gap-2">
+                <select class="flex-1 border rounded px-3 py-2">
+                  <option value="">Rank</option>
+                  <option>A</option>
+                  <option>K</option>
+                  <option>Q</option>
+                  <option>J</option>
+                  <option>T</option>
+                  <option>9</option>
+                  <option>8</option>
+                  <option>7</option>
+                  <option>6</option>
+                  <option>5</option>
+                  <option>4</option>
+                  <option>3</option>
+                  <option>2</option>
+                </select>
+                <select class="flex-1 border rounded px-3 py-2">
+                  <option value="">Suit</option>
+                  <option>♠</option>
+                  <option>♥</option>
+                  <option>♦</option>
+                  <option>♣</option>
+                </select>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium mb-1">Your Card 2</label>
+              <div class="flex gap-2">
+                <select class="flex-1 border rounded px-3 py-2">
+                  <option value="">Rank</option>
+                  <option>A</option>
+                  <option>K</option>
+                  <option>Q</option>
+                  <option>J</option>
+                  <option>T</option>
+                  <option>9</option>
+                  <option>8</option>
+                  <option>7</option>
+                  <option>6</option>
+                  <option>5</option>
+                  <option>4</option>
+                  <option>3</option>
+                  <option>2</option>
+                </select>
+                <select class="flex-1 border rounded px-3 py-2">
+                  <option value="">Suit</option>
+                  <option>♠</option>
+                  <option>♥</option>
+                  <option>♦</option>
+                  <option>♣</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flop -->
+        <div class="border rounded p-4 flex-1">
+          <h3 class="text-xl font-semibold mb-4">Flop</h3>
+          
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">Card 1</label>
+              <div class="flex gap-2">
+                <select class="flex-1 border rounded px-3 py-2">
+                  <option value="">Rank</option>
+                  <option>A</option>
+                  <option>K</option>
+                  <option>Q</option>
+                  <option>J</option>
+                  <option>T</option>
+                  <option>9</option>
+                  <option>8</option>
+                  <option>7</option>
+                  <option>6</option>
+                  <option>5</option>
+                  <option>4</option>
+                  <option>3</option>
+                  <option>2</option>
+                </select>
+                <select class="flex-1 border rounded px-3 py-2">
+                  <option value="">Suit</option>
+                  <option>♠</option>
+                  <option>♥</option>
+                  <option>♦</option>
+                  <option>♣</option>
+                </select>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium mb-1">Card 2</label>
+              <div class="flex gap-2">
+                <select class="flex-1 border rounded px-3 py-2">
+                  <option value="">Rank</option>
+                  <option>A</option>
+                  <option>K</option>
+                  <option>Q</option>
+                  <option>J</option>
+                  <option>T</option>
+                  <option>9</option>
+                  <option>8</option>
+                  <option>7</option>
+                  <option>6</option>
+                  <option>5</option>
+                  <option>4</option>
+                  <option>3</option>
+                  <option>2</option>
+                </select>
+                <select class="flex-1 border rounded px-3 py-2">
+                  <option value="">Suit</option>
+                  <option>♠</option>
+                  <option>♥</option>
+                  <option>♦</option>
+                  <option>♣</option>
+                </select>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium mb-1">Card 3</label>
+              <div class="flex gap-2">
+                <select class="flex-1 border rounded px-3 py-2">
+                  <option value="">Rank</option>
+                  <option>A</option>
+                  <option>K</option>
+                  <option>Q</option>
+                  <option>J</option>
+                  <option>T</option>
+                  <option>9</option>
+                  <option>8</option>
+                  <option>7</option>
+                  <option>6</option>
+                  <option>5</option>
+                  <option>4</option>
+                  <option>3</option>
+                  <option>2</option>
+                </select>
+                <select class="flex-1 border rounded px-3 py-2">
+                  <option value="">Suit</option>
+                  <option>♠</option>
+                  <option>♥</option>
+                  <option>♦</option>
+                  <option>♣</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Turn -->
+        <div class="border rounded p-4 flex-1">
+          <h3 class="text-xl font-semibold mb-4">Turn</h3>
+          
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">Turn Card</label>
+              <div class="flex gap-2">
+                <select class="flex-1 border rounded px-3 py-2">
+                  <option value="">Rank</option>
+                  <option>A</option>
+                  <option>K</option>
+                  <option>Q</option>
+                  <option>J</option>
+                  <option>T</option>
+                  <option>9</option>
+                  <option>8</option>
+                  <option>7</option>
+                  <option>6</option>
+                  <option>5</option>
+                  <option>4</option>
+                  <option>3</option>
+                  <option>2</option>
+                </select>
+                <select class="flex-1 border rounded px-3 py-2">
+                  <option value="">Suit</option>
+                  <option>♠</option>
+                  <option>♥</option>
+                  <option>♦</option>
+                  <option>♣</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- River -->
+        <div class="border rounded p-4 flex-1">
+          <h3 class="text-xl font-semibold mb-4">River</h3>
+          
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">River Card</label>
+              <div class="flex gap-2">
+                <select class="flex-1 border rounded px-3 py-2">
+                  <option value="">Rank</option>
+                  <option>A</option>
+                  <option>K</option>
+                  <option>Q</option>
+                  <option>J</option>
+                  <option>T</option>
+                  <option>9</option>
+                  <option>8</option>
+                  <option>7</option>
+                  <option>6</option>
+                  <option>5</option>
+                  <option>4</option>
+                  <option>3</option>
+                  <option>2</option>
+                </select>
+                <select class="flex-1 border rounded px-3 py-2">
+                  <option value="">Suit</option>
+                  <option>♠</option>
+                  <option>♥</option>
+                  <option>♦</option>
+                  <option>♣</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+        Run Simulation
+      </button>
+    </section>
+    
+    <script>
+      const positions6Max = ['UTG', 'MP', 'CO', 'BTN', 'SB', 'BB'];
+      const positions9Max = ['UTG', 'UTG+1', 'MP', 'MP+1', 'LJ', 'HJ', 'CO', 'BTN', 'SB', 'BB'];
+      
+      const playersSelect = document.getElementById('players') as HTMLSelectElement;
+      const positionSelect = document.getElementById('position') as HTMLSelectElement;
+      const villainSelect = document.getElementById('villain') as HTMLSelectElement;
+      
+      function updatePositions() {
+        const playerCount = parseInt(playersSelect.value);
+        const positions = playerCount === 6 ? positions6Max : positions9Max;
+        
+        const currentPosition = positionSelect.value;
+        positionSelect.innerHTML = positions.map(pos => `<option value="${pos}">${pos}</option>`).join('');
+        
+        // Restore selection if valid
+        if (positions.includes(currentPosition)) {
+          positionSelect.value = currentPosition;
+        }
+      }
+      
+      function updateVillainPositions() {
+        const playerCount = parseInt(playersSelect.value);
+        const positions = playerCount === 6 ? positions6Max : positions9Max;
+        const heroPosition = positionSelect.value;
+        
+        const availablePositions = positions.filter(pos => pos !== heroPosition);
+        const currentVillain = villainSelect.value;
+        villainSelect.innerHTML = availablePositions.map(pos => `<option value="${pos}">${pos}</option>`).join('');
+        
+        // Restore selection if valid, otherwise default to BB
+        if (availablePositions.includes(currentVillain)) {
+          villainSelect.value = currentVillain;
+        } else if (availablePositions.includes('BB')) {
+          villainSelect.value = 'BB';
+        }
+      }
+      
+      playersSelect.addEventListener('change', () => {
+        updatePositions();
+        updateVillainPositions();
+      });
+      
+      positionSelect.addEventListener('change', updateVillainPositions);
+      
+      // Initialize on load
+      updatePositions();
+      updateVillainPositions();
+    </script>
+
+    <section>
+      <h2 class="text-2xl font-semibold mb-4">Results</h2>
+      <div class="results-area">
+        <!-- Results will appear here -->
+      </div>
+    </section>
+  </main>
+</Layout>
