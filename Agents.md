@@ -9,6 +9,15 @@ This is an **Astro project** - a static site generator framework. The codebase i
 - Tailwind CSS for styling
 - Content collections for blog posts
 
+## Development Practices
+
+### Testing
+
+- We use **Test-Driven Development (TDD)** with **Playwright**
+- Write tests first, then implement the feature
+- Tests should be clear and focused on user behavior
+- **Workflow**: Write tests and have them fail. Once the human approves the test, pass them.
+
 ## Preferred Working Style
 
 When working with AI agents on this project, please follow these guidelines:
