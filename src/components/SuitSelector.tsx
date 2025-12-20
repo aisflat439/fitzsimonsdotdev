@@ -2,8 +2,10 @@ import Spade from "../icons/Spade";
 import Heart from "../icons/Heart";
 import Diamond from "../icons/Diamond";
 import Club from "../icons/Club";
+import { usePokerSimulation, type State } from "./PokerSimulationContext";
 
-export type Suit = "spades" | "hearts" | "diamonds" | "clubs";
+export const SUITS = ["spades", "hearts", "diamonds", "clubs"] as const;
+export type Suit = (typeof SUITS)[number];
 
 const SuitIcon = ({ suit }: { suit: Suit }) => {
   switch (suit) {
@@ -19,28 +21,35 @@ const SuitIcon = ({ suit }: { suit: Suit }) => {
 };
 
 type SuitSelectorProps = {
-  selectedSuit: Suit | null;
-  onSelectSuit: (suit: Suit) => void;
-  isSuitDisabled: (suit: Suit) => boolean;
-  testId: string;
+  cardId: keyof State["selectedCards"];
 };
 
-export default function SuitSelector({
-  selectedSuit,
-  onSelectSuit,
-  isSuitDisabled,
-  testId,
-}: SuitSelectorProps) {
-  const suits: Suit[] = ["spades", "hearts", "diamonds", "clubs"];
+export default function SuitSelector({ cardId }: SuitSelectorProps) {
+  const { state, dispatch, isSuitDisabled } = usePokerSimulation();
+
+  const selectedSuit = state.selectedCards[cardId]?.suit || null;
+
+  const onSelectSuit = (suit: Suit) => {
+    const currentRank = state.selectedCards[cardId]?.rank;
+    if (currentRank) {
+      dispatch({
+        type: "SET_CARD",
+        payload: {
+          cardId,
+          card: { rank: currentRank, suit },
+        },
+      });
+    }
+  };
 
   return (
     <div className="flex gap-1">
-      {suits.map((suit) => (
+      {SUITS.map((suit) => (
         <button
           key={suit}
           type="button"
-          data-testid={`${testId}-${suit}`}
-          disabled={isSuitDisabled(suit)}
+          data-testid={`${cardId}-suit-${suit}`}
+          disabled={isSuitDisabled(cardId, suit)}
           onClick={() => onSelectSuit(suit)}
           className={`p-2 border rounded transition-all ${
             selectedSuit === suit

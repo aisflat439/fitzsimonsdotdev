@@ -1,32 +1,38 @@
 import SuitSelector, { type Suit } from "./SuitSelector";
+import { usePokerSimulation, type State } from "./PokerSimulationContext";
 
 const ranks = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"];
 
 type CardSelectorProps = {
   label: string;
-  testId: string;
-  rank: string | null;
-  suit: Suit | null;
-  onRankChange: (rank: string) => void;
-  onSuitChange: (suit: Suit) => void;
-  isSuitDisabled: (suit: Suit) => boolean;
+  cardId: keyof State["selectedCards"];
 };
 
-export default function CardSelector({
-  label,
-  testId,
-  rank,
-  suit,
-  onRankChange,
-  onSuitChange,
-  isSuitDisabled,
-}: CardSelectorProps) {
+export default function CardSelector({ label, cardId }: CardSelectorProps) {
+  const { state, dispatch, isSuitDisabled } = usePokerSimulation();
+
+  const card = state.selectedCards[cardId];
+  const rank = card?.rank || null;
+
+  const onRankChange = (rank: string) => {
+    if (rank) {
+      dispatch({
+        type: "SET_CARD",
+        payload: {
+          cardId,
+          card: { rank, suit: card?.suit || null },
+        },
+      });
+    } else {
+      dispatch({ type: "SET_CARD", payload: { cardId, card: null } });
+    }
+  };
   return (
     <div>
       <label className="block text-sm font-medium mb-1">{label}</label>
       <div className="flex gap-2">
         <select
-          data-testid={`${testId}-rank`}
+          data-testid={`${cardId}-rank`}
           value={rank || ""}
           onChange={(e) => onRankChange(e.target.value)}
           className="flex-1 border rounded px-3 py-2"
@@ -38,12 +44,7 @@ export default function CardSelector({
             </option>
           ))}
         </select>
-        <SuitSelector
-          selectedSuit={suit}
-          onSelectSuit={onSuitChange}
-          isSuitDisabled={isSuitDisabled}
-          testId={`${testId}-suit`}
-        />
+        <SuitSelector cardId={cardId} />
       </div>
     </div>
   );
