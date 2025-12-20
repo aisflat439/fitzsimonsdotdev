@@ -1,7 +1,7 @@
 export default function Club() {
   return (
     <svg
-      data-testid="suit-icon-♣"
+      data-testid="suit-icon-clubs"
       width="24"
       height="24"
       viewBox="0 0 16 16"

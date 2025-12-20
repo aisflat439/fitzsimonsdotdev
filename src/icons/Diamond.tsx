@@ -1,7 +1,7 @@
 export default function Diamond() {
   return (
     <svg
-      data-testid="suit-icon-♦"
+      data-testid="suit-icon-diamonds"
       width="24"
       height="24"
       viewBox="0 0 512 512"

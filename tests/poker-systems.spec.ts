@@ -12,16 +12,16 @@ test("suit selectors are icon buttons with SVGs", async ({ page }) => {
 
   // Check that suit SVG icons are visible in the first hero card
   await expect(
-    page.locator('[data-testid="suit-icon-♠"]').first(),
+    page.locator('[data-testid="suit-icon-spades"]').first(),
   ).toBeVisible();
   await expect(
-    page.locator('[data-testid="suit-icon-♥"]').first(),
+    page.locator('[data-testid="suit-icon-hearts"]').first(),
   ).toBeVisible();
   await expect(
-    page.locator('[data-testid="suit-icon-♦"]').first(),
+    page.locator('[data-testid="suit-icon-diamonds"]').first(),
   ).toBeVisible();
   await expect(
-    page.locator('[data-testid="suit-icon-♣"]').first(),
+    page.locator('[data-testid="suit-icon-clubs"]').first(),
   ).toBeVisible();
 });
 

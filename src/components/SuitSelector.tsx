@@ -5,13 +5,6 @@ import Club from "../icons/Club";
 
 export type Suit = "spades" | "hearts" | "diamonds" | "clubs";
 
-const suitSymbols: Record<Suit, string> = {
-  spades: "♠",
-  hearts: "♥",
-  diamonds: "♦",
-  clubs: "♣",
-};
-
 const SuitIcon = ({ suit }: { suit: Suit }) => {
   switch (suit) {
     case "spades":
@@ -46,7 +39,7 @@ export default function SuitSelector({
         <button
           key={suit}
           type="button"
-          data-testid={`${testId}-${suitSymbols[suit]}`}
+          data-testid={`${testId}-${suit}`}
           disabled={isSuitDisabled(suit)}
           onClick={() => onSelectSuit(suit)}
           className={`p-2 border rounded transition-all ${
