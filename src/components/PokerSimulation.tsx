@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useReducer } from "react";
+import CardSelector from "./CardSelector";
+import { type Suit } from "./SuitSelector";
 
 const positions6Max = ["UTG", "MP", "CO", "BTN", "SB", "BB"];
 const positions9Max = [
@@ -14,16 +16,124 @@ const positions9Max = [
   "BB",
 ];
 
-const ranks = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"];
-const suits = ["♠", "♥", "♦", "♣"];
+type Card = {
+  rank: string;
+  suit: Suit;
+};
+
+type State = {
+  playerCount: number;
+  position: string;
+  villain: string;
+  selectedCards: {
+    heroCard1: Card | null;
+    heroCard2: Card | null;
+    flopCard1: Card | null;
+    flopCard2: Card | null;
+    flopCard3: Card | null;
+    turnCard: Card | null;
+    riverCard: Card | null;
+  };
+};
+
+type Action =
+  | { type: "SET_PLAYER_COUNT"; payload: number }
+  | { type: "SET_POSITION"; payload: string }
+  | { type: "SET_VILLAIN"; payload: string }
+  | {
+      type: "SET_CARD";
+      payload: { cardId: keyof State["selectedCards"]; card: Card | null };
+    };
+
+const initialState: State = {
+  playerCount: 9,
+  position: "UTG",
+  villain: "BB",
+  selectedCards: {
+    heroCard1: null,
+    heroCard2: null,
+    flopCard1: null,
+    flopCard2: null,
+    flopCard3: null,
+    turnCard: null,
+    riverCard: null,
+  },
+};
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case "SET_PLAYER_COUNT":
+      return { ...state, playerCount: action.payload };
+    case "SET_POSITION":
+      return { ...state, position: action.payload };
+    case "SET_VILLAIN":
+      return { ...state, villain: action.payload };
+    case "SET_CARD":
+      return {
+        ...state,
+        selectedCards: {
+          ...state.selectedCards,
+          [action.payload.cardId]: action.payload.card,
+        },
+      };
+    default:
+      return state;
+  }
+}
 
 export default function PokerSimulation() {
-  const [playerCount, setPlayerCount] = useState(9);
-  const [position, setPosition] = useState("UTG");
-  const [villain, setVillain] = useState("BB");
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  const positions = playerCount === 6 ? positions6Max : positions9Max;
-  const availableVillainPositions = positions.filter((pos) => pos !== position);
+  const positions = state.playerCount === 6 ? positions6Max : positions9Max;
+  const availableVillainPositions = positions.filter(
+    (pos) => pos !== state.position,
+  );
+
+  const isCardSelected = (rank: string, suit: Suit): boolean => {
+    return Object.values(state.selectedCards).some(
+      (card) => card?.rank === rank && card?.suit === suit,
+    );
+  };
+
+  const setCard = (
+    cardId: keyof State["selectedCards"],
+    rank: string,
+    suit: Suit,
+  ) => {
+    dispatch({
+      type: "SET_CARD",
+      payload: {
+        cardId,
+        card: { rank, suit },
+      },
+    });
+  };
+
+  const makeIsSuitDisabled =
+    (cardId: keyof State["selectedCards"]) =>
+    (suit: Suit): boolean => {
+      const currentCard = state.selectedCards[cardId];
+      if (!currentCard?.rank) return true;
+      return isCardSelected(currentCard.rank, suit);
+    };
+
+  const makeOnRankChange =
+    (cardId: keyof State["selectedCards"]) => (rank: string) => {
+      const currentSuit = state.selectedCards[cardId]?.suit || "spades";
+      if (rank) {
+        setCard(cardId, rank, currentSuit);
+      } else {
+        dispatch({ type: "SET_CARD", payload: { cardId, card: null } });
+      }
+    };
+
+  const makeOnSuitChange =
+    (cardId: keyof State["selectedCards"]) => (suit: Suit) => {
+      const currentRank = state.selectedCards[cardId]?.rank;
+      if (currentRank) {
+        setCard(cardId, currentRank, suit);
+      }
+    };
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -44,8 +154,13 @@ export default function PokerSimulation() {
                     Players
                   </label>
                   <select
-                    value={playerCount}
-                    onChange={(e) => setPlayerCount(parseInt(e.target.value))}
+                    value={state.playerCount}
+                    onChange={(e) =>
+                      dispatch({
+                        type: "SET_PLAYER_COUNT",
+                        payload: parseInt(e.target.value),
+                      })
+                    }
                     className="w-full border rounded px-3 py-2"
                   >
                     <option value="6">6</option>
@@ -58,8 +173,13 @@ export default function PokerSimulation() {
                     Position
                   </label>
                   <select
-                    value={position}
-                    onChange={(e) => setPosition(e.target.value)}
+                    value={state.position}
+                    onChange={(e) =>
+                      dispatch({
+                        type: "SET_POSITION",
+                        payload: e.target.value,
+                      })
+                    }
                     className="w-full border rounded px-3 py-2"
                   >
                     {positions.map((pos) => (
@@ -75,8 +195,10 @@ export default function PokerSimulation() {
                     Villain
                   </label>
                   <select
-                    value={villain}
-                    onChange={(e) => setVillain(e.target.value)}
+                    value={state.villain}
+                    onChange={(e) =>
+                      dispatch({ type: "SET_VILLAIN", payload: e.target.value })
+                    }
                     className="w-full border rounded px-3 py-2"
                   >
                     {availableVillainPositions.map((pos) => (
@@ -88,53 +210,25 @@ export default function PokerSimulation() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Your Card 1
-                </label>
-                <div className="flex gap-2">
-                  <select className="flex-1 border rounded px-3 py-2">
-                    <option value="">Rank</option>
-                    {ranks.map((rank) => (
-                      <option key={rank} value={rank}>
-                        {rank}
-                      </option>
-                    ))}
-                  </select>
-                  <select className="flex-1 border rounded px-3 py-2">
-                    <option value="">Suit</option>
-                    {suits.map((suit) => (
-                      <option key={suit} value={suit}>
-                        {suit}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+              <CardSelector
+                label="Your Card 1"
+                testId="hero-card-1"
+                rank={state.selectedCards.heroCard1?.rank || null}
+                suit={state.selectedCards.heroCard1?.suit || null}
+                onRankChange={makeOnRankChange("heroCard1")}
+                onSuitChange={makeOnSuitChange("heroCard1")}
+                isSuitDisabled={makeIsSuitDisabled("heroCard1")}
+              />
 
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Your Card 2
-                </label>
-                <div className="flex gap-2">
-                  <select className="flex-1 border rounded px-3 py-2">
-                    <option value="">Rank</option>
-                    {ranks.map((rank) => (
-                      <option key={rank} value={rank}>
-                        {rank}
-                      </option>
-                    ))}
-                  </select>
-                  <select className="flex-1 border rounded px-3 py-2">
-                    <option value="">Suit</option>
-                    {suits.map((suit) => (
-                      <option key={suit} value={suit}>
-                        {suit}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+              <CardSelector
+                label="Your Card 2"
+                testId="hero-card-2"
+                rank={state.selectedCards.heroCard2?.rank || null}
+                suit={state.selectedCards.heroCard2?.suit || null}
+                onRankChange={makeOnRankChange("heroCard2")}
+                onSuitChange={makeOnSuitChange("heroCard2")}
+                isSuitDisabled={makeIsSuitDisabled("heroCard2")}
+              />
             </div>
           </div>
 
@@ -143,31 +237,35 @@ export default function PokerSimulation() {
             <h3 className="text-xl font-semibold mb-4">Flop</h3>
 
             <div className="space-y-4">
-              {[1, 2, 3].map((cardNum) => (
-                <div key={cardNum}>
-                  <label className="block text-sm font-medium mb-1">
-                    Card {cardNum}
-                  </label>
-                  <div className="flex gap-2">
-                    <select className="flex-1 border rounded px-3 py-2">
-                      <option value="">Rank</option>
-                      {ranks.map((rank) => (
-                        <option key={rank} value={rank}>
-                          {rank}
-                        </option>
-                      ))}
-                    </select>
-                    <select className="flex-1 border rounded px-3 py-2">
-                      <option value="">Suit</option>
-                      {suits.map((suit) => (
-                        <option key={suit} value={suit}>
-                          {suit}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              ))}
+              <CardSelector
+                label="Card 1"
+                testId="flop-card-1"
+                rank={state.selectedCards.flopCard1?.rank || null}
+                suit={state.selectedCards.flopCard1?.suit || null}
+                onRankChange={makeOnRankChange("flopCard1")}
+                onSuitChange={makeOnSuitChange("flopCard1")}
+                isSuitDisabled={makeIsSuitDisabled("flopCard1")}
+              />
+
+              <CardSelector
+                label="Card 2"
+                testId="flop-card-2"
+                rank={state.selectedCards.flopCard2?.rank || null}
+                suit={state.selectedCards.flopCard2?.suit || null}
+                onRankChange={makeOnRankChange("flopCard2")}
+                onSuitChange={makeOnSuitChange("flopCard2")}
+                isSuitDisabled={makeIsSuitDisabled("flopCard2")}
+              />
+
+              <CardSelector
+                label="Card 3"
+                testId="flop-card-3"
+                rank={state.selectedCards.flopCard3?.rank || null}
+                suit={state.selectedCards.flopCard3?.suit || null}
+                onRankChange={makeOnRankChange("flopCard3")}
+                onSuitChange={makeOnSuitChange("flopCard3")}
+                isSuitDisabled={makeIsSuitDisabled("flopCard3")}
+              />
             </div>
           </div>
 
@@ -176,29 +274,15 @@ export default function PokerSimulation() {
             <h3 className="text-xl font-semibold mb-4">Turn</h3>
 
             <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Turn Card
-                </label>
-                <div className="flex gap-2">
-                  <select className="flex-1 border rounded px-3 py-2">
-                    <option value="">Rank</option>
-                    {ranks.map((rank) => (
-                      <option key={rank} value={rank}>
-                        {rank}
-                      </option>
-                    ))}
-                  </select>
-                  <select className="flex-1 border rounded px-3 py-2">
-                    <option value="">Suit</option>
-                    {suits.map((suit) => (
-                      <option key={suit} value={suit}>
-                        {suit}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+              <CardSelector
+                label="Turn Card"
+                testId="turn-card"
+                rank={state.selectedCards.turnCard?.rank || null}
+                suit={state.selectedCards.turnCard?.suit || null}
+                onRankChange={makeOnRankChange("turnCard")}
+                onSuitChange={makeOnSuitChange("turnCard")}
+                isSuitDisabled={makeIsSuitDisabled("turnCard")}
+              />
             </div>
           </div>
 
@@ -207,29 +291,15 @@ export default function PokerSimulation() {
             <h3 className="text-xl font-semibold mb-4">River</h3>
 
             <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  River Card
-                </label>
-                <div className="flex gap-2">
-                  <select className="flex-1 border rounded px-3 py-2">
-                    <option value="">Rank</option>
-                    {ranks.map((rank) => (
-                      <option key={rank} value={rank}>
-                        {rank}
-                      </option>
-                    ))}
-                  </select>
-                  <select className="flex-1 border rounded px-3 py-2">
-                    <option value="">Suit</option>
-                    {suits.map((suit) => (
-                      <option key={suit} value={suit}>
-                        {suit}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+              <CardSelector
+                label="River Card"
+                testId="river-card"
+                rank={state.selectedCards.riverCard?.rank || null}
+                suit={state.selectedCards.riverCard?.suit || null}
+                onRankChange={makeOnRankChange("riverCard")}
+                onSuitChange={makeOnSuitChange("riverCard")}
+                isSuitDisabled={makeIsSuitDisabled("riverCard")}
+              />
             </div>
           </div>
         </div>
