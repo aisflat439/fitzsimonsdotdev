@@ -4,24 +4,69 @@ import {
   usePokerSimulation,
 } from "./PokerSimulationContext";
 
-const positions6Max = ["UTG", "MP", "CO", "BTN", "SB", "BB"];
-const positions9Max = [
-  "UTG",
-  "UTG+1",
-  "MP",
-  "MP+1",
-  "LJ",
-  "HJ",
-  "CO",
-  "BTN",
-  "SB",
-  "BB",
-];
+const getPositionsForPlayerCount = (playerCount: number): string[] => {
+  switch (playerCount) {
+    case 2:
+      return ["BTN", "BB"];
+    case 3:
+      return ["BTN", "SB", "BB"];
+    case 4:
+      return ["BTN", "SB", "BB", "CO"];
+    case 5:
+      return ["BTN", "SB", "BB", "CO", "MP"];
+    case 6:
+      return ["UTG", "MP", "CO", "BTN", "SB", "BB"];
+    case 7:
+      return ["UTG", "MP", "CO", "HJ", "BTN", "SB", "BB"];
+    case 8:
+      return ["UTG", "MP", "CO", "HJ", "LJ", "BTN", "SB", "BB"];
+    case 9:
+      return [
+        "UTG",
+        "UTG+1",
+        "MP",
+        "MP+1",
+        "LJ",
+        "HJ",
+        "CO",
+        "BTN",
+        "SB",
+        "BB",
+      ];
+    case 10:
+      return [
+        "UTG",
+        "UTG+1",
+        "UTG+2",
+        "MP",
+        "MP+1",
+        "LJ",
+        "HJ",
+        "CO",
+        "BTN",
+        "SB",
+        "BB",
+      ];
+    default:
+      return [
+        "UTG",
+        "UTG+1",
+        "MP",
+        "MP+1",
+        "LJ",
+        "HJ",
+        "CO",
+        "BTN",
+        "SB",
+        "BB",
+      ];
+  }
+};
 
 function PokerSimulationContent() {
   const { state, dispatch } = usePokerSimulation();
 
-  const positions = state.playerCount === 6 ? positions6Max : positions9Max;
+  const positions = getPositionsForPlayerCount(state.playerCount);
   const availableVillainPositions = positions.filter(
     (pos) => pos !== state.position,
   );
@@ -45,6 +90,7 @@ function PokerSimulationContent() {
                     Players
                   </label>
                   <select
+                    data-testid="player-count"
                     value={state.playerCount}
                     onChange={(e) =>
                       dispatch({
@@ -54,8 +100,11 @@ function PokerSimulationContent() {
                     }
                     className="w-full border rounded px-3 py-2"
                   >
-                    <option value="6">6</option>
-                    <option value="9">9</option>
+                    {[2, 3, 4, 5, 6, 7, 8, 9, 10].map((count) => (
+                      <option key={count} value={count}>
+                        {count}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -64,6 +113,7 @@ function PokerSimulationContent() {
                     Position
                   </label>
                   <select
+                    data-testid="hero-position"
                     value={state.position}
                     onChange={(e) =>
                       dispatch({
@@ -86,6 +136,7 @@ function PokerSimulationContent() {
                     Villain
                   </label>
                   <select
+                    data-testid="villain-position"
                     value={state.villain}
                     onChange={(e) =>
                       dispatch({ type: "SET_VILLAIN", payload: e.target.value })
