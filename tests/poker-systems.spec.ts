@@ -232,3 +232,35 @@ test("positions should match player count", async ({ page }) => {
     expect(availablePositions).toEqual(positions);
   }
 });
+
+test("default player count should be 9 with correct positions", async ({
+  page,
+}) => {
+  await page.goto("/poker-systems");
+
+  const playersSelect = page.locator('[data-testid="player-count"]');
+  const positionSelect = page.locator('[data-testid="hero-position"]');
+
+  // Check default player count is 9
+  const defaultPlayerCount = await playersSelect.inputValue();
+  expect(defaultPlayerCount).toBe("9");
+
+  // Check positions match 9-handed (should be exactly 9 positions)
+  const expectedPositions = [
+    "UTG",
+    "UTG+1",
+    "MP",
+    "LJ",
+    "HJ",
+    "CO",
+    "BTN",
+    "SB",
+    "BB",
+  ];
+
+  const availablePositions = await positionSelect
+    .locator("option")
+    .allTextContents();
+
+  expect(availablePositions).toEqual(expectedPositions);
+});
