@@ -3,7 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/BlogLayout.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
 
   return posts.map((post) => {
     return {
@@ -23,19 +23,28 @@ interface Props {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+const wordCount = post.body.trim().split(/\s+/).filter(Boolean).length;
+const readTime = Math.max(1, Math.ceil(wordCount / 200));
+const revisionsLabel = `${post.data.revisions} ${post.data.revisions === 1 ? 'revision' : 'revisions'}`;
 ---
 
 <Layout title={post.data.title}>
-  <header>
-    <h1>{post.data.title}</h1>
-    <p>{post.data.description}</p>
-    <p>{post.data.date}</p>
-    <p>{post.data.revisions}</p>
+  <header class="mb-3 flex flex-col gap-4">
+    <div class="not-prose self-start text-left text-sm leading-snug text-slate-500 sm:self-end sm:text-right">
+      <p class="m-0">{post.data.date}</p>
+      <p class="m-0">{readTime} min read</p>
+      <p class="m-0">{revisionsLabel}</p>
+    </div>
+
+    <div>
+      <h1>{post.data.title}</h1>
+      <p class="mb-0">{post.data.description}</p>
+    </div>
   </header>
 
   <Content />
 
-  <footer>
+  <footer class="mt-8 border-t border-stone-300">
     <!-- <ul class="tags">
       {post.data.tags.map((tag) => <li>{tag}</li>)}
     </ul> -->
@@ -44,31 +53,3 @@ const { Content } = await post.render();
     </p>
   </footer>
 </Layout>
-
-<style>
-  header {
-    margin-bottom: 2rem;
-  }
-
-  header p {
-    font-size: 1.125rem;
-  }
-
-  footer {
-    border-top: 1px solid #d8d8d3;
-    margin-top: 2rem;
-  }
-
-  .tags {
-    color: #787873;
-    display: flex;
-    gap: 1rem;
-    list-style: none;
-    margin-bottom: 2rem;
-    padding: 0;
-  }
-
-  .tags li::before {
-    content: '#';
-  }
-</style>
