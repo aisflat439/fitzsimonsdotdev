@@ -72,6 +72,9 @@ export const Header = () => {
           <li className="mx-4 text-xl sm:text-3xl">
             <a href="/blog">Blog</a>
           </li>
+          <li className="mx-4 text-xl sm:text-3xl">
+            <a href="/slides">Slides</a>
+          </li>
         </motion.ul>
       </nav>
     </motion.header>

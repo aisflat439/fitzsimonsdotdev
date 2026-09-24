@@ -1,0 +1,72 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="m-0 bg-sky-50 text-slate-900">
+    <main aria-label={title} aria-live="polite">
+      <slot />
+    </main>
+    <script>
+      const slides = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-slide]")
+      );
+      let currentSlide = 1;
+
+      function showSlideFromHash() {
+        const requestedSlide = Number(window.location.hash.slice(1));
+        currentSlide = Number.isInteger(requestedSlide)
+          ? Math.min(Math.max(requestedSlide, 1), slides.length)
+          : 1;
+
+        slides.forEach((slide, index) => {
+          slide.hidden = index !== currentSlide - 1;
+        });
+
+        window.scrollTo(0, 0);
+
+        if (window.location.hash !== `#${currentSlide}`) {
+          window.history.replaceState(null, "", `#${currentSlide}`);
+        }
+      }
+
+      window.addEventListener("hashchange", showSlideFromHash);
+      document.addEventListener("keydown", (event) => {
+        if (
+          event.altKey || event.ctrlKey || event.metaKey || event.shiftKey ||
+          (event.target instanceof Element &&
+            event.target.closest("input, textarea, select, [contenteditable]"))
+        ) return;
+
+        if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+        event.preventDefault();
+
+        const direction = event.key === "ArrowRight" ? 1 : -1;
+        const nextSlide = Math.min(Math.max(currentSlide + direction, 1), slides.length);
+        if (nextSlide !== currentSlide) window.location.hash = String(nextSlide);
+      });
+
+      showSlideFromHash();
+    </script>
+    <style>
+      :global([data-slide]) {
+        min-height: 100svh;
+      }
+
+      :global([data-slide][hidden]) {
+        display: none !important;
+      }
+    </style>
+  </body>
+</html>

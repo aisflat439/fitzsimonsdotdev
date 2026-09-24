@@ -1,0 +1,225 @@
+---
+import { Code } from "astro:components";
+
+interface Props {
+  title: string;
+  blurb: string;
+  prompt: string;
+  theme: "blue" | "orange";
+  pseudocodeSlides?: { focus: string; code: string; highlights: number[]; generatedResponse?: boolean; compact?: boolean }[];
+  pseudocodePath?: string;
+}
+
+const { title, blurb, prompt, theme, pseudocodeSlides = [], pseudocodePath = "pseudo-code/sequential/pseudo-code.ts" } = Astro.props;
+const promptCode = `const prompt = \`\n${prompt}\n\`;`;
+---
+
+{
+  [1, 2, 3].map((stage) => (
+    <section
+      data-slide
+      aria-label={`${title}: ${stage === 1 ? "title" : stage === 2 ? "overview" : "example prompt"}`}
+      class:list={["pattern-slide", theme]}
+      hidden
+    >
+      <div class="pattern-content">
+        <header>
+          <p class="eyebrow">Workflow</p>
+          <h1>{title}</h1>
+        </header>
+        <div class="pattern-columns">
+          <p class:list={["blurb", { unrevealed: stage < 2 }]} aria-hidden={stage < 2}>
+            {blurb}
+          </p>
+          <div class:list={["editor", { unrevealed: stage < 3 }]} aria-hidden={stage < 3}>
+            <div class="editor-tab">prompt.ts <span>TypeScript</span></div>
+            <Code code={promptCode} lang="ts" theme="github-dark" wrap />
+          </div>
+        </div>
+      </div>
+    </section>
+  ))
+}
+
+{pseudocodeSlides.map(({ focus, code, highlights, generatedResponse, compact }) => (
+  <section data-slide aria-label={`${title}: ${focus}`} class:list={["pattern-slide", "code-slide", theme, { compact }]} hidden>
+    <div class="pattern-content">
+      <header>
+        <p class="eyebrow">Workflow</p>
+        <h1>{title}</h1>
+      </header>
+      <p class="code-focus">{focus}</p>
+      <div class:list={["editor", "pseudocode-editor", { "generated-response": generatedResponse }]}>
+        <div class="editor-tab">
+          {generatedResponse ? "← LLM response" : pseudocodePath}
+          <span>{generatedResponse ? "Example generated plan · JSON" : "TypeScript sketch · Rails at work"}</span>
+        </div>
+        <Code
+          code={code.trimEnd()}
+          lang={generatedResponse ? "json" : "ts"}
+          theme="github-dark"
+          wrap
+          transformers={[{
+            line(node, line) {
+              if (highlights.includes(line)) {
+                this.addClassToHast(node, "highlighted-line");
+              }
+            },
+          }]}
+        />
+      </div>
+    </div>
+  </section>
+))}
+
+<style>
+  .pattern-slide {
+    --background: theme("colors.sky.900");
+    --foreground: theme("colors.amber.600");
+    display: grid;
+    align-content: start;
+    padding: clamp(1.25rem, min(5vw, 4svh), 4rem);
+    background: var(--background);
+    color: var(--foreground);
+  }
+
+  .orange {
+    --background: theme("colors.amber.600");
+    --foreground: theme("colors.sky.900");
+  }
+
+  .pattern-content {
+    display: grid;
+    gap: clamp(1rem, 3svh, 3rem);
+    width: 100%;
+    max-width: 90rem;
+    min-width: 0;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.5rem;
+    font-size: clamp(1rem, min(1.5vw, 2.5svh), 1.5rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .pattern-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    align-items: start;
+    gap: clamp(1rem, 3vw, 3rem);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2rem, min(6.5vw, 10svh), 7rem);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+  }
+
+  .blurb {
+    margin: 0;
+    font-size: clamp(1.125rem, min(2.8vw, 4svh), 2.75rem);
+    line-height: 1.35;
+  }
+
+  .editor {
+    min-width: 0;
+    background: #24292e;
+    color: theme("colors.slate.50");
+    border: 1px solid theme("colors.slate.600");
+  }
+
+  .editor-tab {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    overflow-wrap: anywhere;
+    padding: 0.75rem 1rem;
+    background: theme("colors.slate.900");
+    border-bottom: 1px solid theme("colors.slate.600");
+    font-family: monospace;
+    font-size: clamp(0.875rem, 1.2vw, 1.25rem);
+  }
+
+  .editor-tab span {
+    color: theme("colors.slate.400");
+  }
+
+  .editor :global(pre) {
+    margin: 0;
+    padding: clamp(1rem, min(2vw, 2svh), 2rem);
+    font-size: clamp(1rem, min(1.8vw, 2.8svh), 1.75rem);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .unrevealed {
+    visibility: hidden;
+  }
+
+  .pseudocode-editor :global(pre) {
+    font-size: clamp(0.875rem, min(1.6vw, 2svh), 1.5rem);
+    line-height: 1.35;
+  }
+
+  .generated-response {
+    border: 2px solid theme("colors.amber.600");
+  }
+
+  .generated-response .editor-tab {
+    background: theme("colors.amber.600");
+    color: theme("colors.sky.900");
+    font-weight: 700;
+  }
+
+  .generated-response .editor-tab span {
+    color: inherit;
+  }
+
+  .code-slide .pattern-content {
+    gap: clamp(0.5rem, 1.5svh, 1.5rem);
+  }
+
+  .code-focus {
+    margin: 0;
+    font-size: clamp(1rem, min(2.5vw, 3.5svh), 2.5rem);
+    line-height: 1.2;
+  }
+
+  .pseudocode-editor :global(.highlighted-line) {
+    display: inline-block;
+    width: 100%;
+    background: theme("colors.sky.900");
+    box-shadow: -3px 0 theme("colors.amber.600");
+  }
+
+  .compact h1 {
+    font-size: clamp(1.75rem, min(5vw, 7.5svh), 5.5rem);
+  }
+
+  .compact .eyebrow,
+  .compact .editor-tab {
+    font-size: clamp(0.75rem, min(1.2vw, 2svh), 1.125rem);
+  }
+
+  .compact .code-focus {
+    font-size: clamp(0.875rem, min(2vw, 2.8svh), 2rem);
+  }
+
+  .compact .pseudocode-editor :global(pre) {
+    font-size: clamp(0.75rem, min(1.4vw, 1.7svh), 1.25rem);
+    line-height: 1.3;
+  }
+
+  @media (max-width: 640px) {
+    .pattern-columns {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

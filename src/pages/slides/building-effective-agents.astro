@@ -1,0 +1,555 @@
+---
+import SlidesLayout from "../../layouts/SlidesLayout.astro";
+import WorkflowSlides from "../../components/WorkflowSlides.astro";
+import { sequentialSlides } from "../../pseudo-code/sequential/slides";
+import { evaluatorOptimizerSlides } from "../../pseudo-code/evaluator-optimizer/slides";
+import { parallelizationSlides } from "../../pseudo-code/parallelization/slides";
+import { routingSlides } from "../../pseudo-code/routing/slides";
+import { orchestratorWorkerSlides } from "../../pseudo-code/orchestrator-worker/slides";
+
+const workflows = [
+  {
+    title: "Prompt Chaining",
+    blurb: "One task, predictable steps. Each call uses the last step’s output. Check the result before moving on.",
+    prompt: `Use these Eras Tour notes.
+
+Step 1: Create a newsletter outline.
+Step 2: Use that outline to write a draft.
+Step 3: Translate that draft into Spanish.`,
+    pseudocodeSlides: sequentialSlides,
+    pseudocodePath: "pseudo-code/sequential/pseudo-code.ts",
+  },
+  {
+    title: "Evaluator-Optimizer",
+    blurb: "When your prompt says “make sure,” give those quality requirements their own evaluation. Draft, review, and revise from feedback—with a limit.",
+    prompt: `Write an invite to our Taylor Swift listening party
+using this event brief.
+
+Make sure new fans feel welcome, even if they
+don't know the albums.
+Make sure the date, location, and RSVP are clear.
+Make it exciting, but don't imply Taylor will attend.`,
+    pseudocodeSlides: evaluatorOptimizerSlides,
+    pseudocodePath: "pseudo-code/evaluator-optimizer/pseudo-code.ts",
+  },
+  {
+    title: "Parallelization",
+    blurb: "Parse the people. Parse the schedule. Neither needs the other’s output. Run both at once, then combine the results.",
+    prompt: `An invitation for Taylor Swift just came in.
+
+From the invite list, extract the people involved.
+From the supplied schedule notes, extract:
+- Tour commitments
+- Football-team events
+- Travel for football games
+- Studio sessions
+
+Combine both into an invite brief.`,
+    pseudocodeSlides: parallelizationSlides,
+    pseudocodePath: "pseudo-code/parallelization/pseudo-code.ts",
+  },
+  {
+    title: "Routing",
+    blurb: "A tour asset comes in. The LLM classifies it, and code sends it to the right handler. No clear fit? Send it to a person.",
+    prompt: `Review this Taylor Swift tour asset.
+Pick the best use:
+
+- Short-form video content
+- A photo appropriate for a meme
+- A high-quality photo for press use
+- Unknown or unclear: needs manual review
+
+Choose one path, then send it to that handler.`,
+    pseudocodeSlides: routingSlides,
+    pseudocodePath: "pseudo-code/routing/pseudo-code.ts",
+  },
+  {
+    title: "Orchestrator-Worker",
+    blurb: "We know what our workers can do. We don’t know what work is coming. Each freelance journalist’s submission gets its own plan.",
+    prompt: `Turn this freelance journalist's Taylor Swift
+tour submission into a finished recap.
+
+It might contain an article, voice notes,
+photos, clips, or a half-finished draft.
+
+Figure out what work is needed, delegate it
+to our workers, and assemble their results.`,
+    pseudocodeSlides: orchestratorWorkerSlides,
+    pseudocodePath: "pseudo-code/orchestrator-worker/pseudo-code.ts",
+  },
+];
+---
+
+<SlidesLayout title="Building Effective Agents: Workflows Are the Good Part">
+  <section data-slide aria-label="Slide 1: Building Effective Agents" class="title-slide">
+    <div>
+      <h1>Building<br />Effective Agents</h1>
+      <p class="subtitle">Workflows are the good part.</p>
+    </div>
+    <p class="speaker">
+      <strong>Devin Fitzsimons</strong><br />
+      Senior Engineer, AI · CompanyCam
+    </p>
+  </section>
+
+  <section data-slide aria-label="Slide 2: About me" class="about-slide" hidden>
+    <div class="about-copy">
+      <h1>About me</h1>
+      <h2>Devin Fitzsimons</h2>
+      <p>Senior Engineer, AI · CompanyCam</p>
+      <p>TypeScript maximalist.<br />I love state machines.<br />I love pair programming.</p>
+    </div>
+    <img
+      class="about-photo"
+      src="/mountains.jpg"
+      alt="Devin in the mountains"
+    />
+    <div class="expectations">
+      <h2>What to expect from this talk</h2>
+      <ul>
+        <li>Scalding hot takes</li>
+        <li>The 5 workflows and when to use them</li>
+        <li>Practical, useful takeaways</li>
+        <li>Pseudo-code examples</li>
+      </ul>
+    </div>
+  </section>
+  <section data-slide aria-label="Slide 3: Throw it at an LLM" class="llm-slide" hidden>
+    <h1>Throw it at an LLM.</h1>
+    <div class="llm-content">
+      <div class="llm-copy">
+        <p class="llm-premise">Got an LLM-shaped problem?<br />Start here.</p>
+        <p class="llm-punchline">The worst solution.<br />The first solution.</p>
+        <p class="audience-prompt">Who has examples?</p>
+      </div>
+      <img src="/funnel.png" alt="A funnel moving from LLMs through workflows to code." />
+    </div>
+  </section>
+  <section data-slide aria-label="Slide 4: Dario money" class="llm-slide money-slide" hidden>
+    <h1>Throw it at an LLM.</h1>
+    <div class="llm-content">
+      <div class="llm-copy">
+        <p class="llm-premise">Got an LLM-shaped problem?<br />Start here.</p>
+        <p class="llm-punchline">The worst solution.<br />The first solution.</p>
+        <p class="audience-prompt">Who has examples?</p>
+      </div>
+      <img src="/funnel.png" alt="A funnel moving from LLMs through workflows to code." />
+    </div>
+    <div class="money-panel">
+      <h2 class="money-question">What are some alternatives?</h2>
+      <img class="money-overlay" src="/dario-money.jpeg" alt="Dario money" />
+    </div>
+  </section>
+  <section data-slide aria-label="Slide 5: Workflows" class="workflows-slide" hidden>
+    <div class="blue-box workflow-copy">
+      <h1>Workflows</h1>
+      <p>Code and LLM calls, grouped into steps that turn broad inputs into reliable, accurate results.</p>
+      <p>Let the LLM handle the fuzzy parts. Push everything else toward code.</p>
+    </div>
+  </section>
+  <section data-slide aria-label="Slide 6: What the fuck is Jev?" class="workflows-slide jev-slide" hidden>
+    <div class="blue-box workflow-copy">
+      <h1>Workflows</h1>
+      <p>Code and LLM calls, grouped into steps that turn broad inputs into reliable, accurate results.</p>
+      <p>Let the LLM handle the fuzzy parts. Push everything else toward code.</p>
+    </div>
+    <div class="jev-panel">
+      <img src="/wtf-is-jev.webp" alt="What the fuck is Jev?" />
+    </div>
+  </section>
+  {workflows.map((workflow, index) => (
+    <WorkflowSlides
+      {...workflow}
+      theme={index % 2 === 0 ? "blue" : "orange"}
+    />
+  ))}
+  <section data-slide aria-label="Lessons Learned" class="lessons-slide" hidden>
+    <h1>Lessons Learned</h1>
+    <div class="lessons-grid">
+      <article>
+        <h2><code>around_step</code> is so useful.</h2>
+        <p>One hook. Logs, timing, tracing. Every step.</p>
+      </article>
+      <article>
+        <h2>We needed an emitter earlier.</h2>
+        <p>Rich progress events. Tag the turn and block. Update the UI while work happens.</p>
+      </article>
+      <article>
+        <h2>A job retry runs the whole workflow again.</h2>
+        <p>Saved the draft, then failed? The retry saves it again. Update the same record instead of creating a duplicate.</p>
+      </article>
+      <article>
+        <h2>Same result. Every strategy.</h2>
+        <p>Keep partial state, the failed step, and the original exception.</p>
+      </article>
+      <article>
+        <h2>Pass context forward. Override per task.</h2>
+        <p>Share the workflow’s context by default. A task needs a different document? Override that step’s context.</p>
+      </article>
+    </div>
+  </section>
+  <section data-slide aria-label="Thanks for coming to my talk" class="title-slide" hidden>
+    <div>
+      <h1>Thanks for coming<br />to my talk.</h1>
+      <p class="subtitle">Go make something awesome.</p>
+    </div>
+    <p class="speaker">
+      <strong>Devin Fitzsimons</strong><br />
+      Senior Engineer, AI · CompanyCam<br />
+      <a href="https://fitzsimons.dev">fitzsimons.dev</a>
+    </p>
+  </section>
+</SlidesLayout>
+
+<style>
+  .lessons-slide {
+    padding: var(--slide-padding);
+    background: theme("colors.amber.600");
+    color: theme("colors.sky.900");
+  }
+
+  .lessons-slide h1 {
+    margin: 0 0 var(--slide-gap);
+    font-size: clamp(2.25rem, min(7vw, 10svh), 7rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.045em;
+  }
+
+  .lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--slide-gap);
+  }
+
+  .lessons-grid article {
+    padding: var(--box-padding);
+    background: theme("colors.sky.900");
+    color: theme("colors.amber.600");
+    border: 3px solid theme("colors.sky.800");
+    outline: 2px solid theme("colors.amber.600");
+    outline-offset: -10px;
+  }
+
+  .lessons-grid h2 {
+    margin: 0 0 0.4em;
+    font-size: clamp(1.125rem, min(2.5vw, 3.5svh), 2.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  .lessons-grid p {
+    margin: 0;
+    color: theme("colors.sky.100");
+    font-size: clamp(1rem, min(1.7vw, 2.5svh), 1.75rem);
+    line-height: 1.3;
+  }
+
+  @media (max-width: 640px) {
+    .lessons-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  section {
+    --slide-padding: clamp(1rem, min(4vw, 4svh), 4rem);
+    --slide-gap: clamp(0.75rem, min(3vw, 3svh), 3rem);
+    --box-padding: clamp(1.25rem, min(3vw, 2.6svh), 3rem);
+  }
+
+  section :is(div, img) {
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .workflows-slide {
+    display: grid;
+    min-height: 100svh;
+    padding: var(--slide-padding);
+    background: theme("colors.amber.600");
+  }
+
+  .jev-slide {
+    position: relative;
+  }
+
+  .jev-slide > .workflow-copy {
+    filter: blur(3px);
+  }
+
+  .jev-panel {
+    position: absolute;
+    z-index: 1;
+    inset: 10svh 10%;
+    display: grid;
+    place-items: center;
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .jev-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .blue-box {
+    background: theme("colors.sky.900");
+    color: theme("colors.amber.600");
+    padding: var(--box-padding);
+    outline: 4px solid theme("colors.amber.600");
+    outline-offset: -12px;
+  }
+
+  .workflow-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: var(--slide-gap);
+    text-align: center;
+  }
+
+  .workflow-copy h1 {
+    margin: 0;
+    font-size: clamp(3rem, min(12vw, 18svh), 12rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .workflow-copy p {
+    max-width: 44ch;
+    margin: 0;
+    font-size: clamp(1.25rem, min(4vw, 5.5svh), 4rem);
+    line-height: 1.35;
+  }
+
+  .audience-prompt {
+    margin: clamp(0.75rem, 2svh, 2rem) 0 0;
+    color: theme("colors.sky.100");
+    font-size: clamp(1.125rem, min(2.5vw, 3.5svh), 2.5rem);
+    font-weight: 700;
+  }
+
+  .money-panel {
+    position: absolute;
+    z-index: 1;
+    inset: 5svh 10vw 10svh;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    justify-items: center;
+    gap: var(--slide-gap);
+  }
+
+  .money-question {
+    margin: 0;
+    padding: 0.25em 0.5em;
+    background: theme("colors.sky.900");
+    color: theme("colors.amber.600");
+    font-size: clamp(1.75rem, min(6vw, 8svh), 6rem);
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .money-slide {
+    position: relative;
+  }
+
+  .money-slide > h1,
+  .money-slide > .llm-content {
+    filter: blur(3px);
+  }
+
+  .money-overlay {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .title-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--slide-gap);
+    padding: var(--slide-padding);
+    background: theme("colors.sky.800");
+    color: theme("colors.slate.50");
+  }
+
+  .title-slide h1 {
+    margin: 0;
+    color: theme("colors.amber.600");
+    font-size: clamp(2.5rem, min(8.5vw, 15svh), 9rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .subtitle {
+    margin: clamp(1rem, 3svh, 2rem) 0 0;
+    font-size: clamp(1.25rem, min(3vw, 5svh), 3rem);
+    line-height: 1.2;
+  }
+
+  .speaker {
+    margin: 0;
+    font-size: clamp(1rem, min(1.6vw, 3svh), 1.5rem);
+    line-height: 1.6;
+  }
+
+  .about-slide {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    height: 100svh;
+    min-height: 100svh;
+    align-items: stretch;
+    gap: var(--slide-gap);
+    padding: var(--slide-padding);
+    background: theme("colors.amber.600");
+    color: theme("colors.sky.900");
+  }
+
+  .about-copy,
+  .expectations {
+    padding: var(--box-padding);
+    background: theme("colors.sky.900");
+    color: theme("colors.amber.600");
+    outline: 4px solid theme("colors.amber.600");
+    outline-offset: -12px;
+  }
+
+  .about-copy h1 {
+    margin: 0 0 clamp(0.5rem, 1.5svh, 1.5rem);
+    font-size: clamp(1.75rem, min(6vw, 6svh), 6rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .about-copy h2,
+  .expectations h2 {
+    margin: 0;
+    font-size: clamp(1.25rem, min(3vw, 3.8svh), 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .about-copy p {
+    margin: clamp(0.375rem, 1svh, 1rem) 0 0;
+    font-size: clamp(1rem, min(1.8vw, 2.5svh), 1.75rem);
+    line-height: 1.3;
+  }
+
+  .about-photo {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: cover;
+  }
+
+  .expectations {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .expectations h2 {
+    font-size: clamp(1.5rem, min(4vw, 5.5svh), 4rem);
+  }
+
+  .expectations ul {
+    align-self: center;
+    margin: clamp(0.5rem, 1.5svh, 1rem) 0 0;
+    padding-left: 1.25em;
+    list-style: disc;
+    text-align: left;
+    font-size: clamp(1.125rem, min(2.6vw, 3.8svh), 2.75rem);
+    line-height: 1.25;
+  }
+
+  .llm-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--slide-gap);
+    padding: var(--slide-padding);
+    background: theme("colors.sky.900");
+    color: theme("colors.amber.600");
+  }
+
+  .llm-slide h1 {
+    margin: 0;
+    font-size: clamp(2rem, min(7vw, 11svh), 7rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .llm-content {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--slide-gap);
+    align-items: center;
+  }
+
+  .llm-copy {
+    padding: var(--box-padding);
+    background: theme("colors.sky.800");
+  }
+
+  .llm-premise {
+    margin: 0 0 clamp(0.75rem, 2svh, 2rem);
+    color: theme("colors.sky.100");
+    font-size: clamp(1.125rem, min(2.5vw, 3.5svh), 2.5rem);
+    line-height: 1.3;
+  }
+
+  .llm-punchline {
+    margin: 0;
+    font-size: clamp(1.5rem, min(3.5vw, 5svh), 3.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .llm-content img {
+    width: 100%;
+    max-height: 55svh;
+    object-fit: contain;
+  }
+
+  @media (max-width: 640px) {
+    .llm-content {
+      grid-template-columns: 1fr;
+    }
+
+    .about-slide {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      height: auto;
+    }
+
+    .about-photo {
+      height: auto;
+      max-height: 30svh;
+    }
+
+    .llm-content img {
+      max-height: 30svh;
+    }
+
+    .money-panel {
+      inset: 5svh 5vw 15svh;
+    }
+  }
+
+  @media (min-width: 641px) and (max-height: 500px) {
+    .about-slide {
+      height: auto;
+      grid-template-rows: auto auto;
+    }
+  }
+</style>
