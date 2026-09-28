@@ -24,6 +24,11 @@ const { title } = Astro.props;
       );
       let currentSlide = 1;
 
+      function moveSlide(direction: number) {
+        const nextSlide = Math.min(Math.max(currentSlide + direction, 1), slides.length);
+        if (nextSlide !== currentSlide) window.location.hash = String(nextSlide);
+      }
+
       function showSlideFromHash() {
         const requestedSlide = Number(window.location.hash.slice(1));
         currentSlide = Number.isInteger(requestedSlide)
@@ -53,13 +58,67 @@ const { title } = Astro.props;
         event.preventDefault();
 
         const direction = event.key === "ArrowRight" ? 1 : -1;
-        const nextSlide = Math.min(Math.max(currentSlide + direction, 1), slides.length);
-        if (nextSlide !== currentSlide) window.location.hash = String(nextSlide);
+        moveSlide(direction);
       });
+
+      const main = document.querySelector("main")!;
+      type Tap = { x: number; y: number; time: number };
+      let touchStart: Tap | null = null;
+      let previousTap: Tap | null = null;
+
+      function resetTaps() {
+        touchStart = null;
+        previousTap = null;
+      }
+
+      main.addEventListener("pointerdown", (event) => {
+        if (event.pointerType !== "touch") return;
+        if (
+          !event.isPrimary ||
+          (event.target instanceof Element &&
+            event.target.closest("a, button, input, textarea, select, [contenteditable]"))
+        ) {
+          resetTaps();
+          return;
+        }
+        touchStart = { x: event.clientX, y: event.clientY, time: event.timeStamp };
+      });
+
+      main.addEventListener("pointerup", (event) => {
+        if (event.pointerType !== "touch" || !touchStart) return;
+        const start = touchStart;
+        touchStart = null;
+        if (
+          event.timeStamp - start.time > 300 ||
+          Math.hypot(event.clientX - start.x, event.clientY - start.y) > 20
+        ) {
+          previousTap = null;
+          return;
+        }
+
+        const tap = { x: event.clientX, y: event.clientY, time: event.timeStamp };
+        if (
+          previousTap && tap.time - previousTap.time < 350 &&
+          Math.hypot(tap.x - previousTap.x, tap.y - previousTap.y) < 40
+        ) {
+          previousTap = null;
+          moveSlide(tap.x < window.innerWidth / 2 ? -1 : 1);
+        } else {
+          previousTap = tap;
+        }
+      });
+
+      main.addEventListener("pointercancel", resetTaps);
+      window.addEventListener("scroll", resetTaps, { passive: true });
+      window.addEventListener("hashchange", resetTaps);
 
       showSlideFromHash();
     </script>
     <style>
+      main {
+        touch-action: manipulation;
+      }
+
       :global([data-slide]) {
         min-height: 100svh;
       }
