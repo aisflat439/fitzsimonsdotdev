@@ -1,0 +1,73 @@
+---
+interface Props {
+  screenshots: { src: string; alt: string }[];
+}
+
+const { screenshots } = Astro.props;
+const placements = [
+  { x: 3, y: 8, width: 35, rotation: -7 },
+  { x: 36, y: 5, width: 34, rotation: 5 },
+  { x: 65, y: 25, width: 32, rotation: 8 },
+  { x: 6, y: 40, width: 36, rotation: 4 },
+  { x: 32, y: 68, width: 35, rotation: -5 },
+  { x: 40, y: 32, width: 34, rotation: -4 },
+  { x: 64, y: 77, width: 32, rotation: 6 },
+];
+---
+
+<div class="screenshot-collage">
+  {screenshots.map((screenshot, index) => {
+    const placement = placements[index % placements.length];
+    return (
+      <img
+        class="screenshot-card"
+        src={screenshot.src}
+        alt={screenshot.alt}
+        style={`--x: ${placement.x}%; --y: ${placement.y}%; --width: ${placement.width}%; --rotation: ${placement.rotation}deg;`}
+      />
+    );
+  })}
+</div>
+
+<style>
+  .screenshot-collage {
+    position: relative;
+    height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .screenshot-card {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--width);
+    padding: 0;
+    border: 1px solid theme("colors.slate.700");
+    border-radius: 0.25rem;
+    background: black;
+    box-shadow: 0 1.25rem 2.5rem rgb(0 0 0 / 0.4);
+    transform: rotate(var(--rotation));
+    display: block;
+  }
+
+  @media (max-aspect-ratio: 1/1) {
+    .screenshot-collage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      height: auto;
+      min-height: 100svh;
+      padding: 2rem 1.5rem;
+    }
+
+    .screenshot-card {
+      position: relative;
+      top: auto;
+      left: auto;
+      width: 90%;
+    }
+  }
+
+</style>

@@ -1,0 +1,543 @@
+---
+import SlidesLayout from "../../layouts/SlidesLayout.astro";
+import ScreenshotCollage from "../../components/ScreenshotCollage.astro";
+import { Code } from "astro:components";
+import tddPlanCommand from "../../commands/TDD-plan.md?raw";
+import tddCommand from "../../commands/TDD.md?raw";
+import tddUpdateCommand from "../../commands/TDD-update.md?raw";
+import tddLearnCommand from "../../commands/TDD-learn.md?raw";
+
+const [tddIntroduction, tddPreferences] = tddCommand.split("<!--");
+
+const screenshots = [
+  "Dax on models improving faster than custom workflows",
+  "Can Vardar on waiting for AI breaking his focus",
+  "GRoditiD on AI coding models expanding scope",
+  "Adam on burnout and AI",
+  "Hoshino Lina on coding being fun and creative",
+  "Ben Dickson on AI coding losing its appeal",
+  "Shaurya on vibe coding being less fun",
+].map((alt, index) => ({
+  src: `/slides/tdd-is-still-the-goat/Twitter ${index + 1}.png`,
+  alt,
+}));
+
+const tddBenefits = [
+  "Planning ahead, without getting stuck.",
+  "Confidence as you make changes.",
+  "You could make a lot of money selling a book.",
+  "The red-green-refactor cycle.",
+  "Commits had a natural rhythm.",
+];
+
+const benefitSections = [
+  { title: "What made TDD great to begin with?", benefits: tddBenefits, orange: false },
+  {
+    title: "What makes coding with LLMs great?",
+    benefits: [
+      "They do the annoying stuff.",
+      "It's fast.",
+      "The economy doesn't collapse because we all realize we should go back to coding by hand.",
+      "Less syntax anxiety.",
+      "You're open to using more languages.",
+    ],
+    orange: true,
+  },
+];
+
+const reviewPoints = [
+  "Developers are burned out.",
+  "Coding models write awful code.",
+  "We don't remember what we're doing.",
+  "We have to wait around, so we lose track of what we're doing.",
+  "One-shotting never works.",
+  "We build software factories, and they never work.",
+  "We spend more time introspecting our software factories and trying to do stuff.",
+];
+
+const tddCommands = ["/TDD-plan", "/TDD", "/TDD-update", "/TDD-learn"];
+
+const terribleCode = `import { useState } from "react";
+type Project = { id: number | string; name: string };
+
+function useProjects({ projects: incomingProjects }: { projects: Project[] }) {
+  // Initialize the project states.
+  const [isProjectOpen, setIsProjectOpen] = useState(incomingProjects.map(() => false));
+  const [isCurrentProject, setIsCurrentProject] = useState(incomingProjects.map(() => false));
+  const [isProjectEnabled, setIsProjectEnabled] = useState(incomingProjects.map(() => true));
+  const [isProjectValid, setIsProjectValid] = useState(incomingProjects.map(() => false));
+
+  // Prepare the projects so they are ready.
+  const readyProjects = incomingProjects.map(project => ({ ...project, ready: true }));
+  // Reduce the ready projects into a list of projects.
+  const listedProjects = readyProjects.reduce<Project[]>(
+    (projects, project) => [...projects, { ...project }], []
+  );
+  // Filter the listed projects by their project ID type.
+  const numberedProjects = listedProjects.filter(project => typeof project.id === "number");
+  // Map the projects together and cast them as projects.
+  const projects = readyProjects.map((project, index) => ({
+    ...project, ...numberedProjects[index],
+  })) as Project[];
+
+  // Handle validating the project by updating the project states.
+  const handleValidateProject = (projectId: number) => {
+    // Create a map of the projects, then get the unique projects from the map.
+    const projectMap = new Map(projects.map(project => [project.id, { ...project }]));
+    const uniqueProjects = Array.from(new Set(Array.from(projectMap.values())));
+    setIsProjectValid(uniqueProjects.map(project => project.id === projectId ? true : true));
+    setIsCurrentProject(uniqueProjects.map(project => project.id === projectId));
+  };
+
+  // Return the projects and the project states with the project handler.
+  return { projects: projects.map(project => ({ ...project })),
+    isProjectOpen, isCurrentProject, isProjectEnabled, isProjectValid, handleValidateProject };
+}`;
+---
+
+<SlidesLayout title="TDD Is Still the Goat">
+  {[false, true].map((showScreenshots, index) => (
+    <section
+      data-slide
+      aria-label={`Slide ${index + 1}: ${showScreenshots ? "Twitter screenshots" : "TDD Is Still the Goat"}`}
+      class:list={["title-slide", { "screenshots-slide": showScreenshots }]}
+      hidden={showScreenshots}
+    >
+      <div class="title-copy">
+        <h1>TDD Is Still<br />the Goat</h1>
+        <p class="subtitle">Why You Shouldn't Bother with the Latest Craze.</p>
+      </div>
+      <p class="speaker">
+        <strong>Devin Fitzsimons</strong><br />
+        Senior Engineer, AI · CompanyCam
+      </p>
+      {showScreenshots && (
+        <div class="screenshots-overlay">
+          <ScreenshotCollage screenshots={screenshots} />
+        </div>
+      )}
+    </section>
+  ))}
+  {benefitSections.flatMap(({ title, benefits, orange }) => Array.from({ length: benefits.length + 1 }, (_, stage) => (
+    <section
+      data-slide
+      aria-label={`${title}${stage ? ` ${benefits[stage - 1]}` : ""}`}
+      class:list={["content-slide", { orange }]}
+      hidden
+    >
+      <div class="content">
+        <h1>{title}</h1>
+        <ul class="benefits">
+          {benefits.map((benefit, index) => (
+            <li class:list={{ unrevealed: index >= stage }} aria-hidden={index >= stage}>
+              {benefit}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )))}
+  {[0, 1, 2].map((stage) => (
+    <section
+      data-slide
+      aria-label={stage === 2 ? "Also we're dumber." : stage === 1 ? "The waiting: Tom Petty" : "What makes coding with LLMs terrible?"}
+      class:list={["content-slide", "terrible-slide", { "petty-slide": stage > 0, "dumber-slide": stage === 2 }]}
+      hidden
+    >
+      <div class="content">
+        <h1>What makes coding with LLMs terrible?</h1>
+        <div class="terrible-editor">
+          <Code code={terribleCode} lang="ts" theme="github-dark" wrap />
+        </div>
+      </div>
+      {stage > 0 && (
+        <div class="petty-overlay">
+          <h2>also the waiting.</h2>
+          <img
+            src="/slides/tdd-is-still-the-goat/tom-petty-the-waiting.jpg"
+            alt="Tom Petty in The Waiting music video"
+          />
+        </div>
+      )}
+      {stage === 2 && (
+        <div class="dumber-overlay">
+          <h2>Also we're dumber.</h2>
+          <img
+            src="/slides/tdd-is-still-the-goat/dumb-and-dumber.jpg"
+            alt="Jim Carrey and Jeff Daniels on the Dumb and Dumber movie poster"
+          />
+        </div>
+      )}
+    </section>
+  ))}
+  {Array.from({ length: reviewPoints.length + 1 }, (_, stage) => (
+    <section data-slide aria-label={`To review${stage ? `: ${reviewPoints[stage - 1]}` : ""}`} class="content-slide orange review-slide" hidden>
+      <div class="content">
+        <h1>To review</h1>
+        <ul class="benefits">
+          {reviewPoints.map((point, index) => (
+            <li class:list={{ unrevealed: index >= stage }} aria-hidden={index >= stage}>
+              {point}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  ))}
+  <section data-slide aria-label="What do we do?" class="content-slide" hidden>
+    <div class="content">
+      <h1>What do we do?</h1>
+    </div>
+  </section>
+  <section data-slide aria-label="We TDD." class="content-slide" hidden>
+    <div class="content">
+      <h1>What do we do?</h1>
+      <p class="tdd-answer">We TDD.</p>
+    </div>
+  </section>
+  {Array.from({ length: tddCommands.length + 1 }, (_, stage) => (
+    <section data-slide aria-label={`Commands${stage ? `: ${tddCommands[stage - 1]}` : ""}`} class="content-slide orange commands-slide" hidden>
+      <div class="content">
+        <h1>Commands</h1>
+        <p class="commands-intro">A little-known feature in AI coding agents: custom slash commands.</p>
+        <p class="commands-snark">Like skills, but they work reliably because you run them.</p>
+        <ul class="benefits">
+          {tddCommands.map((command, index) => (
+            <li class:list={{ unrevealed: index >= stage }} aria-hidden={index >= stage}>
+              <code>{command}</code>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  ))}
+  <section data-slide aria-label="TDD-plan: the Markdown command" class="content-slide plan-command-slide" hidden>
+    <div class="content">
+      <h1>/TDD-plan</h1>
+      <div class="terrible-editor">
+        <div class="command-tab">TDD-plan.md <span>Markdown</span></div>
+        <Code code={tddPlanCommand.trimEnd()} lang="md" theme="github-dark" wrap />
+      </div>
+    </div>
+  </section>
+  <section data-slide aria-label="TDD: the plan and how we work together" class="content-slide tdd-command-slide" hidden>
+    <div class="content">
+      <h1>/TDD</h1>
+      <div class="terrible-editor">
+        <div class="command-tab">TDD.md <span>Markdown</span></div>
+        <div class="tdd-plan-row">
+          <Code code={tddIntroduction.trim()} lang="md" theme="github-dark" wrap />
+          <p class="plan-callout">← args is the path to the plan.</p>
+        </div>
+        <div class="preferences-space">
+          <Code code={`<!--${tddPreferences}`.trimEnd()} lang="md" theme="github-dark" wrap />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section data-slide aria-label="TDD-update: update the command" class="content-slide" hidden>
+    <div class="content">
+      <h1>/TDD-update</h1>
+      <div class="terrible-editor">
+        <div class="command-tab">TDD-update.md <span>Markdown</span></div>
+        <Code code={tddUpdateCommand.trimEnd()} lang="md" theme="github-dark" wrap />
+      </div>
+    </div>
+  </section>
+  <section data-slide aria-label="TDD-learn: save a flashcard" class="content-slide" hidden>
+    <div class="content">
+      <h1>/TDD-learn</h1>
+      <div class="terrible-editor">
+        <div class="command-tab">TDD-learn.md <span>Markdown</span></div>
+        <Code code={tddLearnCommand.trimEnd()} lang="md" theme="github-dark" wrap />
+      </div>
+      <ul class="learning-notes">
+        <li>This is personal to the developer.</li>
+        <li>How do you want to learn and reinforce what you've learned?</li>
+      </ul>
+    </div>
+  </section>
+  <section data-slide aria-label="My personal setup" class="content-slide setup-slide" hidden>
+    <div class="content">
+      <h1>My personal setup</h1>
+      <img
+        src="/slides/tdd-is-still-the-goat/personal-setup.png"
+        alt="My desktop setup with multiple workspaces, GitHub pull requests, and a herdr coding session"
+      />
+      <ul class="setup-notes">
+        <li>Multiple worktrees.</li>
+        <li>TDD sessions.</li>
+        <li>Exploring multiple work trees in herdr.</li>
+      </ul>
+    </div>
+  </section>
+</SlidesLayout>
+
+<style>
+  .setup-slide .content {
+    display: grid;
+    gap: 3svh;
+  }
+
+  .setup-slide img {
+    width: 100%;
+    max-height: 50svh;
+    object-fit: contain;
+  }
+
+  .setup-notes {
+    margin: 0;
+    padding-left: 1.25em;
+    list-style: disc;
+    color: theme("colors.slate.50");
+    font-size: clamp(1.25rem, min(2.5vw, 3.5svh), 2.5rem);
+    line-height: 1.35;
+  }
+
+  .setup-notes li + li {
+    margin-top: 1svh;
+  }
+
+  .learning-notes {
+    margin: 4svh 0 0;
+    padding-left: 1.25em;
+    list-style: disc;
+    color: theme("colors.slate.50");
+    font-size: clamp(1.5rem, min(3vw, 4.5svh), 3rem);
+    line-height: 1.3;
+  }
+
+  .learning-notes li + li {
+    margin-top: 2svh;
+  }
+
+  .content-slide {
+    display: grid;
+    align-content: start;
+    padding: clamp(1.25rem, min(5vw, 4svh), 4rem);
+    background: theme("colors.sky.900");
+    color: theme("colors.amber.600");
+  }
+
+  .content {
+    width: 100%;
+    max-width: 90rem;
+    min-width: 0;
+    margin: 0 auto;
+  }
+
+  .content-slide h1 {
+    font-size: clamp(2rem, min(5vw, 8svh), 5.5rem);
+    line-height: 1.05;
+  }
+
+  .review-slide .benefits {
+    font-size: clamp(1.5rem, min(3.5vw, 4.5svh), 3.5rem);
+  }
+
+  .tdd-answer {
+    margin: 10svh 0 0;
+    font-size: clamp(4rem, min(15vw, 22svh), 15rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .commands-intro {
+    margin: 3svh 0 0;
+    font-size: clamp(1.25rem, min(2.8vw, 4svh), 2.75rem);
+    line-height: 1.25;
+  }
+
+  .commands-slide .benefits {
+    min-height: 48svh;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .commands-snark {
+    margin: 1svh 0 0;
+    font-size: clamp(1.125rem, min(2.4vw, 3.5svh), 2.25rem);
+    line-height: 1.25;
+  }
+
+  .plan-command-slide h1 {
+    font-size: clamp(1.75rem, min(4.5vw, 6svh), 5rem);
+  }
+
+  .command-tab {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background: theme("colors.slate.900");
+    color: theme("colors.slate.50");
+    font-family: monospace;
+    font-size: clamp(0.75rem, 1.2vw, 1.125rem);
+  }
+
+  .command-tab span {
+    color: theme("colors.slate.400");
+  }
+
+  .plan-command-slide .terrible-editor :global(pre) {
+    font-size: clamp(0.75rem, min(1.35vw, 1.65svh), 1.25rem);
+    line-height: 1.2;
+  }
+
+  .tdd-plan-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .plan-callout {
+    margin: 0;
+    padding: 1rem;
+    color: theme("colors.amber.600");
+    font-size: clamp(1.25rem, min(2.5vw, 4svh), 2.5rem);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .preferences-space {
+    min-height: 50svh;
+    border-top: 1px solid theme("colors.slate.600");
+  }
+
+  .terrible-slide h1 {
+    font-size: clamp(1.75rem, min(4.5vw, 6svh), 5rem);
+  }
+
+  .petty-slide,
+  .dumber-slide {
+    position: relative;
+  }
+
+  .petty-slide > .content,
+  .dumber-slide > .content,
+  .dumber-slide > .petty-overlay {
+    filter: blur(3px);
+  }
+
+  .petty-overlay,
+  .dumber-overlay {
+    position: absolute;
+    z-index: 1;
+    inset: 10svh 10%;
+    display: grid;
+    place-items: center;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: clamp(1rem, 3svh, 3rem);
+  }
+
+  .dumber-overlay {
+    z-index: 2;
+  }
+
+  .petty-overlay h2,
+  .dumber-overlay h2 {
+    margin: 0;
+    padding: 0.35em 0.7em;
+    border: 4px solid theme("colors.sky.900");
+    background: theme("colors.amber.600");
+    color: theme("colors.sky.900");
+    font-size: clamp(2rem, min(7vw, 9svh), 7rem);
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .petty-overlay img,
+  .dumber-overlay img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .terrible-editor {
+    margin-top: clamp(0.75rem, 2svh, 1.5rem);
+    border: 1px solid theme("colors.slate.600");
+    background: #24292e;
+  }
+
+  .terrible-editor :global(pre) {
+    margin: 0;
+    padding: clamp(0.75rem, 1.5svh, 1.5rem);
+    font-size: clamp(0.75rem, min(1.45vw, 1.8svh), 1.5rem);
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  .content-slide.orange {
+    background: theme("colors.amber.600");
+    color: theme("colors.sky.900");
+  }
+
+  .orange h1,
+  .orange .benefits {
+    color: theme("colors.sky.900");
+  }
+
+  .benefits {
+    display: grid;
+    align-content: space-evenly;
+    gap: 1rem;
+    min-height: 65svh;
+    margin: clamp(1.5rem, 4svh, 4rem) 0 0;
+    padding-left: 1.25em;
+    list-style: disc;
+    color: theme("colors.slate.50");
+    font-size: clamp(1.5rem, min(4vw, 6svh), 4rem);
+    line-height: 1.2;
+  }
+
+  .unrevealed {
+    visibility: hidden;
+  }
+
+  .screenshots-slide {
+    position: relative;
+  }
+
+  .screenshots-slide > .title-copy,
+  .screenshots-slide > .speaker {
+    filter: blur(3px);
+  }
+
+  .screenshots-overlay {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+  }
+
+  .title-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: clamp(0.75rem, min(3vw, 3svh), 3rem);
+    padding: clamp(1rem, min(4vw, 4svh), 4rem);
+    background: theme("colors.sky.800");
+    color: theme("colors.slate.50");
+  }
+
+  h1 {
+    margin: 0;
+    color: theme("colors.amber.600");
+    font-size: clamp(2.5rem, min(8.5vw, 15svh), 9rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .subtitle {
+    margin: clamp(1rem, 3svh, 2rem) 0 0;
+    font-size: clamp(1.25rem, min(3vw, 5svh), 3rem);
+    line-height: 1.2;
+  }
+
+  .speaker {
+    margin: 0;
+    font-size: clamp(1rem, min(1.6vw, 3svh), 1.5rem);
+    line-height: 1.6;
+  }
+</style>

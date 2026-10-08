@@ -48,6 +48,12 @@ const { title } = Astro.props;
 
       window.addEventListener("hashchange", showSlideFromHash);
       document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          window.location.assign("/slides");
+          return;
+        }
+
         if (
           event.altKey || event.ctrlKey || event.metaKey || event.shiftKey ||
           (event.target instanceof Element &&
