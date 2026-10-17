@@ -2,7 +2,7 @@
 date: "2023-03-28"
 updated: "2023-03-28"
 title: "AI won't take your job"
-hashtags: ["AI", "Employment"]
+hashtags: ["AI", "Employment", "future"]
 description: "Why I'm not at all concerned about AI taking my programming job."
 revisions: 0
 ---
@@ -15,6 +15,8 @@ First, writing code is the least interesting and least important part of my job 
 
 ## backlogs are incredibly long
 
+There are more features to build. So many. Probably the future looks more like deciding what not to build than what to build. The amount of products and features that are not built is probably a decade worth of work at least. That's before creative destruction. That's before new ideas. That's just what we have left. So even if AI is coming for my job, we have a while.
+
 ## software is bad
 
-The jobs I've walked into every day since I started building software have
+It's god awful. It's worse than you think. It's TERRIBLE. If anything we're going to make more of it. Way more of it. And it will be bad. Really bad. The UX will suck. The SQL queries will be slow. We'll have bad data models and messy API endpoints. You know what that means? We'll need people fixing it. AI isn't going to take my job. I'll just be working with AI to fix the garbage we made last year.
