@@ -1,0 +1,152 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Dates and event details are verified against the linked Meetup listings.
+const talks = [
+  {
+    title: "Building Effective AI Agents: Workflows Are the Good Part",
+    date: "2026-09-24",
+    dateLabel: "September 24, 2026",
+    community: "NoCo AI Builders",
+    format: "Talk",
+    description:
+      "An LLM demo is easy to love. A product that works again tomorrow? That’s the good stuff. Five workflow patterns for making agents more reliable and affordable, and how to move from open-ended exploration to predictable execution.",
+    eventUrl: "https://www.meetup.com/noco-ai-builders/events/316611870/",
+    slidesUrl: "/slides/building-effective-agents#1",
+  },
+  {
+    title: "Build Your Own Personal AI Assistant on AWS",
+    date: "2026-05-14",
+    dateLabel: "May 14, 2026",
+    community: "NoCo AWS Meetup",
+    format: "Hands-on workshop",
+    description:
+      "Bring a laptop, leave with your own assistant. A hands-on workshop deploying OpenClaw to AWS with CDK, connecting it to Telegram and an LLM, and adding a GitHub-backed memory store for persistent context.",
+    eventUrl: "https://www.meetup.com/noco-ai-builders/events/314043983/",
+  },
+  {
+    title: "Beyond Vibe Coding: Exploring the Evolution of Coding With AI",
+    date: "2026-01-20",
+    dateLabel: "January 20, 2026",
+    community: "Fort Collins Internet Pros (FCIP)",
+    format: "Talk · with Tim Kleier",
+    description:
+      "A look at where AI development tools have been, where they are now, and where they might go next. Tim Kleier and I explored everything from code completion and semantic editing to autonomous agents, spec-driven development, and self-evolving systems, with demos along the way.",
+    eventUrl: "https://www.meetup.com/gofcip/events/305539403/",
+  },
+];
+---
+
+<Layout
+  title="Speaking | Devin Fitzsimons"
+  description="Talks and hands-on workshops by Devin Fitzsimons on AI agents, software engineering, and building on AWS. Find event details and presentation slides."
+>
+  <section class="bg-sky-900 text-slate-50 border-b-4 border-amber-600">
+    <div class="max-w-4xl mx-auto px-6 py-16 sm:px-8 sm:py-24">
+      <p
+        class="text-amber-500 uppercase tracking-widest text-sm font-medium mb-4"
+      >
+        Talks & workshops
+      </p>
+      <h1 class="text-5xl sm:text-6xl font-light mb-6">Speaking</h1>
+      <p class="text-xl sm:text-2xl leading-relaxed max-w-2xl">
+        I like building useful things, and talking about how we build them.
+      </p>
+      <p class="text-sky-100 text-lg leading-relaxed max-w-2xl mt-4">
+        Here are talks and hands-on workshops I’ve given on AI, software
+        engineering, and AWS. Practical patterns, real tools, and things you can
+        take back to your own work.
+      </p>
+    </div>
+  </section>
+
+  <div class="max-w-4xl mx-auto px-6 py-12 sm:px-8 sm:py-16">
+    <section aria-labelledby="past-talks">
+      <h2 id="past-talks" class="text-3xl text-sky-900 mb-4">Past talks</h2>
+      <p class="text-slate-600 leading-relaxed mb-10">
+        Around Northern Colorado, with links to the original events. NoCo AWS
+        Meetup is now <a
+          href="https://www.meetup.com/noco-ai-builders/"
+          class="underline underline-offset-4 text-sky-800 hover:text-sky-950"
+          >NoCo AI Builders</a
+        >.
+      </p>
+      <ol class="space-y-6">
+        {
+          talks.map((talk) => (
+            <li>
+              <article class="bg-white/70 border border-sky-200 border-l-4 border-l-amber-600 rounded-sm p-6 sm:p-8">
+                <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-600 mb-4">
+                  <time datetime={talk.date}>{talk.dateLabel}</time>
+                  <span class="bg-sky-100 text-sky-900 px-3 py-1 rounded-sm">
+                    {talk.format}
+                  </span>
+                </div>
+                <h3 class="text-2xl sm:text-3xl leading-tight text-sky-900 mb-3">
+                  {talk.title}
+                </h3>
+                <p class="font-medium text-sm text-sky-800 mb-4">
+                  {talk.community}
+                </p>
+                <p class="text-lg leading-relaxed text-slate-700">
+                  {talk.description}
+                </p>
+                <div class="flex flex-wrap gap-x-6 gap-y-3 mt-6 text-sky-800">
+                  <a
+                    href={talk.eventUrl}
+                    aria-label={`View ${talk.title} on Meetup`}
+                    class="underline underline-offset-4 hover:text-sky-950"
+                  >
+                    Event on Meetup <span aria-hidden="true">↗</span>
+                  </a>
+                  {talk.slidesUrl && (
+                    <a
+                      href={talk.slidesUrl}
+                      aria-label={`View slides for ${talk.title}`}
+                      class="underline underline-offset-4 hover:text-sky-950"
+                    >
+                      View slides <span aria-hidden="true">→</span>
+                    </a>
+                  )}
+                </div>
+              </article>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section
+      aria-labelledby="more-slides"
+      class="mt-12 pt-10 border-t border-sky-200"
+    >
+      <h2 id="more-slides" class="text-3xl text-sky-900 mb-4">
+        More presentation slides
+      </h2>
+      <h3 class="text-xl text-sky-900 mb-2">
+        <a
+          href="/slides/tdd-is-still-the-goat#1"
+          class="underline underline-offset-4 hover:text-sky-950"
+          >TDD Is Still the Goat <span aria-hidden="true">→</span></a
+        >
+      </h3>
+      <p class="text-lg text-slate-700 leading-relaxed">
+        Why the red-green-refactor cycle still matters when you’re building with
+        AI coding tools. Less chasing the latest craze, more staying grounded in
+        work you can understand and test.
+      </p>
+    </section>
+
+    <aside class="mt-12 bg-sky-900 text-slate-50 p-6 sm:p-8 rounded-sm">
+      <h2 class="text-2xl mb-3">Have a meetup in mind?</h2>
+      <p class="text-lg text-sky-100 leading-relaxed mb-5">
+        If one of these topics sounds useful for your group, let’s talk.
+      </p>
+      <a
+        href="https://www.linkedin.com/in/fitzsimonsdevin/"
+        class="inline-block border border-amber-500 px-4 py-2 text-amber-400 hover:bg-amber-500 hover:text-sky-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-500 transition-colors"
+        >Get in touch on LinkedIn <span aria-hidden="true">↗</span></a
+      >
+    </aside>
+  </div>
+</Layout>

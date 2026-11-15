@@ -16,7 +16,7 @@ const useBoundedScroll = (bounds: number) => {
   const scrollYBoundedProgress = useTransform(
     scrollYBounded,
     [0, bounds],
-    [0, 1]
+    [0, 1],
   );
 
   React.useEffect(() => {
@@ -42,7 +42,7 @@ export const Header = () => {
         backgroundColor: useMotionTemplate`rgb(7 89 133 / ${useTransform(
           scrollYBoundedProgress,
           [0, 1],
-          [1, 0.6]
+          [1, 0.6],
         )}`,
         borderColor: useMotionTemplate`rgb(
           ${useTransform(scrollYBoundedProgress, [0, 1], [217, 30])} 
@@ -56,7 +56,7 @@ export const Header = () => {
           style={{
             scale: useTransform(scrollYBoundedProgress, [0, 1], [1, 0.8]),
           }}
-          className="mx-4 text-3xl text-center mb-2 sm:text-left sm:mb-0"
+          className="sm:mx-4 text-2xl sm:text-3xl text-center mb-2 sm:text-left sm:mb-0"
         >
           <a href="/">Devin Fitzsimons</a>
         </motion.div>
@@ -71,6 +71,9 @@ export const Header = () => {
           </li> */}
           <li className="mx-4 text-xl sm:text-3xl">
             <a href="/blog">Blog</a>
+          </li>
+          <li className="mx-4 text-xl sm:text-3xl">
+            <a href="/speaking">Speaking</a>
           </li>
           <li className="mx-4 text-xl sm:text-3xl">
             <a href="/slides">Slides</a>
